@@ -10,7 +10,8 @@ MODEL = "claude-sonnet-5-5"
 EFFORT = "medium"      # low | medium | high; thinking depth before answering
 PACK_VERSION = "1.0"
 ALLOWED_ORIGINS = "https://nautilus-health.github.io,https://www.nautilushealth.org,https://nautilushealth.org,https://www.contractxray.com,https://contractxray.com"
-MAX_QUESTIONS = "10"
+FREE_QUESTIONS = "5"     # before the email
+MAX_QUESTIONS = "10"     # total, after the email
 IP_HOURLY_LIMIT = "30"
 LOG_QUESTIONS = "true"   # eval period only; set to "false" at launch
 

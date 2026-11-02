@@ -6,6 +6,10 @@ CREATE TABLE IF NOT EXISTS sessions (
   profile TEXT,                            -- JSON of intake answers (no names, no plan data)
   ip_hash TEXT,                            -- salted hash, for abuse limits only
   questions INTEGER NOT NULL DEFAULT 0,
+  has_email INTEGER NOT NULL DEFAULT 0,    -- 1 once a report was requested (unlocks more questions)
+  emails_sent INTEGER NOT NULL DEFAULT 0,
+  last_email_at INTEGER,
+  transcript TEXT,                         -- JSON [{q, a}], used to build the report
   created_at INTEGER NOT NULL
 );
 CREATE INDEX IF NOT EXISTS idx_sessions_ip ON sessions(ip_hash, created_at);

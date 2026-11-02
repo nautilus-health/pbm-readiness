@@ -8,7 +8,8 @@ The page on GitHub Pages works without the Worker: results show, and the questio
 |---|---|
 | `index.html` | The tool. `WORKER_URL` near the Q&A section switches questions on. Testers can also add `?api=https://<worker-url>` to the page address. |
 | `knowledge/pack-v1.0.md` | The only material Claude answers from: the Nautilus checklist, the regulation text with page numbers, selected preamble passages, and the open-items list. |
-| `worker/` | Cloudflare Worker: `POST /lead` (email + intake answers), `POST /ask` (one answer), `GET /health`. |
+| `logic.js`, `report.js`, `pdf.js` | Results logic (shared by page and Worker), the emailed HTML report, and the PDF download. |
+| `worker/` | Cloudflare Worker: `POST /start` (anonymous session), `POST /ask` (one answer; 5 free, 10 after email), `POST /report` (emails the report through the Sheet script and records the lead), `GET /health`. |
 | `worker/schema.sql` | D1 tables: `sessions`, `asks`, and `failed_leads` (only used if the Sheet can't be reached). No emails are stored in D1. |
 | `apps-script/Code.gs` | The script attached to the "PBM Readiness Check: Leads" Google Sheet. It receives each sign-up from the Worker and adds a row. |
 | `eval/questions.json`, `eval/run.mjs` | 47 test questions with automatic checks, and the runner that writes a review report for counsel. |
@@ -21,7 +22,8 @@ You need Node.js installed. From the repo folder:
 cd worker
 npx wrangler login
 npx wrangler d1 create pbm-readiness          # copy the database_id it prints into wrangler.toml
-npx wrangler d1 execute pbm-readiness --remote --file schema.sql
+npx wrangler d1 execute pbm-readiness --remote --file schema.sql   # new database
+# existing database from v0.2: npx wrangler d1 execute pbm-readiness --remote --file migrations/0002_report.sql
 npx wrangler secret put ANTHROPIC_API_KEY      # paste the Claude API key
 npx wrangler secret put IP_SALT                # any long random string
 npx wrangler secret put EVAL_TOKEN             # any long random string; lets the eval skip rate limits
@@ -34,7 +36,7 @@ npx wrangler deploy
 
 ## Test before switching on
 
-1. Open `https://nautilus-health.github.io/pbm-readiness/?api=<worker address>` and ask a few questions.
+1. Open `https://nautilus-health.github.io/pbm-readiness/?review&api=<worker address>` and ask a few questions. `review` shows the test-profile picker.
 2. Run the eval and send the report to counsel:
 
 ```bash
@@ -54,19 +56,21 @@ Set `var WORKER_URL = "<worker address>";` in `index.html`, commit and push. Git
 | `MODEL` | `claude-sonnet-5-5` | Change here when a model is retired; redeploy. |
 | `PACK_VERSION` | `1.0` | Bump with every knowledge-pack change. Each answer is logged with the version used. |
 | `ALLOWED_ORIGINS` | GitHub Pages, nautilushealth.org, contractxray.com | Pages that may call the Worker. |
-| `MAX_QUESTIONS` | `10` | Per email session. |
+| `FREE_QUESTIONS` | `5` | Questions before an email is given. |
+| `MAX_QUESTIONS` | `10` | Total questions per session after the email. |
+| `EFFORT` | `medium` | How much the model thinks before answering. |
 | `IP_HOURLY_LIMIT` | `30` | Questions per network per hour. |
 | `LOG_QUESTIONS` | `true` | Stores question text for the eval period. Set to `false` at launch, per the privacy section of the spec. |
 
 ## Leads (Google Sheet)
 
-Every email sign-up becomes a row in the **PBM Readiness Check: Leads** Google Sheet: time received, email, consent, the seven intake answers in plain words, the page it came from, and the pack version. Eval runs are not recorded.
+Every report request becomes a row in the **PBM Readiness Check: Leads** Google Sheet: time received, email, consent, the seven intake answers in plain words, the page it came from, and the pack version. Eval runs are not recorded.
 
 Only rows with **Consent to updates = Yes** may receive the results email or Nautilus updates. Keep the Sheet shared with Nautilus staff only.
 
 Sheet setup (once):
 1. Open the Sheet, then **Extensions > Apps Script**. Replace the editor's contents with `apps-script/Code.gs` and save.
-2. **Project Settings** (gear icon) **> Script properties > Add script property**: name `LEADS_SECRET`, value a long random string.
+2. **Project Settings** (gear icon) **> Script properties**: add `LEADS_SECRET` (a long random string) and `SEND_FROM` (`steve.ditto@nautilushealth.org`). The report is sent from SEND_FROM if it is a "Send mail as" address of the Google account that deployed the script; otherwise from that account, with SEND_FROM as the reply-to address.
 3. **Deploy > New deployment**, type **Web app**, Execute as **Me**, Who has access **Anyone**. Authorize when asked. Copy the **Web app URL**.
 4. Give the Worker the URL and secret: `npx wrangler secret put SHEET_WEBHOOK_URL` and `npx wrangler secret put SHEET_SECRET` (same value as step 2).
 

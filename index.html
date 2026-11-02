@@ -3,106 +3,140 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PBM Rule Readiness Check</title>
+<title>PBM Rule Readiness Check | Nautilus Health Institute</title>
+<meta name="description" content="Answer 7 quick questions to see what the DOL final PBM rule and CAA 2026 mean for your plan: your deadlines, an action plan, answers to your questions, and a report to keep.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --navy:#1B365D; --teal:#2D8B9A; --gold:#C5A572; --light:#F5F5F5;
-    --ink:#333333; --mid:#666666; --line:#DADDE2; --warn:#B4541A; --warnbg:#FBF1E8;
-  }
+  :root{--navy:#1B365D;--teal:#2D8B9A;--gold:#C5A572;--light:#F5F5F5;--ink:#333;--mid:#666;--line:#DADDE2;--warn:#B4541A;--warnbg:#FBF1E8;--tealbg:#EEF6F7}
   *{box-sizing:border-box}
   body{margin:0;font-family:Roboto,Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.5;font-size:16px}
-  header{background:var(--navy);color:#fff;padding:20px 24px}
-  header .wrap{max-width:820px;margin:0 auto}
-  header h1{margin:0;font-size:24px;font-weight:700;letter-spacing:.2px}
-  header p{margin:4px 0 0;font-size:15px;color:#D7DFEA}
-  .proto{background:var(--gold);color:var(--navy);font-size:13px;font-weight:500;text-align:center;padding:6px 12px}
-  main{max-width:820px;margin:0 auto;padding:24px}
-  h2{color:var(--navy);font-size:20px;margin:28px 0 8px}
-  h3{color:var(--navy);font-size:17px;margin:20px 0 6px}
+  a{color:var(--teal)}
+  header{background:var(--navy);color:#fff;padding:16px 24px}
+  .wrap{max-width:820px;margin:0 auto}
+  .brand{display:flex;align-items:center;gap:18px}
+  .brand .mark{flex:0 0 auto;line-height:0;padding-right:18px;border-right:1px solid rgba(255,255,255,.35)}
+  .brand .mark img{height:40px;width:auto}
+  .brand .t{font-size:20px;font-weight:700}
+  .brand .s{font-size:14px;color:#D7DFEA}
+  .proto{background:var(--gold);color:var(--navy);font-size:13px;font-weight:500;text-align:center;padding:5px 12px}
+  .steps{display:flex;gap:6px;max-width:820px;margin:18px auto 0;padding:0 24px}
+  .steps div{flex:1;font-size:13px;color:var(--mid);border-top:4px solid var(--line);padding-top:6px}
+  .steps div.on{color:var(--navy);font-weight:700;border-color:var(--teal)}
+  .steps div.done{color:var(--teal);border-color:var(--teal)}
+  main{max-width:820px;margin:0 auto;padding:12px 24px 24px}
+  h1{color:var(--navy);font-size:30px;line-height:1.2;margin:18px 0 10px}
+  h2{color:var(--navy);font-size:21px;margin:30px 0 8px}
+  h3{color:var(--navy);font-size:17px;margin:22px 0 6px}
   .muted{color:var(--mid);font-size:14px}
-  .card{border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin:14px 0;background:#fff}
-  .q{margin:0 0 18px}
-  .q label.qlabel{display:block;font-weight:500;margin-bottom:6px;color:var(--navy)}
-  .q .num{display:inline-block;width:24px;height:24px;border-radius:12px;background:var(--teal);color:#fff;font-size:13px;text-align:center;line-height:24px;margin-right:8px}
-  .opts{display:flex;flex-wrap:wrap;gap:8px}
-  .opts button{font:inherit;font-size:14px;padding:8px 14px;border:1px solid var(--line);border-radius:20px;background:#fff;color:var(--ink);cursor:pointer}
-  .opts button:hover{border-color:var(--teal)}
-  .opts button[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:#fff}
-  select{font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
-  .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-  .primary{font:inherit;font-weight:500;background:var(--navy);color:#fff;border:0;border-radius:8px;padding:12px 22px;cursor:pointer;font-size:16px}
-  .primary:disabled{opacity:.45;cursor:not-allowed}
+  .hidden{display:none!important}
+  .lede{font-size:18px;margin:0 0 18px}
+  .gets{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:18px 0 22px}
+  .gets div{background:var(--light);border-radius:10px;padding:14px}
+  .gets b{display:block;color:var(--navy);margin-bottom:2px}
+  .gets span{font-size:14px;color:var(--mid)}
+  .gets .n{display:inline-block;width:26px;height:26px;border-radius:13px;background:var(--teal);color:#fff;text-align:center;line-height:26px;font-weight:700;font-size:14px;margin-bottom:6px}
+  .btn{font:inherit;font-weight:500;background:var(--navy);color:#fff;border:0;border-radius:8px;padding:13px 26px;cursor:pointer;font-size:17px}
+  .btn:hover{background:#142a49}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+  .btn.teal{background:var(--teal)} .btn.teal:hover{background:#25737f}
+  .btn.gold{background:var(--gold);color:var(--navy)} .btn.gold:hover{background:#b8955f}
+  .link{font:inherit;background:none;border:0;color:var(--teal);cursor:pointer;padding:0;font-size:15px;text-decoration:underline}
   .ghost{font:inherit;background:none;border:1px solid var(--line);border-radius:8px;padding:8px 14px;cursor:pointer;color:var(--navy);font-size:14px}
+  .card{border:1px solid var(--line);border-radius:12px;padding:22px 24px;margin:16px 0;background:#fff}
+  .prog{height:6px;background:var(--light);border-radius:3px;overflow:hidden;margin:4px 0 16px}
+  .prog i{display:block;height:100%;background:var(--teal);transition:width .25s}
+  .qn{font-size:13px;color:var(--mid)}
+  .qlabel{font-size:21px;font-weight:500;color:var(--navy);margin:2px 0 16px}
+  .why{font-size:14px;color:var(--mid);margin:-10px 0 14px}
+  .choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+  .choices.months{grid-template-columns:repeat(auto-fit,minmax(104px,1fr))}
+  .choices.small{grid-template-columns:repeat(auto-fit,minmax(90px,1fr))}
+  .choice{font:inherit;font-size:16px;text-align:left;padding:13px 16px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);cursor:pointer}
+  .choices.months .choice,.choices.small .choice{text-align:center;padding:11px 8px;font-size:15px}
+  .choice:hover{border-color:var(--teal);background:var(--tealbg)}
+  .choice[aria-pressed="true"]{border-color:var(--teal);background:var(--teal);color:#fff}
+  .sub{font-weight:500;color:var(--navy);margin:16px 0 8px;font-size:15px}
+  .qnav{display:flex;justify-content:space-between;align-items:center;margin-top:20px}
+  .summary{background:var(--navy);color:#fff;border-radius:12px;padding:20px 22px;margin:18px 0}
+  .summary .k{font-size:13px;color:#D7DFEA;text-transform:uppercase;letter-spacing:.5px}
+  .summary .h{font-size:21px;font-weight:700;line-height:1.3;margin:4px 0 8px}
+  .summary .d{font-size:15px;color:#E9EEF4}
+  .summary .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+  .summary .btn{font-size:15px;padding:10px 18px}
   table{width:100%;border-collapse:collapse;font-size:14px}
   th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px;font-weight:500}
   td{border-bottom:1px solid var(--line);padding:8px 10px;vertical-align:top}
   tr:nth-child(even) td{background:var(--light)}
-  .profile-tag{display:inline-block;background:var(--light);border-left:4px solid var(--teal);padding:6px 12px;margin:4px 0 10px;font-weight:500;color:var(--navy)}
   .dates{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
   .date{background:var(--light);border-radius:8px;padding:12px 14px}
-  .date .k{font-size:13px;color:var(--mid)}
-  .date .v{font-size:18px;font-weight:700;color:var(--navy)}
-  .flag{border-left:4px solid var(--teal);background:#EEF6F7;padding:10px 14px;margin:10px 0;border-radius:0 8px 8px 0;font-size:15px}
-  .flag.urgent{border-color:var(--warn);background:var(--warnbg)}
-  .flag b{color:var(--navy)}
-  .flag.urgent b{color:var(--warn)}
-  ol.actions{padding-left:22px}
-  ol.actions li{margin:0 0 12px}
-  ol.actions .when{font-size:13px;color:var(--teal);font-weight:500}
-  .cta{background:var(--navy);color:#fff;border-radius:10px;padding:16px 20px;margin:24px 0}
-  .cta a{color:var(--gold);font-weight:500}
-  .locked{border:1px dashed var(--line);border-radius:10px;padding:18px 20px;background:var(--light)}
-  .locked input[type=email]{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;width:100%;max-width:340px}
-  header .brand{display:flex;align-items:center;gap:18px}
-  header .mark{flex:0 0 auto;display:block;line-height:0}
-  header .mark img{height:46px;width:auto}
-  header .mark{padding-right:18px;border-right:1px solid rgba(255,255,255,.35)}
-  footer{background:var(--light);border-top:3px solid var(--teal);margin-top:32px;padding:24px;font-size:13px;color:var(--mid)}
-  footer > *{max-width:772px;margin-left:auto;margin-right:auto}
-  .foot-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:12px}
-  .wordmark{height:38px;width:auto;display:block}
-  .foot-links{display:flex;gap:18px;flex-wrap:wrap}
-  .foot-links a{color:var(--navy);font-weight:500;text-decoration:none;font-size:14px}
-  .foot-links a:hover{color:var(--teal)}
-  footer .about{color:var(--ink);font-size:14px;margin:0 auto 10px}
-  footer .legal{margin:0 auto 6px}
-  @media (max-width:560px){header .brand{flex-direction:column;align-items:flex-start;gap:10px} header .mark{border-right:0;padding-right:0} header .mark img{height:36px} header h1{font-size:20px}}
-  .hidden{display:none}
-  a{color:var(--teal)}
-  .qa{border:1px solid var(--line);border-radius:10px;padding:18px 20px;background:var(--light);margin-top:8px}
-  .qa input[type=email],.qa textarea{font:inherit;font-size:15px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink)}
-  .qa input[type=email]{max-width:340px}
-  .qa textarea{min-height:64px;resize:vertical}
-  .qa .err{color:var(--warn);font-size:14px;margin:6px 0 0}
+  .date .k{font-size:13px;color:var(--mid)} .date .v{font-size:18px;font-weight:700;color:var(--navy)}
+  .flag{border-left:4px solid var(--teal);background:var(--tealbg);padding:10px 14px;margin:10px 0;border-radius:0 8px 8px 0;font-size:15px}
+  .flag.urgent{border-color:var(--warn);background:var(--warnbg)} .flag b{color:var(--navy)} .flag.urgent b{color:var(--warn)}
+  ol.actions{padding-left:22px} ol.actions li{margin:0 0 12px} ol.actions .when{font-size:13px;color:var(--teal);font-weight:500}
+  .panel{border:2px solid var(--teal);border-radius:12px;padding:20px 22px;margin:28px 0 0;scroll-margin-top:12px}
+  .panel h2{margin-top:0}
+  .panel.report{border-color:var(--gold);background:#FBF8F2}
   .msgs{margin:8px 0 12px}
   .msg{border-radius:10px;padding:10px 14px;margin:10px 0;font-size:15px;background:#fff;border:1px solid var(--line)}
-  .msg.user{background:#EEF6F7;border-color:#CFE5E8;color:var(--navy);font-weight:500}
+  .msg.user{background:var(--tealbg);border-color:#CFE5E8;color:var(--navy);font-weight:500}
   .msg p{margin:0 0 8px} .msg p:last-child{margin-bottom:0} .msg ul{margin:4px 0 8px;padding-left:20px}
   .msg .disc{color:var(--mid);font-size:13px}
-  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 10px}
-  .chips button{font:inherit;font-size:13px;padding:6px 12px;border:1px solid var(--teal);color:var(--teal);background:#fff;border-radius:16px;cursor:pointer;text-align:left}
-  .chips button:hover{background:#EEF6F7}
   .thinking{color:var(--mid);font-style:italic}
-  .testbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:14px;color:var(--mid);margin-bottom:8px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 12px}
+  .chips button{font:inherit;font-size:14px;padding:7px 13px;border:1px solid var(--teal);color:var(--teal);background:#fff;border-radius:18px;cursor:pointer;text-align:left}
+  .chips button:hover{background:var(--tealbg)}
+  textarea,input[type=email]{font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink)}
+  textarea{min-height:70px;resize:vertical}
+  .err{color:var(--warn);font-size:14px;margin:6px 0 0}
+  .ok{color:#1d6b3a;font-size:15px;margin:10px 0 0;font-weight:500}
+  .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  .includes{margin:6px 0 14px;padding-left:20px;font-size:15px} .includes li{margin:2px 0}
+  .counter{font-size:13px;color:var(--mid)}
+  .sticky{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);box-shadow:0 -4px 14px rgba(0,0,0,.06);padding:10px 16px;display:flex;gap:10px;justify-content:center;z-index:5}
+  .sticky .btn{font-size:15px;padding:10px 16px}
+  .testbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:14px;color:var(--mid);margin:12px 0 0;padding:8px 10px;border:1px dashed var(--line);border-radius:8px}
+  select{font:inherit;font-size:14px;padding:6px 8px;border:1px solid var(--line);border-radius:6px}
+  footer{background:var(--light);border-top:3px solid var(--teal);margin-top:40px;padding:24px;font-size:13px;color:var(--mid)}
+  footer > *{max-width:772px;margin-left:auto;margin-right:auto}
+  .foot-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:12px}
+  .foot-top img{height:36px;width:auto;display:block}
+  .foot-links{display:flex;gap:18px;flex-wrap:wrap} .foot-links a{color:var(--navy);font-weight:500;text-decoration:none;font-size:14px}
+  footer .about{color:var(--ink);font-size:14px;margin:0 auto 10px} footer .legal{margin:0 auto 6px}
+  @media (max-width:560px){
+    .brand{flex-direction:column;align-items:flex-start;gap:8px}.brand .mark{border:0;padding:0}.brand .mark img{height:32px}
+    h1{font-size:25px}.qlabel{font-size:19px}.choices{grid-template-columns:1fr}
+    main{padding:8px 16px 24px}.steps{padding:0 16px}.card{padding:18px 16px}
+  }
+  body.has-sticky{padding-bottom:70px}
 </style>
 </head>
 <body>
 <header><div class="wrap brand">
-  <a href="https://www.nautilushealth.org/" class="mark" aria-label="Nautilus Health Institute home"><img src="data:image/png;base64,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" alt="Nautilus Health Institute"></a>
-  <div>
-    <h1>PBM Rule Readiness Check</h1>
-    <p>Seven quick questions. See what the DOL final PBM rule and the Consolidated Appropriations Act (CAA) of 2026 mean for your plan.</p>
-  </div>
+  <a href="https://www.nautilushealth.org/" class="mark" aria-label="Nautilus Health Institute home"><img src="assets/nautilus-wordmark-white.png" alt="Nautilus"></a>
+  <div><div class="t">PBM Rule Readiness Check</div><div class="s">What the DOL final PBM rule and CAA 2026 mean for your plan</div></div>
 </div></header>
-<div class="proto">Prototype for review. Logic pending counsel review. No data leaves this page.</div>
+<div class="proto" id="proto">Preview for review. Logic and answers pending counsel review.</div>
+
+<div class="steps" id="steps" aria-hidden="true">
+  <div data-s="1">1. Your plan</div><div data-s="2">2. Your results</div><div data-s="3">3. Ask &amp; get your report</div>
+</div>
 
 <main>
-  <section id="intake">
-    <div class="testbar">
-      <span>Reviewers: load a test profile</span>
-      <select id="preset" aria-label="Load a test profile">
+  <!-- Intro -->
+  <section id="intro">
+    <h1>What does the DOL PBM rule mean for your plan?</h1>
+    <p class="lede">Answer 7 quick questions. In about 2 minutes you'll have your deadlines, a personal action plan, and answers to your follow-up questions, all in a report you can keep.</p>
+    <div class="gets">
+      <div><span class="n">1</span><b>Your deadlines</b><span>When the rule reaches your plan and when your PBM owes you disclosures</span></div>
+      <div><span class="n">2</span><b>Your action plan</b><span>What to do now, before renewal, and when disclosures arrive</span></div>
+      <div><span class="n">3</span><b>Your questions answered</b><span>Plain answers, with sources from the rule and the Nautilus checklist</span></div>
+      <div><span class="n">4</span><b>Your report</b><span>Everything in one PDF, emailed to you to share with your team</span></div>
+    </div>
+    <div class="row"><button class="btn" id="startBtn">Start the check</button><span class="muted">Free. No email needed to start. No contract or plan data.</span></div>
+    <div class="testbar hidden" id="testbar">
+      <span>Reviewers: jump to a test profile</span>
+      <select id="preset" aria-label="Test profile">
         <option value="">Choose…</option>
         <option value="a">Self-funded employer, 800 lives, calendar year</option>
         <option value="b">Level-funded employer, 150 lives, July plan year</option>
@@ -112,21 +146,25 @@
         <option value="f">Broker, client unsure of funding</option>
       </select>
     </div>
-
-    <div class="card" id="questions"></div>
-    <div class="row">
-      <button class="primary" id="go" disabled>See my results</button>
-      <span class="muted" id="remain"></span>
-    </div>
-    <p class="muted">We don't ask for names, plan numbers or contracts. "Not sure" is always a fine answer.</p>
   </section>
 
-  <section id="results" class="hidden" aria-live="polite"></section>
+  <!-- One question per screen -->
+  <section id="quiz" class="hidden">
+    <div class="card" id="qcard" aria-live="polite"></div>
+  </section>
+
+  <!-- Results -->
+  <section id="results" class="hidden"></section>
 </main>
+
+<div class="sticky hidden" id="sticky">
+  <button class="btn teal" id="stickyAsk">Ask a question</button>
+  <button class="btn gold" id="stickyReport">Get my report</button>
+</div>
 
 <footer>
   <div class="foot-top">
-    <a href="https://www.nautilushealth.org/" aria-label="Nautilus Health Institute"><img class="wordmark" src="data:image/png;base64,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" alt="Nautilus Health Institute"></a>
+    <a href="https://www.nautilushealth.org/" aria-label="Nautilus Health Institute"><img src="assets/nautilus-wordmark-navy.png" alt="Nautilus Health Institute"></a>
     <div class="foot-links">
       <a href="https://www.nautilushealth.org/PBM">PBM Resources</a>
       <a href="https://www.contractxray.com/">Contract X-Ray</a>
@@ -134,449 +172,323 @@
     </div>
   </div>
   <p class="about">Nautilus Health Institute is a 501(c)(3) non-profit organization with a mission to transform health plan market norms in procurement, contracting, and data use by 2030. This tool is part of the Nautilus PBM Fiduciary Standards Initiative.</p>
-  <p class="legal">General information about the DOL final PBM rule (29 CFR 2550.408b-22) and the Consolidated Appropriations Act (CAA) of 2026. Not legal advice, and no attorney-client relationship is created. Items marked "pending counsel confirmation" are open questions.</p>
+  <p class="legal">General information about the DOL final PBM rule (29 CFR 2550.408b-22) and the Consolidated Appropriations Act (CAA) of 2026. Not legal advice, and no attorney-client relationship is created. Items marked "pending counsel confirmation" are open questions. We store your answers and, if you ask for your report, your email and questions. We don't ask for names, plan numbers or contracts.</p>
   <p class="legal">Copyright &copy; 2026 Nautilus Health Institute</p>
 </footer>
 
-<script>
-(function(){
-  "use strict";
-  var MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  var SHORT = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+<script type="module">
+import { QUESTIONS, MONTHS, compute, suggestions } from "./logic.js";
+import { md, esc } from "./report.js";
+import { buildPDF } from "./pdf.js";
 
-  var QUESTIONS = [
-    {id:"role", label:"Which best describes you?", opts:[["sponsor","Plan sponsor or fiduciary"],["advisor","Broker or consultant"],["attorney","Attorney"],["other","Other"]]},
-    {id:"type", label:"What kind of employer sponsors the plan?", opts:[["private","Private employer"],["multi","Multiemployer (union) plan"],["gov","Government"],["church","Church"],["unsure","Not sure"]]},
-    {id:"fund", label:"How is the medical plan funded?", opts:[["self","Self-funded"],["level","Level-funded"],["fully","Fully insured"],["unsure","Not sure"]]},
-    {id:"size", label:"How many employees or participants?", opts:[["small","Under 100"],["mid","100 to 499"],["large","500 or more"],["unsure","Not sure"]]},
-    {id:"pymonth", label:"What month does the plan year start?", kind:"month"},
-    {id:"renewal", label:"When does the PBM contract next renew, and how much notice does it need to stop auto-renewal?", kind:"renewal"},
-    {id:"holder", label:"Who holds the PBM contract?", opts:[["pbm","The plan, directly with the PBM"],["tpa","A TPA"],["carrier","The insurance carrier"],["unsure","Not sure"]]}
-  ];
+/* ---------- config ---------- */
+// The Cloudflare Worker that answers questions and emails reports. Empty = questions and email switched off.
+let WORKER_URL = "";
+const params = new URLSearchParams(location.search);
+const api = params.get("api");
+if (api && /^https:\/\/[\w.-]+$|^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(api)) WORKER_URL = api;
+const REVIEW = params.has("review");
+if (REVIEW) document.getElementById("testbar").classList.remove("hidden");
 
-  var S = {};
-  var qbox = document.getElementById("questions");
+/* ---------- state ---------- */
+let S = {};                 // intake answers
+let qi = 0;                 // current question index
+const QA = { session: null, transcript: [], remaining: null, unlocked: false, busy: false, email: "" };
+const $ = (id) => document.getElementById(id);
 
-  function el(tag, attrs, html){
-    var e = document.createElement(tag);
-    if(attrs){ for(var k in attrs){ e.setAttribute(k, attrs[k]); } }
-    if(html !== undefined){ e.innerHTML = html; }
-    return e;
-  }
-
-  function monthSelect(id, withUnsure){
-    var s = el("select", {id:id, "aria-label":"Month"});
-    s.appendChild(el("option",{value:""},"Month…"));
-    MONTHS.forEach(function(m,i){ s.appendChild(el("option",{value:String(i+1)},m)); });
-    if(withUnsure){ s.appendChild(el("option",{value:"unsure"},"Not sure")); }
-    return s;
-  }
-
-  function renderQuestions(){
-    qbox.innerHTML = "";
-    QUESTIONS.forEach(function(q, idx){
-      var wrap = el("div",{"class":"q"});
-      wrap.appendChild(el("label",{"class":"qlabel"},'<span class="num">'+(idx+1)+'</span>'+q.label));
-      if(q.opts){
-        var o = el("div",{"class":"opts", role:"group", "aria-label":q.label});
-        q.opts.forEach(function(p){
-          var b = el("button",{type:"button","data-q":q.id,"data-v":p[0],"aria-pressed":String(S[q.id]===p[0])},p[1]);
-          b.addEventListener("click", function(){ S[q.id]=p[0]; renderQuestions(); });
-          o.appendChild(b);
-        });
-        wrap.appendChild(o);
-      } else if(q.kind==="month"){
-        var s = monthSelect("pymonth", true);
-        s.value = S.pymonth || "";
-        s.addEventListener("change", function(){ S.pymonth = s.value; check(); });
-        wrap.appendChild(s);
-      } else if(q.kind==="renewal"){
-        var r = el("div",{"class":"row"});
-        var rm = monthSelect("rmonth", true);
-        rm.value = S.rmonth || "";
-        var ry = el("select",{id:"ryear","aria-label":"Year"});
-        ry.appendChild(el("option",{value:""},"Year…"));
-        [2026,2027,2028,2029,2030].forEach(function(y){ ry.appendChild(el("option",{value:String(y)},String(y))); });
-        ry.value = S.ryear || "";
-        var nw = el("select",{id:"notice","aria-label":"Notice window"});
-        nw.appendChild(el("option",{value:""},"Notice window…"));
-        [30,60,90,120,180].forEach(function(d){ nw.appendChild(el("option",{value:String(d)},d+" days")); });
-        nw.appendChild(el("option",{value:"unsure"},"Not sure"));
-        nw.value = S.notice || "";
-        rm.addEventListener("change", function(){ S.rmonth = rm.value; if(rm.value==="unsure"){ S.ryear="unsure"; } check(); renderQuestions(); });
-        ry.addEventListener("change", function(){ S.ryear = ry.value; check(); });
-        nw.addEventListener("change", function(){ S.notice = nw.value; check(); });
-        r.appendChild(rm);
-        if(S.rmonth !== "unsure"){ r.appendChild(ry); }
-        r.appendChild(nw);
-        wrap.appendChild(r);
-      }
-      qbox.appendChild(wrap);
-    });
-    check();
-  }
-
-  function answered(){
-    var n = 0;
-    ["role","type","fund","size","pymonth","holder"].forEach(function(k){ if(S[k]) n++; });
-    if(S.rmonth && (S.rmonth==="unsure" || S.ryear) && S.notice) n++;
-    return n;
-  }
-  function check(){
-    var n = answered();
-    document.getElementById("go").disabled = n < 7;
-    document.getElementById("remain").textContent = n < 7 ? (7-n)+" to go" : "Ready";
-  }
-
-  /* ---------- dates (UTC, first of month) ---------- */
-  function D(y,m,d){ return new Date(Date.UTC(y,m-1,d||1)); }
-  function addDays(dt,n){ return new Date(dt.getTime() + n*864e5); }
-  function fmt(dt){ return SHORT[dt.getUTCMonth()]+" "+dt.getUTCDate()+", "+dt.getUTCFullYear(); }
-  function todayUTC(){ var t=new Date(); return D(t.getFullYear(), t.getMonth()+1, t.getDate()); }
-  function firstOnOrAfter(month, threshold){
-    for(var y=2026;y<=2032;y++){ var c=D(y,month,1); if(c>=threshold) return c; }
-    return null;
-  }
-  var DOL_START = D(2027,7,1), CAA_START = D(2028,8,3);
-
-  /* ---------- applicability ---------- */
-  var CAT = {
-    FULL:{label:"ERISA plan, self-funded or level-funded, 100 or more participants",
-      dol:"Applies in full. Detailed initial disclosures, semiannual or quarterly reports, an annual audit right, and machine-readable data.",
-      pass:"Applies.", rep:"Detailed report."},
-    SMALL:{label:"ERISA plan, self-funded or level-funded, under 100 participants",
-      dol:"The detailed rule doesn't apply. General statutory disclosures are still required.",
-      pass:"Applies.", rep:"Summary report."},
-    FI:{label:"ERISA plan, fully insured",
-      dol:"The detailed rule doesn't apply. General statutory disclosures are still required.",
-      pass:"Applies through the insurer.", rep:"Summary report. Plans with 100 or more participants may opt in to the detailed report."},
-    NON:{label:"Government or church plan (not covered by ERISA)",
-      dol:"Doesn't apply. Contract for the same terms.",
-      pass:"Doesn't apply. Contract for the same terms.", rep:"Applies."}
-  };
-  var ORDER = ["FULL","FI","SMALL","NON"];
-
-  function cats(){
-    var types = S.type==="unsure" ? ["private","gov"] : [S.type];
-    var funds = S.fund==="unsure" ? ["self","fully"] : [S.fund];
-    var sizes = S.size==="unsure" ? ["mid","small"] : [S.size];
-    var found = {};
-    types.forEach(function(t){ funds.forEach(function(f){ sizes.forEach(function(z){
-      var c;
-      if(t==="gov"||t==="church") c="NON";
-      else if(f==="fully") c="FI";
-      else if(z==="small") c="SMALL";
-      else c="FULL";
-      found[c]=true;
-    });});});
-    return ORDER.filter(function(c){ return found[c]; }).slice(0,2);
-  }
-
-  function you(){ return (S.role==="advisor"||S.role==="attorney") ? {your:"your client's", You:"Your client", you:"your client"} : {your:"your", You:"You", you:"you"}; }
-
-  /* ---------- results ---------- */
-  function buildResults(){
-    var key = JSON.stringify(S);
-    if(QA.key !== key){ QA.session = null; QA.history = []; QA.key = key; }
-    var Y = you();
-    var list = cats();
-    var primary = list[0];
-    var unsureProfile = list.length > 1;
-    var today = todayUTC();
-
-    var pm = (S.pymonth && S.pymonth!=="unsure") ? Number(S.pymonth) : null;
-    var dolFirst = pm ? firstOnOrAfter(pm, DOL_START) : null;
-    var caaFirst = pm ? firstOnOrAfter(pm, CAA_START) : null;
-
-    var renewal = (S.rmonth && S.rmonth!=="unsure" && S.ryear) ? D(Number(S.ryear), Number(S.rmonth), 1) : null;
-    var notice = (S.notice && S.notice!=="unsure") ? Number(S.notice) : null;
-    var autoDeadline = (renewal && notice) ? addDays(renewal, -notice) : null;
-    var dolApplies = primary==="FULL";
-    var initialDue = (dolApplies && renewal && dolFirst && renewal >= dolFirst) ? addDays(renewal,-90) : null;
-    var earlier = [autoDeadline, initialDue].filter(Boolean).sort(function(a,b){return a-b;})[0] || null;
-    var reviewBy = earlier ? addDays(earlier,-60) : null;
-
-    var h = [];
-    h.push('<h2>'+(S.role==="advisor"||S.role==="attorney" ? "Your client's results" : "Your results")+'</h2>');
-
-    /* profile + applicability */
-    if(unsureProfile){
-      h.push('<div class="flag"><b>Your answers fit more than one profile.</b> We show the two most likely below. Confirm '+Y.your+' plan type, funding and size with '+(S.role==="advisor" ? "the plan sponsor or counsel" : "your broker or counsel")+'.</div>');
-    }
-    h.push('<h3>What applies</h3>');
-    h.push('<table><thead><tr><th>Profile</th><th>DOL final rule</th><th>CAA 2026 pass-through (2028)</th><th>CAA 2026 PBM reports (2028)</th></tr></thead><tbody>');
-    list.forEach(function(c){
-      var r = CAT[c];
-      h.push('<tr><td><b>'+r.label+'</b></td><td>'+r.dol+'</td><td>'+r.pass+'</td><td>'+r.rep+'</td></tr>');
-    });
-    h.push('</tbody></table>');
-
-    /* dates */
-    var dates = [];
-    if(primary!=="NON" && dolFirst) dates.push(["First plan year under the DOL rule", fmt(dolFirst), primary==="FULL" ? "" : "Detailed rule doesn't apply to this profile"]);
-    if(primary!=="NON" && caaFirst) dates.push(["First plan year under CAA 2026", fmt(caaFirst), ""]);
-    if(initialDue) dates.push(["Initial disclosure due", fmt(initialDue), "90 days before renewal", initialDue]);
-    if(autoDeadline) dates.push(["Auto-renewal deadline", fmt(autoDeadline), notice+"-day notice window", autoDeadline]);
-    if(reviewBy) dates.push(["Start contract review by", fmt(reviewBy), "60 days before the earlier deadline", reviewBy]);
-    if(dates.length){
-      h.push('<h3>Key dates</h3><div class="dates">');
-      dates.forEach(function(d){
-        var past = (d[3] && d[3] < today);
-        h.push('<div class="date"><div class="k">'+d[0]+'</div><div class="v"'+(past?' style="color:#B4541A"':'')+'>'+d[1]+'</div>'+(past?'<div class="muted">This date has passed</div>':(d[2]?'<div class="muted">'+d[2]+'</div>':''))+'</div>');
-      });
-      h.push('</div>');
-    }
-    var missing = [];
-    if(!pm) missing.push("plan year start month");
-    if(!renewal) missing.push("renewal date");
-    if(!notice) missing.push("auto-renewal notice window");
-    if(missing.length){
-      h.push('<p class="muted">Some dates need the '+missing.join(", ")+'. These are in the PBM contract or the plan document.</p>');
-    }
-
-    /* flags */
-    var flags = [];
-    if(autoDeadline && autoDeadline >= today && (autoDeadline - today) <= 120*864e5){
-      flags.push('<div class="flag urgent"><b>Act now.</b> The auto-renewal notice deadline is '+fmt(autoDeadline)+', within 120 days. Miss it and the current terms roll forward.</div>');
-    }
-    if(autoDeadline && autoDeadline < today && renewal >= today){
-      flags.push('<div class="flag urgent"><b>The auto-renewal notice window may have closed.</b> Check the contract now for any remaining exit or amendment rights.</div>');
-    }
-    if(renewal && renewal < today){
-      flags.push('<div class="flag"><b>That renewal date has passed.</b> Enter the next renewal date for accurate deadlines.</div>');
-    }
-    if(dolApplies && renewal && dolFirst && renewal < dolFirst && renewal >= today){
-      flags.push('<div class="flag"><b>'+Y.your.charAt(0).toUpperCase()+Y.your.slice(1)+' next renewal comes before the detailed rule.</b> '+Y.You+' '+(Y.you==="you"?"are":"is")+' still owed statutory disclosures now. Plan for the full disclosures at the renewal after.</div>');
-    }
-    if(renewal && renewal > CAA_START && primary!=="NON"){
-      flags.push('<div class="flag"><b>The current contract runs past August 3, 2028.</b> CAA 2026 pass-through requirements attach to plan years starting on or after that date. Whether an existing contract must be amended mid-term is pending counsel confirmation. See the August 2028 scenario table in the checklist.</div>');
-    }
-    if(S.holder==="tpa" || S.holder==="carrier"){
-      var who = S.holder==="tpa" ? "the TPA" : "the carrier";
-      flags.push('<div class="flag"><b>The contract is held through '+who+'.</b> That entity owes '+Y.you+' the disclosures, even if another company runs the PBM.</div>');
-    }
-    if(S.holder==="unsure"){
-      flags.push('<div class="flag"><b>Find out who holds the PBM contract.</b> Whoever holds it owes '+Y.you+' the disclosures.</div>');
-    }
-    if(flags.length){ h.push('<h3>Watch for</h3>'+flags.join("")); }
-
-    /* actions */
-    h.push('<h3>What to do next</h3><ol class="actions">');
-    actions(primary, {reviewBy:reviewBy, autoDeadline:autoDeadline, initialDue:initialDue, dolFirst:dolFirst, caaFirst:caaFirst, unsure:unsureProfile}).forEach(function(a){
-      h.push('<li><div class="when">'+a[0]+'</div>'+a[1]+'</li>');
-    });
-    h.push('</ol>');
-
-    /* CTA */
-    h.push('<div class="cta">Visit <a href="https://www.nautilushealth.org/PBM">www.nautilushealth.org/PBM</a> for the full Fiduciary Action Checklist and the August 2028 scenario table.</div>');
-
-    h.push('<div id="qa"></div>');
-
-    h.push('<p style="margin-top:20px"><button class="ghost" id="restart">Start over</button> <button class="ghost" id="copy">Copy results as text</button> <span class="muted" id="copied"></span></p>');
-
-    var box = document.getElementById("results");
-    box.innerHTML = h.join("");
-    box.classList.remove("hidden");
-    renderQA(primary);
-    document.getElementById("restart").addEventListener("click", function(){ S={}; QA.session=null; QA.history=[]; document.getElementById("preset").value=""; box.classList.add("hidden"); renderQuestions(); window.scrollTo(0,0); });
-    document.getElementById("copy").addEventListener("click", function(){
-      var txt = box.innerText.replace(/\n{3,}/g,"\n\n");
-      try{ navigator.clipboard.writeText(txt).then(function(){ document.getElementById("copied").textContent="Copied"; }, function(){ document.getElementById("copied").textContent="Copy not available here"; }); }
-      catch(e){ document.getElementById("copied").textContent="Copy not available here"; }
-    });
-    box.scrollIntoView({behavior:"smooth", block:"start"});
-  }
-
-  function actions(c, d){
-    var Y = you();
-    var now = "Now";
-    var today = todayUTC();
-    var by = function(dt, fallback){ if(!dt) return fallback; return dt < today ? "Now (target date "+fmt(dt)+" has passed)" : "By "+fmt(dt); };
-    var a = [];
-    if(c==="NON"){
-      a.push([now, "<b>Pull "+Y.your+" PBM contract and every amendment.</b> Federal rules won't do this work for a government or church plan. The contract is the only protection."]);
-      a.push([by(d.reviewBy,"Before the next renewal"), "<b>Run a Contract X-Ray.</b> Get a Negotiation Guide that compares the contract to the DOL rule and CAA 2026 standards."]);
-      a.push([by(d.autoDeadline,"Check the contract"), "<b>Calendar the auto-renewal notice deadline.</b> That date is the leverage point for new terms."]);
-      a.push(["At renewal", "<b>Contract for the same disclosures.</b> Ask for initial and semiannual compensation disclosures, in machine-readable form."]);
-      a.push(["At renewal", "<b>Contract for an annual audit right</b> with an auditor the plan chooses and claims-level data."]);
-      a.push(["At renewal", "<b>Contract for full pass-through</b> of rebates and other manufacturer payments to the plan."]);
-      return a;
-    }
-    a.push([now, "<b>Pull "+Y.your+" PBM contract and every amendment.</b> Include any contract held by a TPA or carrier on the plan's behalf."]);
-    a.push([by(d.reviewBy,"Before the next renewal"), "<b>Run a Contract X-Ray.</b> Get a Negotiation Guide that scores the contract against the DOL final rule and CAA 2026."]);
-    if(c==="FULL"){
-      a.push([by(d.autoDeadline,"Check the contract"), "<b>Calendar the auto-renewal notice deadline.</b> Missing it rolls the current terms forward."]);
-      a.push([now, "<b>Request the statutory disclosures "+Y.you+" "+(Y.you==="you"?"are":"is")+" owed today.</b> The general 408(b)(2) requirement already applies. The DOL's temporary enforcement policy covers the gap until the detailed rule starts."]);
-      a.push([by(d.initialDue, d.dolFirst ? "From "+fmt(d.dolFirst) : "When the rule applies"), "<b>Review the initial disclosure and document the decision.</b> A documented review supports the rule's exemption for a fiduciary who acts in good faith on a disclosure that turns out to be wrong."]);
-      a.push([d.dolFirst ? "From "+fmt(d.dolFirst) : "When the rule applies", "<b>Choose the plan's auditor.</b> The rule gives the plan an annual audit right, with an auditor the plan selects."]);
-    } else if(c==="FI"){
-      a.push([now, "<b>Ask the insurer for the general statutory disclosures.</b> The detailed rule doesn't cover fully insured plans, but the statute still does."]);
-      a.push([by(d.caaFirst,"By August 2028"), "<b>Ask how CAA 2026 pass-through will reach the plan.</b> Get the answer in writing at renewal."]);
-      a.push([by(d.autoDeadline,"Check the contract"), "<b>Calendar the renewal notice deadline</b> and use it to price a self-funded option."]);
-    } else if(c==="SMALL"){
-      a.push([now, "<b>Request the general statutory disclosures.</b> The detailed rule starts at 100 participants, but the statute applies now."]);
-      a.push([by(d.autoDeadline,"Check the contract"), "<b>Calendar the auto-renewal notice deadline.</b> Missing it rolls the current terms forward."]);
-      a.push([by(d.caaFirst,"By August 2028"), "<b>Plan for CAA 2026 pass-through.</b> Ask the PBM how rebates will reach the plan."]);
-    }
-    if(d.unsure){
-      a.splice(1,0,[now, "<b>Confirm the plan's profile.</b> Funding, size and sponsor type decide which rules apply. Check the plan document or ask "+(S.role==="advisor" ? "the plan sponsor" : "your broker")+"."]);
-    }
-    /* order: undated "Now" first, then by date; undated items last; stable */
-    var key = function(lbl){
-      if(lbl.indexOf("Now")===0) return 0;
-      var m = lbl.match(/([A-Z][a-z]{2}) (\d+), (\d{4})/);
-      if(m) return D(Number(m[3]), SHORT.indexOf(m[1])+1, Number(m[2])).getTime();
-      return 9e15;
-    };
-    return a.map(function(x,i){return [x,i];}).sort(function(p,q){ return (key(p[0][0])-key(q[0][0])) || (p[1]-q[1]); }).map(function(p){return p[0];}).slice(0,6);
-  }
-
-
-  /* ---------- Q&A (Worker) ---------- */
-  // Set WORKER_URL once the Cloudflare Worker is deployed. Empty = questions switched off.
-  var WORKER_URL = "";
-  try { var qp = new URLSearchParams(location.search).get("api"); if (qp && /^https:\/\/[\w.-]+(:\d+)?$|^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(qp)) WORKER_URL = qp; } catch(e){}
-  var QA = { session:null, history:[], remaining:null, busy:false };
-
-  function esc(t){ return String(t).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
-  function md(t){
-    var lines = esc(t).split(/\n/), out=[], list=false;
-    lines.forEach(function(l){
-      l = l.replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
-      var m = l.match(/^\s*(?:[-*•]|\d+\.)\s+(.*)$/);
-      if(m){ if(!list){ out.push("<ul>"); list=true; } out.push("<li>"+m[1]+"</li>"); return; }
-      if(list){ out.push("</ul>"); list=false; }
-      if(!l.trim()) return;
-      if(/^General information, not legal advice\.?$/.test(l.trim())) out.push('<p class="disc">'+l+'</p>');
-      else out.push("<p>"+l+"</p>");
-    });
-    if(list) out.push("</ul>");
-    return out.join("");
-  }
-  function api(path, payload){
-    return fetch(WORKER_URL + path, { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(payload) })
-      .then(function(r){ return r.json().then(function(j){ j._status = r.status; return j; }, function(){ return {_status:r.status, error:"Unexpected response."}; }); });
-  }
-  function suggestions(cat){
-    if(cat==="NON") return ["Which disclosure and audit terms should we put in our PBM contract?","Do the CAA 2026 PBM reports apply to our plan?","How do we handle a PBM that refuses these terms?"];
-    if(cat==="FI") return ["What disclosures is our insurer required to give us now?","How will the 2028 rebate pass-through reach a fully insured plan?","Should we consider moving to self-funding?"];
-    if(cat==="SMALL") return ["What disclosures are we owed if we're under 100?","Does the 2028 rebate pass-through apply to us?","What should we ask our PBM for at renewal?"];
-    return ["When is our PBM's first detailed disclosure due?","What audit terms should we insist on at renewal?","Does the August 2028 pass-through reach our current contract?"];
-  }
-
-  function renderQA(cat){
-    var box = document.getElementById("qa"); if(!box) return;
-    var Y = you();
-    var h = ['<div class="qa"><h3 style="margin-top:0">Ask a question about '+Y.your+' results</h3>'];
-    if(!WORKER_URL){
-      h.push('<p class="muted">Coming next: answers from Nautilus-approved material, with sources cited. Enter an email to unlock questions and get a copy of these results.</p>'+
-        '<div class="row"><input type="email" placeholder="you@company.com" disabled aria-label="Email (disabled in prototype)"><button class="ghost" disabled>Unlock questions</button></div>'+
-        '<p class="muted"><label><input type="checkbox" disabled> Send me my results and occasional Nautilus updates.</label><br>Prototype: email and questions are switched off.</p></div>');
-      box.innerHTML = h.join(""); return;
-    }
-    if(!QA.session){
-      h.push('<p class="muted">Answers come only from Nautilus-reviewed material on the DOL final rule and CAA 2026, with sources cited. Enter your work email to unlock up to 10 questions.</p>'+
-        '<form id="leadForm" novalidate><div class="row"><input type="email" id="email" placeholder="you@company.com" autocomplete="email" aria-label="Work email" required><button class="primary" type="submit" id="leadBtn" style="padding:9px 18px;font-size:15px">Unlock questions</button></div>'+
-        '<p class="muted" style="margin:10px 0 0"><label><input type="checkbox" id="consent"> Send me my results and occasional Nautilus updates.</label></p>'+
-        '<p class="err" id="leadErr" role="alert"></p></form>'+
-        '<p class="muted" style="margin-bottom:0">We store your email and your seven answers, nothing else. Please don\'t enter names, member data or contract text in questions.</p></div>');
-      box.innerHTML = h.join("");
-      document.getElementById("leadForm").addEventListener("submit", function(e){
-        e.preventDefault();
-        var email = document.getElementById("email").value.trim(), err = document.getElementById("leadErr"), btn = document.getElementById("leadBtn");
-        if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ err.textContent = "Please enter a valid email address."; return; }
-        btn.disabled = true; err.textContent = "";
-        var embed = ""; try { embed = document.referrer || ""; } catch(x){}
-        api("/lead", { email:email, consent: document.getElementById("consent").checked, profile:S, embed:embed }).then(function(j){
-          btn.disabled = false;
-          if(j.session){ QA.session = j.session; QA.remaining = j.remaining; renderQA(cat); var q=document.getElementById("q"); if(q) q.focus(); }
-          else err.textContent = j.error || "Something went wrong. Please try again.";
-        }, function(){ btn.disabled = false; err.textContent = "Couldn't reach the service. Please try again."; });
-      });
-      return;
-    }
-    h.push('<div class="msgs" id="msgs">');
-    for(var i=0;i<QA.history.length;i++){
-      var m = QA.history[i];
-      h.push(m.role==="user" ? '<div class="msg user">'+esc(m.content)+'</div>' : '<div class="msg">'+md(m.content)+'</div>');
-    }
-    h.push('</div>');
-    if(QA.remaining > 0){
-      if(!QA.history.length){
-        h.push('<div class="chips">'); suggestions(cat).forEach(function(t){ h.push('<button type="button" data-s="'+esc(t)+'">'+esc(t)+'</button>'); }); h.push('</div>');
-      }
-      h.push('<form id="askForm"><textarea id="q" maxlength="500" placeholder="Type a question about the rule, your dates or your next steps" aria-label="Your question"></textarea>'+
-        '<div class="row" style="margin-top:8px"><button class="primary" type="submit" id="askBtn" style="padding:9px 18px;font-size:15px">Ask</button><span class="muted" id="left">'+QA.remaining+' question'+(QA.remaining===1?'':'s')+' left</span></div>'+
-        '<p class="err" id="askErr" role="alert"></p></form>');
-    } else {
-      h.push('<p class="muted">You\'ve used all 10 questions for this session. For more, visit <a href="https://www.nautilushealth.org/PBM">nautilushealth.org/PBM</a>.</p>');
-    }
-    h.push('</div>');
-    box.innerHTML = h.join("");
-    var chips = box.querySelectorAll(".chips button");
-    for(var k=0;k<chips.length;k++){ chips[k].addEventListener("click", function(){ document.getElementById("q").value = this.getAttribute("data-s"); send(cat); }); }
-    var f = document.getElementById("askForm");
-    if(f) f.addEventListener("submit", function(e){ e.preventDefault(); send(cat); });
-  }
-
-  function send(cat){
-    if(QA.busy) return;
-    var q = document.getElementById("q"), err = document.getElementById("askErr"), btn = document.getElementById("askBtn");
-    var text = (q.value||"").trim();
-    if(!text){ err.textContent = "Please type a question."; return; }
-    QA.busy = true; btn.disabled = true; q.disabled = true; err.textContent = "";
-    var msgs = document.getElementById("msgs");
-    msgs.insertAdjacentHTML("beforeend", '<div class="msg user">'+esc(text)+'</div><div class="msg thinking" id="thinking">Checking the rule and the checklist…</div>');
-    var prior = QA.history.slice(-6);
-    api("/ask", { session: QA.session, question: text, history: prior }).then(function(j){
-      QA.busy = false;
-      if(j.answer){
-        QA.history.push({role:"user", content:text}, {role:"assistant", content:j.answer});
-        QA.remaining = j.remaining; renderQA(cat);
-        var all = document.querySelectorAll(".msg"); if(all.length) all[all.length-1].scrollIntoView({behavior:"smooth", block:"nearest"});
-      } else {
-        if(j.code==="no_session"){ QA.session=null; QA.history=[]; renderQA(cat); return; }
-        if(j.code==="limit"){ QA.remaining = 0; renderQA(cat); return; }
-        var t = document.getElementById("thinking"); if(t) t.remove();
-        var last = msgs.lastElementChild; if(last && last.classList.contains("user")) last.remove();
-        btn.disabled = false; q.disabled = false; err.textContent = j.error || "Something went wrong. Please try again.";
-      }
-    }, function(){
-      QA.busy = false; var t = document.getElementById("thinking"); if(t) t.remove();
-      var last = msgs.lastElementChild; if(last && last.classList.contains("user")) last.remove();
-      btn.disabled = false; q.disabled = false; err.textContent = "Couldn't reach the service. Please try again.";
-    });
-  }
-
-  /* ---------- tell an embedding page how tall we are ---------- */
-  (function(){
-    if(window.parent === window) return;
-    var last = 0;
-    function post(){ var hgt = Math.ceil(document.documentElement.scrollHeight); if(Math.abs(hgt-last) > 4){ last = hgt; try{ window.parent.postMessage({type:"pbm-readiness-height", height:hgt}, "*"); }catch(e){} } }
-    try { new ResizeObserver(post).observe(document.body); } catch(e) { setInterval(post, 500); }
-    window.addEventListener("load", post);
-  })();
-
-  /* ---------- presets for reviewers ---------- */
-  var PRESETS = {
-    a:{role:"sponsor",type:"private",fund:"self",size:"large",pymonth:"1",rmonth:"1",ryear:"2028",notice:"90",holder:"pbm"},
-    b:{role:"sponsor",type:"private",fund:"level",size:"mid",pymonth:"7",rmonth:"7",ryear:"2027",notice:"120",holder:"tpa"},
-    c:{role:"sponsor",type:"private",fund:"fully",size:"mid",pymonth:"1",rmonth:"1",ryear:"2027",notice:"60",holder:"carrier"},
-    d:{role:"sponsor",type:"private",fund:"self",size:"small",pymonth:"1",rmonth:"1",ryear:"2027",notice:"90",holder:"tpa"},
-    e:{role:"sponsor",type:"gov",fund:"self",size:"large",pymonth:"7",rmonth:"7",ryear:"2027",notice:"180",holder:"pbm"},
-    f:{role:"advisor",type:"private",fund:"unsure",size:"mid",pymonth:"1",rmonth:"unsure",ryear:"unsure",notice:"unsure",holder:"unsure"}
-  };
-  document.getElementById("preset").addEventListener("change", function(e){
-    var p = PRESETS[e.target.value];
-    if(!p) return;
-    S = JSON.parse(JSON.stringify(p));
-    renderQuestions();
-    buildResults();
+function setStep(n) {
+  document.querySelectorAll("#steps div").forEach((d) => {
+    const s = +d.dataset.s;
+    d.className = s === n ? "on" : s < n ? "done" : "";
   });
+}
+setStep(1);
 
-  document.getElementById("go").addEventListener("click", buildResults);
-  renderQuestions();
-})();
+/* ---------- intake: one question per screen ---------- */
+$("startBtn").addEventListener("click", () => { qi = 0; show("quiz"); renderQ(); });
+
+function show(id) {
+  ["intro", "quiz", "results"].forEach((x) => $(x).classList.toggle("hidden", x !== id));
+  $("sticky").classList.toggle("hidden", id !== "results" || window.parent !== window);
+  document.body.classList.toggle("has-sticky", id === "results" && window.parent === window);
+  setStep(id === "results" ? 2 : 1);
+  window.scrollTo(0, 0);
+}
+
+const WHY = {
+  type: "Government and church plans aren't covered by ERISA, so different rules apply.",
+  fund: "Level-funded plans count as self-funded under the rule.",
+  size: "Count employees for a single employer, participants for a multiemployer plan.",
+  pymonth: "The rule starts with the first plan year beginning on or after July 1, 2027.",
+  renewal: "These set your disclosure and negotiating deadlines. They're in the PBM contract.",
+  holder: "Whoever signed the pharmacy contract owes you the disclosures.",
+};
+
+function renderQ() {
+  const q = QUESTIONS[qi];
+  const h = [];
+  h.push(`<div class="qn">Question ${qi + 1} of ${QUESTIONS.length}</div><div class="prog"><i style="width:${(qi / QUESTIONS.length) * 100}%"></i></div>`);
+  let label = q.label;
+  if (S.role === "advisor" || S.role === "attorney") label = label.replace("the plan", "your client's plan").replace("the medical plan", "your client's medical plan");
+  h.push(`<div class="qlabel" id="qlabel">${esc(label)}</div>`);
+  if (WHY[q.id]) h.push(`<div class="why">${esc(WHY[q.id])}</div>`);
+  if (q.opts) {
+    h.push(`<div class="choices" role="group" aria-labelledby="qlabel">`);
+    for (const [v, t] of q.opts) h.push(`<button type="button" class="choice" data-v="${v}" aria-pressed="${S[q.id] === v}">${esc(t)}</button>`);
+    h.push(`</div>`);
+  } else if (q.kind === "month") {
+    h.push(monthGrid("pymonth"));
+  } else if (q.kind === "renewal") {
+    h.push(`<div class="sub">Month</div>` + monthGrid("rmonth"));
+    if (S.rmonth !== "unsure") {
+      h.push(`<div class="sub">Year</div><div class="choices small">`);
+      for (const y of ["2026", "2027", "2028", "2029", "2030"]) h.push(`<button type="button" class="choice" data-k="ryear" data-v="${y}" aria-pressed="${S.ryear === y}">${y}</button>`);
+      h.push(`</div>`);
+    }
+    h.push(`<div class="sub">Notice needed to stop auto-renewal</div><div class="choices small">`);
+    for (const d of ["30", "60", "90", "120", "180"]) h.push(`<button type="button" class="choice" data-k="notice" data-v="${d}" aria-pressed="${S.notice === d}">${d} days</button>`);
+    h.push(`<button type="button" class="choice" data-k="notice" data-v="unsure" aria-pressed="${S.notice === "unsure"}">Not sure</button></div>`);
+  }
+  h.push(`<div class="qnav"><span>${qi > 0 ? `<button class="link" id="back">&larr; Back</button>` : `<button class="link" id="back">&larr; Start</button>`}</span>`);
+  if (q.kind === "renewal") h.push(`<button class="btn" id="next" ${renewalDone() ? "" : "disabled"}>Next</button>`);
+  h.push(`</div>`);
+  $("qcard").innerHTML = h.join("");
+
+  $("back").addEventListener("click", () => { if (qi === 0) show("intro"); else { qi--; renderQ(); } });
+  $("qcard").querySelectorAll(".choice").forEach((b) => b.addEventListener("click", () => {
+    const k = b.dataset.k || q.id, v = b.dataset.v;
+    S[k] = v;
+    if (k === "rmonth" && v === "unsure") S.ryear = "unsure";
+    if (k === "rmonth" && v !== "unsure" && S.ryear === "unsure") delete S.ryear;
+    if (q.kind === "renewal") { renderQ(); return; }
+    setTimeout(advance, 160);   // brief pause so the choice registers visually
+    b.setAttribute("aria-pressed", "true");
+  }));
+  const nx = $("next"); if (nx) nx.addEventListener("click", advance);
+}
+
+function monthGrid(key) {
+  const h = [`<div class="choices months">`];
+  MONTHS.forEach((m, i) => h.push(`<button type="button" class="choice" data-k="${key}" data-v="${i + 1}" aria-pressed="${S[key] === String(i + 1)}">${m.slice(0, 3)}</button>`));
+  h.push(`<button type="button" class="choice" data-k="${key}" data-v="unsure" aria-pressed="${S[key] === "unsure"}">Not sure</button></div>`);
+  return h.join("");
+}
+const renewalDone = () => S.rmonth && (S.rmonth === "unsure" || S.ryear) && S.notice;
+
+function advance() {
+  if (qi < QUESTIONS.length - 1) { qi++; renderQ(); }
+  else buildResults();
+}
+
+/* ---------- results ---------- */
+function buildResults() {
+  const key = JSON.stringify(S);
+  if (QA.key !== key) { QA.session = null; QA.transcript = []; QA.unlocked = false; QA.remaining = null; QA.key = key; }
+  const r = compute(S);
+  const Y = r.voice;
+  const h = [];
+
+  h.push(`<div class="summary"><div class="k">${Y.you === "you" ? "Your result" : "Your client's result"}</div><div class="h">${esc(r.headline)}</div>`);
+  if (r.nextDeadline) h.push(`<div class="d"><b>Next:</b> ${esc(r.nextDeadline)}</div>`);
+  h.push(`<div class="row"><button class="btn teal" data-go="ask">Ask a question</button><button class="btn gold" data-go="report">Get my full report</button></div></div>`);
+
+  if (r.unsure) h.push(`<div class="flag"><b>${esc(Y.Your)} answers fit more than one profile.</b> We show the two most likely below. Confirm the plan type, funding and size with ${S.role === "advisor" ? "the plan sponsor or counsel" : "your broker or counsel"}.</div>`);
+
+  h.push(`<h3>What applies</h3><table><thead><tr><th>Profile</th><th>DOL final rule</th><th>CAA 2026 pass-through (2028)</th><th>CAA 2026 PBM reports (2028)</th></tr></thead><tbody>`);
+  for (const row of r.rows) h.push(`<tr><td><b>${esc(row.label)}</b></td><td>${esc(row.dol)}</td><td>${esc(row.pass)}</td><td>${esc(row.rep)}</td></tr>`);
+  h.push(`</tbody></table>`);
+
+  if (r.dates.length) {
+    h.push(`<h3>Key dates</h3><div class="dates">`);
+    for (const d of r.dates) h.push(`<div class="date"><div class="k">${esc(d.k)}</div><div class="v"${d.past ? ' style="color:#B4541A"' : ""}>${esc(d.v)}</div>${d.past ? '<div class="muted">This date has passed</div>' : d.note ? `<div class="muted">${esc(d.note)}</div>` : ""}</div>`);
+    h.push(`</div>`);
+  }
+  if (r.missing.length) h.push(`<p class="muted">Some dates need the ${esc(r.missing.join(", "))}. These are in the PBM contract or the plan document.</p>`);
+
+  if (r.flags.length) {
+    h.push(`<h3>Watch for</h3>`);
+    for (const f of r.flags) h.push(`<div class="flag${f.urgent ? " urgent" : ""}"><b>${esc(f.title)}</b> ${esc(f.body)}</div>`);
+  }
+
+  h.push(`<h3>Your action plan</h3><ol class="actions">`);
+  for (const a of r.actions) h.push(`<li><div class="when">${esc(a.when)}</div><b>${esc(a.title)}</b> ${esc(a.body)}</li>`);
+  h.push(`</ol>`);
+
+  h.push(`<div class="panel" id="ask"></div>`);
+  h.push(`<div class="panel report" id="report"></div>`);
+  h.push(`<p style="margin-top:22px" class="row"><button class="ghost" id="edit">Change my answers</button><button class="ghost" id="restart">Start over</button></p>`);
+
+  $("results").innerHTML = h.join("");
+  show("results");
+  QA.primary = r.primary;
+  renderAsk();
+  renderReportPanel();
+  $("results").querySelectorAll("[data-go]").forEach((b) => b.addEventListener("click", () => goTo(b.dataset.go)));
+  $("edit").addEventListener("click", () => { qi = 0; show("quiz"); renderQ(); });
+  $("restart").addEventListener("click", () => { S = {}; qi = 0; $("preset").value = ""; show("intro"); });
+}
+
+function goTo(which) {
+  const el = $(which); if (!el) return;
+  el.scrollIntoView({ behavior: "smooth", block: "start" });
+  setStep(3);
+  if (which === "ask") setTimeout(() => { const q = $("q"); if (q) q.focus({ preventScroll: true }); }, 400);
+  if (which === "report") setTimeout(() => { const e = $("email"); if (e) e.focus({ preventScroll: true }); }, 400);
+}
+$("stickyAsk").addEventListener("click", () => goTo("ask"));
+$("stickyReport").addEventListener("click", () => goTo("report"));
+
+/* ---------- Q&A ---------- */
+function apiPost(path, payload) {
+  return fetch(WORKER_URL + path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) })
+    .then((r) => r.json().then((j) => ({ ...j, _status: r.status }), () => ({ _status: r.status, error: "Unexpected response." })));
+}
+async function ensureSession() {
+  if (QA.session) return true;
+  const j = await apiPost("/start", { profile: S });
+  if (!j.session) throw new Error(j.error || "Couldn't start a session.");
+  QA.session = j.session; QA.remaining = j.remaining; QA.unlocked = !!j.unlocked;
+  return true;
+}
+
+function renderAsk() {
+  const box = $("ask"); if (!box) return;
+  const Y = compute(S).voice;
+  const h = [`<h2>Ask about ${Y.your} results</h2>`];
+  if (!WORKER_URL) {
+    h.push(`<p class="muted">Coming soon: plain answers to your follow-up questions, with sources from the rule and the Nautilus checklist.</p>`);
+    box.innerHTML = h.join(""); return;
+  }
+  h.push(`<p class="muted" style="margin-top:-4px">Plain answers from the final rule and the Nautilus Fiduciary Action Checklist, with sources. No email needed. Please don't include names, member data or contract text.</p>`);
+  h.push(`<div class="msgs" id="msgs">`);
+  for (const t of QA.transcript) h.push(`<div class="msg user">${esc(t.q)}</div><div class="msg">${md(t.a)}</div>`);
+  h.push(`</div>`);
+  const left = QA.remaining == null ? null : QA.remaining;
+  if (left === 0 && !QA.unlocked) {
+    h.push(`<div class="flag"><b>You've used your free questions.</b> Get your report below to unlock 5 more. Your answers so far will be in it.</div>`);
+  } else if (left === 0) {
+    h.push(`<p class="muted">You've used all your questions for this session. Your report has every answer. For more help, visit <a href="https://www.nautilushealth.org/PBM">nautilushealth.org/PBM</a>.</p>`);
+  } else {
+    if (!QA.transcript.length) {
+      h.push(`<div class="muted" style="margin-bottom:4px">Try one of these:</div><div class="chips">`);
+      for (const t of suggestions(QA.primary)) h.push(`<button type="button" data-s="${esc(t)}">${esc(t)}</button>`);
+      h.push(`</div>`);
+    }
+    h.push(`<form id="askForm"><textarea id="q" maxlength="500" placeholder="Or type your own question about the rule, your dates or your next steps" aria-label="Your question"></textarea>
+      <div class="row" style="margin-top:8px"><button class="btn teal" type="submit" id="askBtn" style="font-size:15px;padding:10px 20px">Ask</button>
+      <span class="counter" id="left">${left == null ? (QA.unlocked ? "" : "5 free questions") : `${left} question${left === 1 ? "" : "s"} left${QA.unlocked ? "" : " before email"}`}</span></div>
+      <p class="err" id="askErr" role="alert"></p></form>`);
+  }
+  box.innerHTML = h.join("");
+  box.querySelectorAll(".chips button").forEach((b) => b.addEventListener("click", () => { $("q").value = b.dataset.s; send(); }));
+  const f = $("askForm"); if (f) f.addEventListener("submit", (e) => { e.preventDefault(); send(); });
+}
+
+async function send() {
+  if (QA.busy) return;
+  const q = $("q"), err = $("askErr"), btn = $("askBtn");
+  const text = (q.value || "").trim();
+  if (!text) { err.textContent = "Please type a question."; return; }
+  QA.busy = true; btn.disabled = true; q.disabled = true; err.textContent = ""; setStep(3);
+  const msgs = $("msgs");
+  msgs.insertAdjacentHTML("beforeend", `<div class="msg user">${esc(text)}</div><div class="msg thinking" id="thinking">Checking the rule and the checklist…</div>`);
+  const undo = (m) => { $("thinking")?.remove(); const last = msgs.lastElementChild; if (last && last.classList.contains("user")) last.remove(); btn.disabled = false; q.disabled = false; err.textContent = m; QA.busy = false; };
+  try {
+    await ensureSession();
+    const history = QA.transcript.slice(-3).flatMap((t) => [{ role: "user", content: t.q }, { role: "assistant", content: t.a }]);
+    const j = await apiPost("/ask", { session: QA.session, question: text, history });
+    QA.busy = false;
+    if (j.answer) {
+      QA.transcript.push({ q: text, a: j.answer }); QA.remaining = j.remaining; QA.unlocked = !!j.unlocked;
+      renderAsk(); renderReportPanel();
+      const all = document.querySelectorAll("#msgs .msg"); if (all.length) all[all.length - 1].scrollIntoView({ behavior: "smooth", block: "nearest" });
+    } else if (j.code === "need_email" || j.code === "limit") { QA.remaining = 0; renderAsk(); }
+    else if (j.code === "no_session") { QA.session = null; undo("Your session expired. Please ask again."); }
+    else undo(j.error || "Something went wrong. Please try again.");
+  } catch (e) { undo("Couldn't reach the service. Please try again."); }
+}
+
+/* ---------- report ---------- */
+function renderReportPanel() {
+  const box = $("report"); if (!box) return;
+  const n = QA.transcript.length;
+  const h = [`<h2>Get your full report</h2>`];
+  h.push(`<p style="margin:0 0 6px">One document to keep and share with your committee, broker or counsel:</p><ul class="includes">
+    <li>Your plan profile and what applies</li><li>Your key dates and watch-outs</li><li>Your action plan</li>
+    <li>${n ? `Your ${n} question${n === 1 ? "" : "s"} and answers` : "Every question you ask above, with the answers"}</li>
+    <li>Links to the full checklist and to Contract X-Ray</li></ul>`);
+  if (!WORKER_URL) {
+    h.push(`<button class="btn gold" id="pdfOnly">Download my report (PDF)</button><p class="err" id="repErr" role="alert"></p>`);
+    box.innerHTML = h.join("");
+    $("pdfOnly").addEventListener("click", () => downloadPDF().catch(() => { $("repErr").textContent = "The PDF couldn't be created in this browser."; }));
+    return;
+  }
+  if (QA.sent) {
+    h.push(`<p class="ok">Sent to ${esc(QA.email)}. Check your inbox (and spam folder) in a minute or two.</p>
+      <div class="row" style="margin-top:10px"><button class="btn gold" id="pdfAgain">Download PDF</button>${n > QA.sentCount ? `<button class="ghost" id="resend">Email the updated report</button>` : ""}</div><p class="err" id="repErr" role="alert"></p>`);
+    box.innerHTML = h.join("");
+    $("pdfAgain").addEventListener("click", () => downloadPDF().catch(() => { $("repErr").textContent = "The PDF couldn't be created in this browser."; }));
+    const rs = $("resend"); if (rs) rs.addEventListener("click", () => requestReport(QA.email, QA.consent));
+    return;
+  }
+  h.push(`<form id="repForm" novalidate>
+      <label for="email" class="muted">Where should we send it?</label>
+      <div class="row" style="margin-top:4px"><input type="email" id="email" placeholder="you@company.com" autocomplete="email" style="max-width:340px" required>
+      <button class="btn gold" type="submit" id="repBtn" style="font-size:16px;padding:11px 20px">Email me the report</button></div>
+      <p class="muted" style="margin:10px 0 0"><label><input type="checkbox" id="consent"> Also send me occasional Nautilus updates on PBM contracting and the rule.</label></p>
+      <p class="muted" style="margin:6px 0 0">You'll also get a PDF download right away${QA.unlocked ? "" : ", and 5 more questions"}. We never share your email.</p>
+      <p class="err" id="repErr" role="alert"></p></form>`);
+  box.innerHTML = h.join("");
+  $("repForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = $("email").value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { $("repErr").textContent = "Please enter a valid email address."; return; }
+    requestReport(email, $("consent").checked);
+  });
+}
+
+async function requestReport(email, consent) {
+  const btn = $("repBtn") || $("resend"), err = $("repErr");
+  if (btn) btn.disabled = true; if (err) err.textContent = "";
+  setStep(3);
+  try {
+    await ensureSession();
+    let embed = ""; try { embed = document.referrer || ""; } catch (x) {}
+    const j = await apiPost("/report", { session: QA.session, email, consent, embed });
+    if (!j.ok) { if (btn) btn.disabled = false; if (err) err.textContent = j.error || "Something went wrong. Please try again."; return; }
+    QA.email = email; QA.consent = consent; QA.sent = true; QA.sentCount = QA.transcript.length;
+    QA.unlocked = true; if (j.remaining != null) QA.remaining = j.remaining;
+    renderAsk(); renderReportPanel();
+    if (!j.emailed) $("repErr").textContent = "We couldn't send the email just now. Your PDF is downloading, and we'll follow up.";
+    downloadPDF().catch(() => {});
+  } catch (e) { if (btn) btn.disabled = false; if (err) err.textContent = "Couldn't reach the service. Please try again."; }
+}
+
+async function downloadPDF() {
+  for (let i = 0; i < 50 && !window.jspdf; i++) await new Promise((r) => setTimeout(r, 100));
+  if (!window.jspdf) throw new Error("pdf library not loaded");
+  await buildPDF({ profile: S, transcript: QA.transcript });
+}
+
+/* ---------- reviewer presets (?review) ---------- */
+const PRESETS = {
+  a: { role: "sponsor", type: "private", fund: "self", size: "large", pymonth: "1", rmonth: "1", ryear: "2028", notice: "90", holder: "pbm" },
+  b: { role: "sponsor", type: "private", fund: "level", size: "mid", pymonth: "7", rmonth: "7", ryear: "2027", notice: "120", holder: "tpa" },
+  c: { role: "sponsor", type: "private", fund: "fully", size: "mid", pymonth: "1", rmonth: "1", ryear: "2027", notice: "60", holder: "carrier" },
+  d: { role: "sponsor", type: "private", fund: "self", size: "small", pymonth: "1", rmonth: "1", ryear: "2027", notice: "90", holder: "tpa" },
+  e: { role: "sponsor", type: "gov", fund: "self", size: "large", pymonth: "7", rmonth: "7", ryear: "2027", notice: "180", holder: "pbm" },
+  f: { role: "advisor", type: "private", fund: "unsure", size: "mid", pymonth: "1", rmonth: "unsure", ryear: "unsure", notice: "unsure", holder: "unsure" },
+};
+$("preset").addEventListener("change", (e) => { const p = PRESETS[e.target.value]; if (p) { S = { ...p }; buildResults(); } });
+
+/* ---------- tell an embedding page how tall we are ---------- */
+if (window.parent !== window) {
+  let last = 0;
+  const post = () => { const h = Math.ceil(document.documentElement.scrollHeight); if (Math.abs(h - last) > 4) { last = h; try { window.parent.postMessage({ type: "pbm-readiness-height", height: h }, "*"); } catch (e) {} } };
+  try { new ResizeObserver(post).observe(document.body); } catch (e) { setInterval(post, 500); }
+  addEventListener("load", post);
+}
 </script>
 </body>
 </html>

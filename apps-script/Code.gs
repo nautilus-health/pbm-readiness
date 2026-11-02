@@ -1,12 +1,16 @@
 /**
- * PBM Readiness Check: lead intake for the "PBM Readiness Check: Leads" Google Sheet.
+ * PBM Readiness Check: leads and report email for the "PBM Readiness Check: Leads" Google Sheet.
  *
- * The Cloudflare Worker POSTs one JSON lead per email sign-up. This script checks the
- * shared secret and appends a row to the "Leads" tab.
+ * The Cloudflare Worker POSTs one JSON request when someone asks for their report. This script
+ * checks the shared secret, appends a row to the "Leads" tab (first send only), and emails the
+ * report, which the Worker has already rendered as HTML.
  *
- * Setup (once): Project Settings > Script properties > add LEADS_SECRET (same value as the
- * Worker secret SHEET_SECRET). Then Deploy > New deployment > Web app, Execute as: Me,
- * Who has access: Anyone. Copy the web app URL into the Worker secret SHEET_WEBHOOK_URL.
+ * Script properties (Project Settings > Script properties):
+ *   LEADS_SECRET  same value as the Worker secret SHEET_SECRET
+ *   SEND_FROM     steve.ditto@nautilushealth.org. Used as the From address if it is a
+ *                 "Send mail as" alias of this Google account; otherwise used as Reply-To.
+ *
+ * Deploy > Manage deployments > Edit > Version: New version keeps the same web app URL.
  */
 
 var SHEET_NAME = "Leads";
@@ -42,22 +46,40 @@ function doPost(e) {
     data.consent === true ? "Yes" : "No",
     label("role"), label("type"), label("fund"), label("size"),
     month(p.pymonth), renewal, notice, label("holder"),
-    safe_(data.source), safe_(data.embed), safe_(data.pack)
+    safe_(data.source), safe_(data.embed), safe_(data.pack),
+    safe_((data.questions || []).map(function (q, i) { return (i + 1) + ". " + q; }).join("\n"), 5000)
   ];
 
-  var lock = LockService.getScriptLock();
-  lock.waitLock(10000);
-  try {
-    SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME).appendRow(row);
-  } finally {
-    lock.releaseLock();
+  if (data.record !== false) {
+    var lock = LockService.getScriptLock();
+    lock.waitLock(10000);
+    try {
+      SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME).appendRow(row);
+    } finally {
+      lock.releaseLock();
+    }
   }
-  return reply_({ ok: true });
+
+  var emailed = false, error = "";
+  if (data.report && data.report.html && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email || "")) {
+    try {
+      var from = PropertiesService.getScriptProperties().getProperty("SEND_FROM") || "";
+      var opts = { htmlBody: data.report.html, name: "Nautilus Health Institute" };
+      if (from) opts.replyTo = from;
+      if (from && GmailApp.getAliases().indexOf(from) >= 0) opts.from = from;
+      GmailApp.sendEmail(data.email, data.report.subject || "Your PBM Rule Readiness Report",
+        "Your PBM Rule Readiness Report is in this email. If it doesn't display, run the check again at https://www.nautilushealth.org/PBM.", opts);
+      emailed = true;
+    } catch (err) {
+      error = String(err);
+    }
+  }
+  return reply_({ ok: true, emailed: emailed, error: error });
 }
 
 // Stop a value from being read as a formula, and cap its length.
-function safe_(v) {
-  var s = String(v == null ? "" : v).slice(0, 300);
+function safe_(v, max) {
+  var s = String(v == null ? "" : v).slice(0, max || 300);
   return /^[=+\-@]/.test(s) ? "'" + s : s;
 }
 

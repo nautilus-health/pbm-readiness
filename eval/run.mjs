@@ -32,8 +32,8 @@ async function post(p, body) {
 
 async function runOne(q) {
   const profile = spec.profiles[q.profile];
-  const lead = await post("/lead", { email: "eval@nautilushealth.org", consent: false, profile, embed: "eval" });
-  if (!lead.session) return { ...q, ok: false, error: `lead failed: ${lead.status} ${lead.error || ""}` };
+  const lead = await post("/start", { profile });
+  if (!lead.session) return { ...q, ok: false, error: `start failed: ${lead.status} ${lead.error || ""}` };
   const t0 = Date.now();
   const a = await post("/ask", { session: lead.session, question: q.question, history: [] });
   const ms = Date.now() - t0;
