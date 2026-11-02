@@ -425,7 +425,7 @@ function renderReportPanel() {
     return;
   }
   if (QA.sent) {
-    h.push(`<p class="ok">Sent to ${esc(QA.email)}. Check your inbox (and spam folder) in a minute or two.</p>
+    h.push((QA.emailed ? `<p class="ok">Sent to ${esc(QA.email)}. Check your inbox (and spam folder) in a minute or two.</p>` : `<p class="err">We couldn't send the email just now, so your PDF downloaded instead. We have your address and will follow up.</p>`) + `
       <div class="row" style="margin-top:10px"><button class="btn gold" id="pdfAgain">Download PDF</button>${n > QA.sentCount ? `<button class="ghost" id="resend">Email the updated report</button>` : ""}</div><p class="err" id="repErr" role="alert"></p>`);
     box.innerHTML = h.join("");
     $("pdfAgain").addEventListener("click", () => downloadPDF().catch(() => { $("repErr").textContent = "The PDF couldn't be created in this browser."; }));
@@ -457,10 +457,9 @@ async function requestReport(email, consent) {
     let embed = ""; try { embed = document.referrer || ""; } catch (x) {}
     const j = await apiPost("/report", { session: QA.session, email, consent, embed });
     if (!j.ok) { if (btn) btn.disabled = false; if (err) err.textContent = j.error || "Something went wrong. Please try again."; return; }
-    QA.email = email; QA.consent = consent; QA.sent = true; QA.sentCount = QA.transcript.length;
+    QA.email = email; QA.consent = consent; QA.sent = true; QA.emailed = !!j.emailed; QA.sentCount = QA.transcript.length;
     QA.unlocked = true; if (j.remaining != null) QA.remaining = j.remaining;
     renderAsk(); renderReportPanel();
-    if (!j.emailed) $("repErr").textContent = "We couldn't send the email just now. Your PDF is downloading, and we'll follow up.";
     downloadPDF().catch(() => {});
   } catch (e) { if (btn) btn.disabled = false; if (err) err.textContent = "Couldn't reach the service. Please try again."; }
 }
