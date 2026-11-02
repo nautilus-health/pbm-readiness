@@ -1,0 +1,5 @@
+worker/.dev.vars
+worker/.wrangler/
+worker/node_modules/
+eval/results/
+node_modules/

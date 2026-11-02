@@ -71,6 +71,20 @@
   @media (max-width:560px){header .brand{flex-direction:column;align-items:flex-start;gap:10px} header .mark{border-right:0;padding-right:0} header .mark img{height:36px} header h1{font-size:20px}}
   .hidden{display:none}
   a{color:var(--teal)}
+  .qa{border:1px solid var(--line);border-radius:10px;padding:18px 20px;background:var(--light);margin-top:8px}
+  .qa input[type=email],.qa textarea{font:inherit;font-size:15px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;width:100%;background:#fff;color:var(--ink)}
+  .qa input[type=email]{max-width:340px}
+  .qa textarea{min-height:64px;resize:vertical}
+  .qa .err{color:var(--warn);font-size:14px;margin:6px 0 0}
+  .msgs{margin:8px 0 12px}
+  .msg{border-radius:10px;padding:10px 14px;margin:10px 0;font-size:15px;background:#fff;border:1px solid var(--line)}
+  .msg.user{background:#EEF6F7;border-color:#CFE5E8;color:var(--navy);font-weight:500}
+  .msg p{margin:0 0 8px} .msg p:last-child{margin-bottom:0} .msg ul{margin:4px 0 8px;padding-left:20px}
+  .msg .disc{color:var(--mid);font-size:13px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 10px}
+  .chips button{font:inherit;font-size:13px;padding:6px 12px;border:1px solid var(--teal);color:var(--teal);background:#fff;border-radius:16px;cursor:pointer;text-align:left}
+  .chips button:hover{background:#EEF6F7}
+  .thinking{color:var(--mid);font-style:italic}
   .testbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:14px;color:var(--mid);margin-bottom:8px}
 </style>
 </head>
@@ -262,6 +276,8 @@
 
   /* ---------- results ---------- */
   function buildResults(){
+    var key = JSON.stringify(S);
+    if(QA.key !== key){ QA.session = null; QA.history = []; QA.key = key; }
     var Y = you();
     var list = cats();
     var primary = list[0];
@@ -354,18 +370,15 @@
     /* CTA */
     h.push('<div class="cta">Visit <a href="https://www.nautilushealth.org/PBM">www.nautilushealth.org/PBM</a> for the full Fiduciary Action Checklist and the August 2028 scenario table.</div>');
 
-    /* locked Q&A */
-    h.push('<div class="locked"><h3 style="margin-top:0">Ask a question about '+Y.your+' results</h3>'+
-      '<p class="muted">Coming next: answers from Nautilus-approved material, with sources cited. Enter an email to unlock questions and get a copy of these results.</p>'+
-      '<div class="row"><input type="email" placeholder="you@company.com" disabled aria-label="Email (disabled in prototype)"><button class="ghost" disabled>Unlock questions</button></div>'+
-      '<p class="muted"><label><input type="checkbox" disabled> Send me my results and occasional Nautilus updates.</label><br>Prototype: email and questions are switched off.</p></div>');
+    h.push('<div id="qa"></div>');
 
     h.push('<p style="margin-top:20px"><button class="ghost" id="restart">Start over</button> <button class="ghost" id="copy">Copy results as text</button> <span class="muted" id="copied"></span></p>');
 
     var box = document.getElementById("results");
     box.innerHTML = h.join("");
     box.classList.remove("hidden");
-    document.getElementById("restart").addEventListener("click", function(){ S={}; document.getElementById("preset").value=""; box.classList.add("hidden"); renderQuestions(); window.scrollTo(0,0); });
+    renderQA(primary);
+    document.getElementById("restart").addEventListener("click", function(){ S={}; QA.session=null; QA.history=[]; document.getElementById("preset").value=""; box.classList.add("hidden"); renderQuestions(); window.scrollTo(0,0); });
     document.getElementById("copy").addEventListener("click", function(){
       var txt = box.innerText.replace(/\n{3,}/g,"\n\n");
       try{ navigator.clipboard.writeText(txt).then(function(){ document.getElementById("copied").textContent="Copied"; }, function(){ document.getElementById("copied").textContent="Copy not available here"; }); }
@@ -417,6 +430,132 @@
     };
     return a.map(function(x,i){return [x,i];}).sort(function(p,q){ return (key(p[0][0])-key(q[0][0])) || (p[1]-q[1]); }).map(function(p){return p[0];}).slice(0,6);
   }
+
+
+  /* ---------- Q&A (Worker) ---------- */
+  // Set WORKER_URL once the Cloudflare Worker is deployed. Empty = questions switched off.
+  var WORKER_URL = "";
+  try { var qp = new URLSearchParams(location.search).get("api"); if (qp && /^https:\/\/[\w.-]+(:\d+)?$|^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(qp)) WORKER_URL = qp; } catch(e){}
+  var QA = { session:null, history:[], remaining:null, busy:false };
+
+  function esc(t){ return String(t).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+  function md(t){
+    var lines = esc(t).split(/\n/), out=[], list=false;
+    lines.forEach(function(l){
+      l = l.replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
+      var m = l.match(/^\s*(?:[-*•]|\d+\.)\s+(.*)$/);
+      if(m){ if(!list){ out.push("<ul>"); list=true; } out.push("<li>"+m[1]+"</li>"); return; }
+      if(list){ out.push("</ul>"); list=false; }
+      if(!l.trim()) return;
+      if(/^General information, not legal advice\.?$/.test(l.trim())) out.push('<p class="disc">'+l+'</p>');
+      else out.push("<p>"+l+"</p>");
+    });
+    if(list) out.push("</ul>");
+    return out.join("");
+  }
+  function api(path, payload){
+    return fetch(WORKER_URL + path, { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(payload) })
+      .then(function(r){ return r.json().then(function(j){ j._status = r.status; return j; }, function(){ return {_status:r.status, error:"Unexpected response."}; }); });
+  }
+  function suggestions(cat){
+    if(cat==="NON") return ["Which disclosure and audit terms should we put in our PBM contract?","Do the CAA 2026 PBM reports apply to our plan?","How do we handle a PBM that refuses these terms?"];
+    if(cat==="FI") return ["What disclosures is our insurer required to give us now?","How will the 2028 rebate pass-through reach a fully insured plan?","Should we consider moving to self-funding?"];
+    if(cat==="SMALL") return ["What disclosures are we owed if we're under 100?","Does the 2028 rebate pass-through apply to us?","What should we ask our PBM for at renewal?"];
+    return ["When is our PBM's first detailed disclosure due?","What audit terms should we insist on at renewal?","Does the August 2028 pass-through reach our current contract?"];
+  }
+
+  function renderQA(cat){
+    var box = document.getElementById("qa"); if(!box) return;
+    var Y = you();
+    var h = ['<div class="qa"><h3 style="margin-top:0">Ask a question about '+Y.your+' results</h3>'];
+    if(!WORKER_URL){
+      h.push('<p class="muted">Coming next: answers from Nautilus-approved material, with sources cited. Enter an email to unlock questions and get a copy of these results.</p>'+
+        '<div class="row"><input type="email" placeholder="you@company.com" disabled aria-label="Email (disabled in prototype)"><button class="ghost" disabled>Unlock questions</button></div>'+
+        '<p class="muted"><label><input type="checkbox" disabled> Send me my results and occasional Nautilus updates.</label><br>Prototype: email and questions are switched off.</p></div>');
+      box.innerHTML = h.join(""); return;
+    }
+    if(!QA.session){
+      h.push('<p class="muted">Answers come only from Nautilus-reviewed material on the DOL final rule and CAA 2026, with sources cited. Enter your work email to unlock up to 10 questions.</p>'+
+        '<form id="leadForm" novalidate><div class="row"><input type="email" id="email" placeholder="you@company.com" autocomplete="email" aria-label="Work email" required><button class="primary" type="submit" id="leadBtn" style="padding:9px 18px;font-size:15px">Unlock questions</button></div>'+
+        '<p class="muted" style="margin:10px 0 0"><label><input type="checkbox" id="consent"> Send me my results and occasional Nautilus updates.</label></p>'+
+        '<p class="err" id="leadErr" role="alert"></p></form>'+
+        '<p class="muted" style="margin-bottom:0">We store your email and your seven answers, nothing else. Please don\'t enter names, member data or contract text in questions.</p></div>');
+      box.innerHTML = h.join("");
+      document.getElementById("leadForm").addEventListener("submit", function(e){
+        e.preventDefault();
+        var email = document.getElementById("email").value.trim(), err = document.getElementById("leadErr"), btn = document.getElementById("leadBtn");
+        if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ err.textContent = "Please enter a valid email address."; return; }
+        btn.disabled = true; err.textContent = "";
+        var embed = ""; try { embed = document.referrer || ""; } catch(x){}
+        api("/lead", { email:email, consent: document.getElementById("consent").checked, profile:S, embed:embed }).then(function(j){
+          btn.disabled = false;
+          if(j.session){ QA.session = j.session; QA.remaining = j.remaining; renderQA(cat); var q=document.getElementById("q"); if(q) q.focus(); }
+          else err.textContent = j.error || "Something went wrong. Please try again.";
+        }, function(){ btn.disabled = false; err.textContent = "Couldn't reach the service. Please try again."; });
+      });
+      return;
+    }
+    h.push('<div class="msgs" id="msgs">');
+    for(var i=0;i<QA.history.length;i++){
+      var m = QA.history[i];
+      h.push(m.role==="user" ? '<div class="msg user">'+esc(m.content)+'</div>' : '<div class="msg">'+md(m.content)+'</div>');
+    }
+    h.push('</div>');
+    if(QA.remaining > 0){
+      if(!QA.history.length){
+        h.push('<div class="chips">'); suggestions(cat).forEach(function(t){ h.push('<button type="button" data-s="'+esc(t)+'">'+esc(t)+'</button>'); }); h.push('</div>');
+      }
+      h.push('<form id="askForm"><textarea id="q" maxlength="500" placeholder="Type a question about the rule, your dates or your next steps" aria-label="Your question"></textarea>'+
+        '<div class="row" style="margin-top:8px"><button class="primary" type="submit" id="askBtn" style="padding:9px 18px;font-size:15px">Ask</button><span class="muted" id="left">'+QA.remaining+' question'+(QA.remaining===1?'':'s')+' left</span></div>'+
+        '<p class="err" id="askErr" role="alert"></p></form>');
+    } else {
+      h.push('<p class="muted">You\'ve used all 10 questions for this session. For more, visit <a href="https://www.nautilushealth.org/PBM">nautilushealth.org/PBM</a>.</p>');
+    }
+    h.push('</div>');
+    box.innerHTML = h.join("");
+    var chips = box.querySelectorAll(".chips button");
+    for(var k=0;k<chips.length;k++){ chips[k].addEventListener("click", function(){ document.getElementById("q").value = this.getAttribute("data-s"); send(cat); }); }
+    var f = document.getElementById("askForm");
+    if(f) f.addEventListener("submit", function(e){ e.preventDefault(); send(cat); });
+  }
+
+  function send(cat){
+    if(QA.busy) return;
+    var q = document.getElementById("q"), err = document.getElementById("askErr"), btn = document.getElementById("askBtn");
+    var text = (q.value||"").trim();
+    if(!text){ err.textContent = "Please type a question."; return; }
+    QA.busy = true; btn.disabled = true; q.disabled = true; err.textContent = "";
+    var msgs = document.getElementById("msgs");
+    msgs.insertAdjacentHTML("beforeend", '<div class="msg user">'+esc(text)+'</div><div class="msg thinking" id="thinking">Checking the rule and the checklist…</div>');
+    var prior = QA.history.slice(-6);
+    api("/ask", { session: QA.session, question: text, history: prior }).then(function(j){
+      QA.busy = false;
+      if(j.answer){
+        QA.history.push({role:"user", content:text}, {role:"assistant", content:j.answer});
+        QA.remaining = j.remaining; renderQA(cat);
+        var all = document.querySelectorAll(".msg"); if(all.length) all[all.length-1].scrollIntoView({behavior:"smooth", block:"nearest"});
+      } else {
+        if(j.code==="no_session"){ QA.session=null; QA.history=[]; renderQA(cat); return; }
+        if(j.code==="limit"){ QA.remaining = 0; renderQA(cat); return; }
+        var t = document.getElementById("thinking"); if(t) t.remove();
+        var last = msgs.lastElementChild; if(last && last.classList.contains("user")) last.remove();
+        btn.disabled = false; q.disabled = false; err.textContent = j.error || "Something went wrong. Please try again.";
+      }
+    }, function(){
+      QA.busy = false; var t = document.getElementById("thinking"); if(t) t.remove();
+      var last = msgs.lastElementChild; if(last && last.classList.contains("user")) last.remove();
+      btn.disabled = false; q.disabled = false; err.textContent = "Couldn't reach the service. Please try again.";
+    });
+  }
+
+  /* ---------- tell an embedding page how tall we are ---------- */
+  (function(){
+    if(window.parent === window) return;
+    var last = 0;
+    function post(){ var hgt = Math.ceil(document.documentElement.scrollHeight); if(Math.abs(hgt-last) > 4){ last = hgt; try{ window.parent.postMessage({type:"pbm-readiness-height", height:hgt}, "*"); }catch(e){} } }
+    try { new ResizeObserver(post).observe(document.body); } catch(e) { setInterval(post, 500); }
+    window.addEventListener("load", post);
+  })();
 
   /* ---------- presets for reviewers ---------- */
   var PRESETS = {
