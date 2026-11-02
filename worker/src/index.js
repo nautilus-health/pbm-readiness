@@ -1,9 +1,10 @@
 // PBM Rule Readiness Check: Cloudflare Worker
-// POST /lead  -> store email + profile, return a session token that unlocks questions
+// POST /lead  -> send email + profile to the Google Sheet, return a session token that unlocks questions
 // POST /ask   -> answer one question from the knowledge pack via the Claude API
 // GET  /health -> pack version and model, for monitoring
 //
-// Secrets:  ANTHROPIC_API_KEY, IP_SALT, EVAL_TOKEN (optional; lets the eval runner skip rate limits)
+// Secrets:  ANTHROPIC_API_KEY, IP_SALT, SHEET_WEBHOOK_URL, SHEET_SECRET,
+//           EVAL_TOKEN (optional; lets the eval runner skip rate limits)
 // Vars:     MODEL, ALLOWED_ORIGINS, PACK_VERSION, MAX_QUESTIONS, IP_HOURLY_LIMIT, LOG_QUESTIONS, ANTHROPIC_BASE_URL (tests only)
 // Bindings: DB (D1)
 
@@ -81,7 +82,7 @@ export default {
     const isEval = !!env.EVAL_TOKEN && req.headers.get("X-Eval-Token") === env.EVAL_TOKEN;
 
     try {
-      if (url.pathname === "/lead") return await lead(body, env, c.headers, ipHash, now, req, isEval);
+      if (url.pathname === "/lead") return await lead(body, env, c.headers, ipHash, now, req, isEval, ctx);
       if (url.pathname === "/ask") return await ask(body, env, c.headers, ipHash, now, isEval);
     } catch (e) {
       console.error("handler_error", url.pathname, e && e.stack ? e.stack : String(e));
@@ -91,29 +92,58 @@ export default {
   },
 };
 
-async function lead(body, env, headers, ipHash, now, req, isEval) {
+async function lead(body, env, headers, ipHash, now, req, isEval, ctx) {
   const email = String(body.email || "").trim().toLowerCase();
   if (!EMAIL_RE.test(email) || email.length > 254) return json({ error: "Please enter a valid email address." }, 400, headers);
-  const consent = body.consent === true ? 1 : 0;
+  const consent = body.consent === true;
   const profile = cleanProfile(body.profile);
   const source = String(req.headers.get("Origin") || "").slice(0, 100);
   const embed = String(body.embed || "").slice(0, 200);
 
-  // Light abuse guard: at most 20 leads per IP per hour.
-  const recent = await env.DB.prepare("SELECT COUNT(*) AS n FROM leads WHERE ip_hash = ? AND created_at > ?")
+  // Light abuse guard: at most 20 sign-ups per IP per hour.
+  const recent = await env.DB.prepare("SELECT COUNT(*) AS n FROM sessions WHERE ip_hash = ? AND created_at > ?")
     .bind(ipHash, now - 3600_000).first();
   if (!isEval && recent && recent.n >= 20) return json({ error: "Too many requests. Please try again later." }, 429, headers);
 
+  // The session holds the profile (so it can't be swapped mid-session) but not the email.
   const session = crypto.randomUUID();
-  await env.DB.batch([
-    env.DB.prepare(
-      "INSERT INTO leads (email, consent, profile, source, embed, ip_hash, pack_version, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
-    ).bind(email, consent, JSON.stringify(profile), source, embed, ipHash, env.PACK_VERSION || "", now),
-    env.DB.prepare("INSERT INTO sessions (id, email, profile, questions, created_at) VALUES (?, ?, ?, 0, ?)")
-      .bind(session, email, JSON.stringify(profile), now),
-  ]);
+  await env.DB.prepare("INSERT INTO sessions (id, profile, ip_hash, questions, created_at) VALUES (?, ?, ?, 0, ?)")
+    .bind(session, JSON.stringify(profile), ipHash, now).run();
+
+  // Leads live in the Google Sheet. Eval runs are not recorded.
+  if (!isEval) {
+    const lead = { email, consent, profile, source, embed, pack: env.PACK_VERSION || "" };
+    ctx.waitUntil(sendToSheet(lead, env, now));
+  }
+
   const max = parseInt(env.MAX_QUESTIONS || "10", 10);
   return json({ session, remaining: max }, 200, headers);
+}
+
+// Append the lead to the Google Sheet via its Apps Script web app.
+// If that fails, keep the lead in failed_leads so it can be re-sent (see DEPLOY.md).
+async function sendToSheet(lead, env, now) {
+  let error = "";
+  try {
+    if (!env.SHEET_WEBHOOK_URL) throw new Error("SHEET_WEBHOOK_URL not set");
+    const r = await fetch(env.SHEET_WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...lead, secret: env.SHEET_SECRET || "" }),
+      redirect: "follow",
+    });
+    const text = await r.text();
+    let ok = false;
+    try { ok = JSON.parse(text).ok === true; } catch {}
+    if (!ok) error = `sheet ${r.status}: ${text.slice(0, 200)}`;
+  } catch (e) {
+    error = String(e && e.message ? e.message : e);
+  }
+  if (error) {
+    console.error("sheet_append_failed", error);
+    await env.DB.prepare("INSERT INTO failed_leads (lead, error, created_at) VALUES (?, ?, ?)")
+      .bind(JSON.stringify(lead), error.slice(0, 300), now).run();
+  }
 }
 
 async function ask(body, env, headers, ipHash, now, isEval) {

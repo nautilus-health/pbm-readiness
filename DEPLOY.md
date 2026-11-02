@@ -9,7 +9,8 @@ The page on GitHub Pages works without the Worker: results show, and the questio
 | `index.html` | The tool. `WORKER_URL` near the Q&A section switches questions on. Testers can also add `?api=https://<worker-url>` to the page address. |
 | `knowledge/pack-v1.0.md` | The only material Claude answers from: the Nautilus checklist, the regulation text with page numbers, selected preamble passages, and the open-items list. |
 | `worker/` | Cloudflare Worker: `POST /lead` (email + intake answers), `POST /ask` (one answer), `GET /health`. |
-| `worker/schema.sql` | D1 tables: `leads`, `sessions`, `asks`. |
+| `worker/schema.sql` | D1 tables: `sessions`, `asks`, and `failed_leads` (only used if the Sheet can't be reached). No emails are stored in D1. |
+| `apps-script/Code.gs` | The script attached to the "PBM Readiness Check: Leads" Google Sheet. It receives each sign-up from the Worker and adds a row. |
 | `eval/questions.json`, `eval/run.mjs` | 47 test questions with automatic checks, and the runner that writes a review report for counsel. |
 
 ## One-time setup (Cloudflare)
@@ -24,6 +25,8 @@ npx wrangler d1 execute pbm-readiness --remote --file schema.sql
 npx wrangler secret put ANTHROPIC_API_KEY      # paste the Claude API key
 npx wrangler secret put IP_SALT                # any long random string
 npx wrangler secret put EVAL_TOKEN             # any long random string; lets the eval skip rate limits
+npx wrangler secret put SHEET_WEBHOOK_URL      # the Apps Script web app URL (ends in /exec)
+npx wrangler secret put SHEET_SECRET           # same value as LEADS_SECRET in the Apps Script
 npx wrangler deploy
 ```
 
@@ -55,13 +58,27 @@ Set `var WORKER_URL = "<worker address>";` in `index.html`, commit and push. Git
 | `IP_HOURLY_LIMIT` | `30` | Questions per network per hour. |
 | `LOG_QUESTIONS` | `true` | Stores question text for the eval period. Set to `false` at launch, per the privacy section of the spec. |
 
-## Leads
+## Leads (Google Sheet)
+
+Every email sign-up becomes a row in the **PBM Readiness Check: Leads** Google Sheet: time received, email, consent, the seven intake answers in plain words, the page it came from, and the pack version. Eval runs are not recorded.
+
+Only rows with **Consent to updates = Yes** may receive the results email or Nautilus updates. Keep the Sheet shared with Nautilus staff only.
+
+Sheet setup (once):
+1. Open the Sheet, then **Extensions > Apps Script**. Replace the editor's contents with `apps-script/Code.gs` and save.
+2. **Project Settings** (gear icon) **> Script properties > Add script property**: name `LEADS_SECRET`, value a long random string.
+3. **Deploy > New deployment**, type **Web app**, Execute as **Me**, Who has access **Anyone**. Authorize when asked. Copy the **Web app URL**.
+4. Give the Worker the URL and secret: `npx wrangler secret put SHEET_WEBHOOK_URL` and `npx wrangler secret put SHEET_SECRET` (same value as step 2).
+
+If you change the script later, use **Deploy > Manage deployments > Edit > New version** so the URL stays the same.
+
+If the Sheet can't be reached, the user still gets their questions and the lead is kept in D1. To check and re-send:
 
 ```bash
-npx wrangler d1 execute pbm-readiness --remote --command "SELECT email, consent, profile, source, datetime(created_at/1000,'unixepoch') FROM leads ORDER BY created_at DESC"
+npx wrangler d1 execute pbm-readiness --remote --command "SELECT id, lead, error, datetime(created_at/1000,'unixepoch') FROM failed_leads"
 ```
 
-Only rows with `consent = 1` may receive the results email or Nautilus updates. Eval runs use `eval@nautilushealth.org`; delete those rows before exporting.
+Copy those rows into the Sheet, then `DELETE FROM failed_leads WHERE id IN (...)`.
 
 ## Embedding on nautilushealth.org/PBM
 

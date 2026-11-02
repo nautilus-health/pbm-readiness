@@ -1,25 +1,14 @@
 -- PBM Rule Readiness Check: D1 schema
-CREATE TABLE IF NOT EXISTS leads (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  email TEXT NOT NULL,
-  consent INTEGER NOT NULL DEFAULT 0,      -- 1 = opted in to results email and Nautilus updates
-  profile TEXT,                            -- JSON of intake answers (no names, no plan data)
-  source TEXT,                             -- origin of the page (github.io, nautilushealth.org, contractxray.com)
-  embed TEXT,                              -- parent page URL when embedded, if known
-  ip_hash TEXT,                            -- salted hash, for abuse limits only
-  pack_version TEXT,
-  created_at INTEGER NOT NULL
-);
-CREATE INDEX IF NOT EXISTS idx_leads_ip ON leads(ip_hash, created_at);
-CREATE INDEX IF NOT EXISTS idx_leads_email ON leads(email);
+-- Leads (emails) live in the Google Sheet. D1 holds only what the Worker needs to run.
 
 CREATE TABLE IF NOT EXISTS sessions (
   id TEXT PRIMARY KEY,
-  email TEXT NOT NULL,
-  profile TEXT,
+  profile TEXT,                            -- JSON of intake answers (no names, no plan data)
+  ip_hash TEXT,                            -- salted hash, for abuse limits only
   questions INTEGER NOT NULL DEFAULT 0,
   created_at INTEGER NOT NULL
 );
+CREATE INDEX IF NOT EXISTS idx_sessions_ip ON sessions(ip_hash, created_at);
 
 CREATE TABLE IF NOT EXISTS asks (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -35,3 +24,11 @@ CREATE TABLE IF NOT EXISTS asks (
   created_at INTEGER NOT NULL
 );
 CREATE INDEX IF NOT EXISTS idx_asks_ip ON asks(ip_hash, created_at);
+
+-- Only used when the Google Sheet can't be reached. Re-send, then delete.
+CREATE TABLE IF NOT EXISTS failed_leads (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  lead TEXT NOT NULL,
+  error TEXT,
+  created_at INTEGER NOT NULL
+);
