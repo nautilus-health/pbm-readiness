@@ -192,8 +192,11 @@ async function ask(body, env, headers, ipHash, now, isEval) {
     },
     body: JSON.stringify({
       model: env.MODEL,
-      max_tokens: 700,
-      temperature: 0.2,
+      // Sonnet 5.5 thinks by default; thinking tokens count against max_tokens,
+      // so leave room for it. The prompt keeps the visible answer under 250 words.
+      max_tokens: 4000,
+      thinking: { type: "adaptive" },
+      output_config: { effort: env.EFFORT || "medium" },
       system: [
         { type: "text", text: RULES },
         { type: "text", text: "KNOWLEDGE PACK\n\n" + PACK, cache_control: { type: "ephemeral" } },
@@ -209,7 +212,10 @@ async function ask(body, env, headers, ipHash, now, isEval) {
   }
   const data = await res.json();
   const answer = (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("\n").trim();
-  if (!answer) return json({ error: "No answer came back. Please try again." }, 502, headers);
+  if (!answer) {
+    console.error("empty_answer", data.stop_reason, JSON.stringify((data.content || []).map((b) => b.type)), JSON.stringify(data.usage || {}));
+    return json({ error: "No answer came back. Please try again.", ...(isEval ? { debug: { stop: data.stop_reason, blocks: (data.content || []).map((b) => b.type), usage: data.usage } } : {}) }, 502, headers);
+  }
 
   const u = data.usage || {};
   await env.DB.batch([
@@ -223,5 +229,8 @@ async function ask(body, env, headers, ipHash, now, isEval) {
     ),
   ]);
 
-  return json({ answer, pack: env.PACK_VERSION, remaining: Math.max(0, max - s.questions - 1) }, 200, headers);
+  const out = { answer, pack: env.PACK_VERSION, remaining: Math.max(0, max - s.questions - 1) };
+  if (isEval) out.debug = { stop: data.stop_reason, blocks: (data.content || []).map((b) => b.type), usage: u };
+  if (data.stop_reason && data.stop_reason !== "end_turn") console.warn("stop_reason", data.stop_reason, JSON.stringify(u));
+  return json(out, 200, headers);
 }

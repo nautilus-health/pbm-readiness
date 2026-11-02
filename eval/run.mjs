@@ -42,7 +42,7 @@ async function runOne(q) {
   for (const p of [...q.must, ...spec.always.must]) if (!re(p).test(a.answer)) fails.push(`missing /${p}/`);
   for (const p of [...q.must_not, ...spec.always.must_not]) if (re(p).test(a.answer)) fails.push(`forbidden /${p}/`);
   const words = a.answer.split(/\s+/).length;
-  if (words > 320) fails.push(`too long (${words} words)`);
+  if (words > 260) fails.push(`too long (${words} words)`);
   return { ...q, ok: fails.length === 0, fails, answer: a.answer, words, ms, pack: a.pack };
 }
 

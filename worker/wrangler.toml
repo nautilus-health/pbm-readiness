@@ -7,6 +7,7 @@ rules = [{ type = "Text", globs = ["**/*.md"], fallthrough = true }]
 
 [vars]
 MODEL = "claude-sonnet-5-5"
+EFFORT = "medium"      # low | medium | high; thinking depth before answering
 PACK_VERSION = "1.0"
 ALLOWED_ORIGINS = "https://nautilus-health.github.io,https://www.nautilushealth.org,https://nautilushealth.org,https://www.contractxray.com,https://contractxray.com"
 MAX_QUESTIONS = "10"

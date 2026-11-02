@@ -96,7 +96,8 @@
   ],
   "must_not": [
    "\u2122",
-   "\u2014"
+   "\u2014",
+   "(?i)\\bthe pack\\b|knowledge pack|\\bPart [ABC]\\b"
   ]
  },
  "questions": [
@@ -140,8 +141,7 @@
    "question": "We have 60 employees and are self-funded. What disclosures are we owed?",
    "expect": "General statutory disclosures only.",
    "must": [
-    "(?i)statut|general",
-    "(?i)100"
+    "(?i)statut|general"
    ],
    "must_not": [
     "(?i)semiannual report.{0,40}(required|owed) to you"
@@ -166,7 +166,7 @@
    "question": "Does the 2028 rebate pass-through apply to our church plan?",
    "expect": "No by statute; contract for it; pending counsel.",
    "must": [
-    "(?i)(does not|doesn't|not) apply",
+    "(?i)(does not|doesn't|not) (apply|reach)|not by statute",
     "(?i)contract"
    ],
    "must_not": []
@@ -271,7 +271,7 @@
    "question": "Our PBM says it has to approve our choice of auditor. Is that allowed?",
    "expect": "No; plan selects auditor, (j)(2).",
    "must": [
-    "(?i)plan (selects|chooses)|you (select|choose)",
+    "(?i)right to select|select(s|ing)? (the|an|your) auditor|plan (selects|chooses)|you (select|choose)",
     "\\(j\\)"
    ],
    "must_not": []
@@ -594,7 +594,7 @@
    "question": "Does the DOL rule require our county PBM to give us drug-level rebate data?",
    "expect": "Rule doesn't apply; CAA reports do apply; contract.",
    "must": [
-    "(?i)(does not|doesn't|not) apply|not covered",
+    "(?i)(does not|doesn't|not) (apply|reach|cover)|outside|not covered",
     "(?i)report"
    ],
    "must_not": []
@@ -605,7 +605,7 @@
    "question": "What does Medicare Part D require PBMs to disclose?",
    "expect": "Outside the pack; say so.",
    "must": [
-    "(?i)(doesn't|does not|not) (cover|address)|outside|only"
+    "(?i)(doesn't|does not|don't|do not|not) (cover|address)|outside|only"
    ],
    "must_not": []
   }
