@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PBM Rule Readiness Check</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1B365D; --teal:#2D8B9A; --gold:#C5A572; --light:#F5F5F5;
+    --ink:#333333; --mid:#666666; --line:#DADDE2; --warn:#B4541A; --warnbg:#FBF1E8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Roboto,Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.5;font-size:16px}
+  header{background:var(--navy);color:#fff;padding:20px 24px}
+  header .wrap{max-width:820px;margin:0 auto}
+  header h1{margin:0;font-size:24px;font-weight:700;letter-spacing:.2px}
+  header p{margin:4px 0 0;font-size:15px;color:#D7DFEA}
+  .proto{background:var(--gold);color:var(--navy);font-size:13px;font-weight:500;text-align:center;padding:6px 12px}
+  main{max-width:820px;margin:0 auto;padding:24px}
+  h2{color:var(--navy);font-size:20px;margin:28px 0 8px}
+  h3{color:var(--navy);font-size:17px;margin:20px 0 6px}
+  .muted{color:var(--mid);font-size:14px}
+  .card{border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin:14px 0;background:#fff}
+  .q{margin:0 0 18px}
+  .q label.qlabel{display:block;font-weight:500;margin-bottom:6px;color:var(--navy)}
+  .q .num{display:inline-block;width:24px;height:24px;border-radius:12px;background:var(--teal);color:#fff;font-size:13px;text-align:center;line-height:24px;margin-right:8px}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opts button{font:inherit;font-size:14px;padding:8px 14px;border:1px solid var(--line);border-radius:20px;background:#fff;color:var(--ink);cursor:pointer}
+  .opts button:hover{border-color:var(--teal)}
+  .opts button[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:#fff}
+  select{font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+  .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  .primary{font:inherit;font-weight:500;background:var(--navy);color:#fff;border:0;border-radius:8px;padding:12px 22px;cursor:pointer;font-size:16px}
+  .primary:disabled{opacity:.45;cursor:not-allowed}
+  .ghost{font:inherit;background:none;border:1px solid var(--line);border-radius:8px;padding:8px 14px;cursor:pointer;color:var(--navy);font-size:14px}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px;font-weight:500}
+  td{border-bottom:1px solid var(--line);padding:8px 10px;vertical-align:top}
+  tr:nth-child(even) td{background:var(--light)}
+  .profile-tag{display:inline-block;background:var(--light);border-left:4px solid var(--teal);padding:6px 12px;margin:4px 0 10px;font-weight:500;color:var(--navy)}
+  .dates{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .date{background:var(--light);border-radius:8px;padding:12px 14px}
+  .date .k{font-size:13px;color:var(--mid)}
+  .date .v{font-size:18px;font-weight:700;color:var(--navy)}
+  .flag{border-left:4px solid var(--teal);background:#EEF6F7;padding:10px 14px;margin:10px 0;border-radius:0 8px 8px 0;font-size:15px}
+  .flag.urgent{border-color:var(--warn);background:var(--warnbg)}
+  .flag b{color:var(--navy)}
+  .flag.urgent b{color:var(--warn)}
+  ol.actions{padding-left:22px}
+  ol.actions li{margin:0 0 12px}
+  ol.actions .when{font-size:13px;color:var(--teal);font-weight:500}
+  .cta{background:var(--navy);color:#fff;border-radius:10px;padding:16px 20px;margin:24px 0}
+  .cta a{color:var(--gold);font-weight:500}
+  .locked{border:1px dashed var(--line);border-radius:10px;padding:18px 20px;background:var(--light)}
+  .locked input[type=email]{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;width:100%;max-width:340px}
+  footer{max-width:820px;margin:0 auto;padding:16px 24px 32px;font-size:13px;color:var(--mid);border-top:1px solid var(--line)}
+  .hidden{display:none}
+  a{color:var(--teal)}
+  .testbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:14px;color:var(--mid);margin-bottom:8px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>PBM Rule Readiness Check</h1>
+  <p>Seven quick questions. See what the DOL final PBM rule and the Consolidated Appropriations Act (CAA) of 2026 mean for your plan.</p>
+</div></header>
+<div class="proto">Prototype for review. Logic pending counsel review. No data leaves this page.</div>
+
+<main>
+  <section id="intake">
+    <div class="testbar">
+      <span>Reviewers: load a test profile</span>
+      <select id="preset" aria-label="Load a test profile">
+        <option value="">Choose…</option>
+        <option value="a">Self-funded employer, 800 lives, calendar year</option>
+        <option value="b">Level-funded employer, 150 lives, July plan year</option>
+        <option value="c">Fully insured employer, 300 lives</option>
+        <option value="d">Self-funded employer, 60 lives</option>
+        <option value="e">School district (government plan)</option>
+        <option value="f">Broker, client unsure of funding</option>
+      </select>
+    </div>
+
+    <div class="card" id="questions"></div>
+    <div class="row">
+      <button class="primary" id="go" disabled>See my results</button>
+      <span class="muted" id="remain"></span>
+    </div>
+    <p class="muted">We don't ask for names, plan numbers or contracts. "Not sure" is always a fine answer.</p>
+  </section>
+
+  <section id="results" class="hidden" aria-live="polite"></section>
+</main>
+
+<footer>
+  General information about the DOL final PBM rule (29 CFR 2550.408b-22) and the Consolidated Appropriations Act (CAA) of 2026. Not legal advice, and no attorney-client relationship is created. Items marked "pending counsel confirmation" are open questions.<br>
+  Nautilus Health Institute | November 2026
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  var SHORT = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+  var QUESTIONS = [
+    {id:"role", label:"Which best describes you?", opts:[["sponsor","Plan sponsor or fiduciary"],["advisor","Broker or consultant"],["attorney","Attorney"],["other","Other"]]},
+    {id:"type", label:"What kind of employer sponsors the plan?", opts:[["private","Private employer"],["multi","Multiemployer (union) plan"],["gov","Government"],["church","Church"],["unsure","Not sure"]]},
+    {id:"fund", label:"How is the medical plan funded?", opts:[["self","Self-funded"],["level","Level-funded"],["fully","Fully insured"],["unsure","Not sure"]]},
+    {id:"size", label:"How many employees or participants?", opts:[["small","Under 100"],["mid","100 to 499"],["large","500 or more"],["unsure","Not sure"]]},
+    {id:"pymonth", label:"What month does the plan year start?", kind:"month"},
+    {id:"renewal", label:"When does the PBM contract next renew, and how much notice does it need to stop auto-renewal?", kind:"renewal"},
+    {id:"holder", label:"Who holds the PBM contract?", opts:[["pbm","The plan, directly with the PBM"],["tpa","A TPA"],["carrier","The insurance carrier"],["unsure","Not sure"]]}
+  ];
+
+  var S = {};
+  var qbox = document.getElementById("questions");
+
+  function el(tag, attrs, html){
+    var e = document.createElement(tag);
+    if(attrs){ for(var k in attrs){ e.setAttribute(k, attrs[k]); } }
+    if(html !== undefined){ e.innerHTML = html; }
+    return e;
+  }
+
+  function monthSelect(id, withUnsure){
+    var s = el("select", {id:id, "aria-label":"Month"});
+    s.appendChild(el("option",{value:""},"Month…"));
+    MONTHS.forEach(function(m,i){ s.appendChild(el("option",{value:String(i+1)},m)); });
+    if(withUnsure){ s.appendChild(el("option",{value:"unsure"},"Not sure")); }
+    return s;
+  }
+
+  function renderQuestions(){
+    qbox.innerHTML = "";
+    QUESTIONS.forEach(function(q, idx){
+      var wrap = el("div",{"class":"q"});
+      wrap.appendChild(el("label",{"class":"qlabel"},'<span class="num">'+(idx+1)+'</span>'+q.label));
+      if(q.opts){
+        var o = el("div",{"class":"opts", role:"group", "aria-label":q.label});
+        q.opts.forEach(function(p){
+          var b = el("button",{type:"button","data-q":q.id,"data-v":p[0],"aria-pressed":String(S[q.id]===p[0])},p[1]);
+          b.addEventListener("click", function(){ S[q.id]=p[0]; renderQuestions(); });
+          o.appendChild(b);
+        });
+        wrap.appendChild(o);
+      } else if(q.kind==="month"){
+        var s = monthSelect("pymonth", true);
+        s.value = S.pymonth || "";
+        s.addEventListener("change", function(){ S.pymonth = s.value; check(); });
+        wrap.appendChild(s);
+      } else if(q.kind==="renewal"){
+        var r = el("div",{"class":"row"});
+        var rm = monthSelect("rmonth", true);
+        rm.value = S.rmonth || "";
+        var ry = el("select",{id:"ryear","aria-label":"Year"});
+        ry.appendChild(el("option",{value:""},"Year…"));
+        [2026,2027,2028,2029,2030].forEach(function(y){ ry.appendChild(el("option",{value:String(y)},String(y))); });
+        ry.value = S.ryear || "";
+        var nw = el("select",{id:"notice","aria-label":"Notice window"});
+        nw.appendChild(el("option",{value:""},"Notice window…"));
+        [30,60,90,120,180].forEach(function(d){ nw.appendChild(el("option",{value:String(d)},d+" days")); });
+        nw.appendChild(el("option",{value:"unsure"},"Not sure"));
+        nw.value = S.notice || "";
+        rm.addEventListener("change", function(){ S.rmonth = rm.value; if(rm.value==="unsure"){ S.ryear="unsure"; } check(); renderQuestions(); });
+        ry.addEventListener("change", function(){ S.ryear = ry.value; check(); });
+        nw.addEventListener("change", function(){ S.notice = nw.value; check(); });
+        r.appendChild(rm);
+        if(S.rmonth !== "unsure"){ r.appendChild(ry); }
+        r.appendChild(nw);
+        wrap.appendChild(r);
+      }
+      qbox.appendChild(wrap);
+    });
+    check();
+  }
+
+  function answered(){
+    var n = 0;
+    ["role","type","fund","size","pymonth","holder"].forEach(function(k){ if(S[k]) n++; });
+    if(S.rmonth && (S.rmonth==="unsure" || S.ryear) && S.notice) n++;
+    return n;
+  }
+  function check(){
+    var n = answered();
+    document.getElementById("go").disabled = n < 7;
+    document.getElementById("remain").textContent = n < 7 ? (7-n)+" to go" : "Ready";
+  }
+
+  /* ---------- dates (UTC, first of month) ---------- */
+  function D(y,m,d){ return new Date(Date.UTC(y,m-1,d||1)); }
+  function addDays(dt,n){ return new Date(dt.getTime() + n*864e5); }
+  function fmt(dt){ return SHORT[dt.getUTCMonth()]+" "+dt.getUTCDate()+", "+dt.getUTCFullYear(); }
+  function todayUTC(){ var t=new Date(); return D(t.getFullYear(), t.getMonth()+1, t.getDate()); }
+  function firstOnOrAfter(month, threshold){
+    for(var y=2026;y<=2032;y++){ var c=D(y,month,1); if(c>=threshold) return c; }
+    return null;
+  }
+  var DOL_START = D(2027,7,1), CAA_START = D(2028,8,3);
+
+  /* ---------- applicability ---------- */
+  var CAT = {
+    FULL:{label:"ERISA plan, self-funded or level-funded, 100 or more participants",
+      dol:"Applies in full. Detailed initial disclosures, semiannual or quarterly reports, an annual audit right, and machine-readable data.",
+      pass:"Applies.", rep:"Detailed report."},
+    SMALL:{label:"ERISA plan, self-funded or level-funded, under 100 participants",
+      dol:"The detailed rule doesn't apply. General statutory disclosures are still required.",
+      pass:"Applies.", rep:"Summary report."},
+    FI:{label:"ERISA plan, fully insured",
+      dol:"The detailed rule doesn't apply. General statutory disclosures are still required.",
+      pass:"Applies through the insurer.", rep:"Summary report. Plans with 100 or more participants may opt in to the detailed report."},
+    NON:{label:"Government or church plan (not covered by ERISA)",
+      dol:"Doesn't apply. Contract for the same terms.",
+      pass:"Doesn't apply. Contract for the same terms.", rep:"Applies."}
+  };
+  var ORDER = ["FULL","FI","SMALL","NON"];
+
+  function cats(){
+    var types = S.type==="unsure" ? ["private","gov"] : [S.type];
+    var funds = S.fund==="unsure" ? ["self","fully"] : [S.fund];
+    var sizes = S.size==="unsure" ? ["mid","small"] : [S.size];
+    var found = {};
+    types.forEach(function(t){ funds.forEach(function(f){ sizes.forEach(function(z){
+      var c;
+      if(t==="gov"||t==="church") c="NON";
+      else if(f==="fully") c="FI";
+      else if(z==="small") c="SMALL";
+      else c="FULL";
+      found[c]=true;
+    });});});
+    return ORDER.filter(function(c){ return found[c]; }).slice(0,2);
+  }
+
+  function you(){ return (S.role==="advisor"||S.role==="attorney") ? {your:"your client's", You:"Your client", you:"your client"} : {your:"your", You:"You", you:"you"}; }
+
+  /* ---------- results ---------- */
+  function buildResults(){
+    var Y = you();
+    var list = cats();
+    var primary = list[0];
+    var unsureProfile = list.length > 1;
+    var today = todayUTC();
+
+    var pm = (S.pymonth && S.pymonth!=="unsure") ? Number(S.pymonth) : null;
+    var dolFirst = pm ? firstOnOrAfter(pm, DOL_START) : null;
+    var caaFirst = pm ? firstOnOrAfter(pm, CAA_START) : null;
+
+    var renewal = (S.rmonth && S.rmonth!=="unsure" && S.ryear) ? D(Number(S.ryear), Number(S.rmonth), 1) : null;
+    var notice = (S.notice && S.notice!=="unsure") ? Number(S.notice) : null;
+    var autoDeadline = (renewal && notice) ? addDays(renewal, -notice) : null;
+    var dolApplies = primary==="FULL";
+    var initialDue = (dolApplies && renewal && dolFirst && renewal >= dolFirst) ? addDays(renewal,-90) : null;
+    var earlier = [autoDeadline, initialDue].filter(Boolean).sort(function(a,b){return a-b;})[0] || null;
+    var reviewBy = earlier ? addDays(earlier,-60) : null;
+
+    var h = [];
+    h.push('<h2>'+(S.role==="advisor"||S.role==="attorney" ? "Your client's results" : "Your results")+'</h2>');
+
+    /* profile + applicability */
+    if(unsureProfile){
+      h.push('<div class="flag"><b>Your answers fit more than one profile.</b> We show the two most likely below. Confirm '+Y.your+' plan type, funding and size with '+(S.role==="advisor" ? "the plan sponsor or counsel" : "your broker or counsel")+'.</div>');
+    }
+    h.push('<h3>What applies</h3>');
+    h.push('<table><thead><tr><th>Profile</th><th>DOL final rule</th><th>CAA 2026 pass-through (2028)</th><th>CAA 2026 PBM reports (2028)</th></tr></thead><tbody>');
+    list.forEach(function(c){
+      var r = CAT[c];
+      h.push('<tr><td><b>'+r.label+'</b></td><td>'+r.dol+'</td><td>'+r.pass+'</td><td>'+r.rep+'</td></tr>');
+    });
+    h.push('</tbody></table>');
+
+    /* dates */
+    var dates = [];
+    if(primary!=="NON" && dolFirst) dates.push(["First plan year under the DOL rule", fmt(dolFirst), primary==="FULL" ? "" : "Detailed rule doesn't apply to this profile"]);
+    if(primary!=="NON" && caaFirst) dates.push(["First plan year under CAA 2026", fmt(caaFirst), ""]);
+    if(initialDue) dates.push(["Initial disclosure due", fmt(initialDue), "90 days before renewal", initialDue]);
+    if(autoDeadline) dates.push(["Auto-renewal deadline", fmt(autoDeadline), notice+"-day notice window", autoDeadline]);
+    if(reviewBy) dates.push(["Start contract review by", fmt(reviewBy), "60 days before the earlier deadline", reviewBy]);
+    if(dates.length){
+      h.push('<h3>Key dates</h3><div class="dates">');
+      dates.forEach(function(d){
+        var past = (d[3] && d[3] < today);
+        h.push('<div class="date"><div class="k">'+d[0]+'</div><div class="v"'+(past?' style="color:#B4541A"':'')+'>'+d[1]+'</div>'+(past?'<div class="muted">This date has passed</div>':(d[2]?'<div class="muted">'+d[2]+'</div>':''))+'</div>');
+      });
+      h.push('</div>');
+    }
+    var missing = [];
+    if(!pm) missing.push("plan year start month");
+    if(!renewal) missing.push("renewal date");
+    if(!notice) missing.push("auto-renewal notice window");
+    if(missing.length){
+      h.push('<p class="muted">Some dates need the '+missing.join(", ")+'. These are in the PBM contract or the plan document.</p>');
+    }
+
+    /* flags */
+    var flags = [];
+    if(autoDeadline && autoDeadline >= today && (autoDeadline - today) <= 120*864e5){
+      flags.push('<div class="flag urgent"><b>Act now.</b> The auto-renewal notice deadline is '+fmt(autoDeadline)+', within 120 days. Miss it and the current terms roll forward.</div>');
+    }
+    if(autoDeadline && autoDeadline < today && renewal >= today){
+      flags.push('<div class="flag urgent"><b>The auto-renewal notice window may have closed.</b> Check the contract now for any remaining exit or amendment rights.</div>');
+    }
+    if(renewal && renewal < today){
+      flags.push('<div class="flag"><b>That renewal date has passed.</b> Enter the next renewal date for accurate deadlines.</div>');
+    }
+    if(dolApplies && renewal && dolFirst && renewal < dolFirst && renewal >= today){
+      flags.push('<div class="flag"><b>'+Y.your.charAt(0).toUpperCase()+Y.your.slice(1)+' next renewal comes before the detailed rule.</b> '+Y.You+' '+(Y.you==="you"?"are":"is")+' still owed statutory disclosures now. Plan for the full disclosures at the renewal after.</div>');
+    }
+    if(renewal && renewal > CAA_START && primary!=="NON"){
+      flags.push('<div class="flag"><b>The current contract runs past August 3, 2028.</b> CAA 2026 pass-through requirements attach to plan years starting on or after that date. Whether an existing contract must be amended mid-term is pending counsel confirmation. See the August 2028 scenario table in the checklist.</div>');
+    }
+    if(S.holder==="tpa" || S.holder==="carrier"){
+      var who = S.holder==="tpa" ? "the TPA" : "the carrier";
+      flags.push('<div class="flag"><b>The contract is held through '+who+'.</b> That entity owes '+Y.you+' the disclosures, even if another company runs the PBM.</div>');
+    }
+    if(S.holder==="unsure"){
+      flags.push('<div class="flag"><b>Find out who holds the PBM contract.</b> Whoever holds it owes '+Y.you+' the disclosures.</div>');
+    }
+    if(flags.length){ h.push('<h3>Watch for</h3>'+flags.join("")); }
+
+    /* actions */
+    h.push('<h3>What to do next</h3><ol class="actions">');
+    actions(primary, {reviewBy:reviewBy, autoDeadline:autoDeadline, initialDue:initialDue, dolFirst:dolFirst, caaFirst:caaFirst, unsure:unsureProfile}).forEach(function(a){
+      h.push('<li><div class="when">'+a[0]+'</div>'+a[1]+'</li>');
+    });
+    h.push('</ol>');
+
+    /* CTA */
+    h.push('<div class="cta">Visit <a href="https://www.nautilushealth.org/PBM">www.nautilushealth.org/PBM</a> for the full Fiduciary Action Checklist and the August 2028 scenario table.</div>');
+
+    /* locked Q&A */
+    h.push('<div class="locked"><h3 style="margin-top:0">Ask a question about '+Y.your+' results</h3>'+
+      '<p class="muted">Coming next: answers from Nautilus-approved material, with sources cited. Enter an email to unlock questions and get a copy of these results.</p>'+
+      '<div class="row"><input type="email" placeholder="you@company.com" disabled aria-label="Email (disabled in prototype)"><button class="ghost" disabled>Unlock questions</button></div>'+
+      '<p class="muted"><label><input type="checkbox" disabled> Send me my results and occasional Nautilus updates.</label><br>Prototype: email and questions are switched off.</p></div>');
+
+    h.push('<p style="margin-top:20px"><button class="ghost" id="restart">Start over</button> <button class="ghost" id="copy">Copy results as text</button> <span class="muted" id="copied"></span></p>');
+
+    var box = document.getElementById("results");
+    box.innerHTML = h.join("");
+    box.classList.remove("hidden");
+    document.getElementById("restart").addEventListener("click", function(){ S={}; document.getElementById("preset").value=""; box.classList.add("hidden"); renderQuestions(); window.scrollTo(0,0); });
+    document.getElementById("copy").addEventListener("click", function(){
+      var txt = box.innerText.replace(/\n{3,}/g,"\n\n");
+      try{ navigator.clipboard.writeText(txt).then(function(){ document.getElementById("copied").textContent="Copied"; }, function(){ document.getElementById("copied").textContent="Copy not available here"; }); }
+      catch(e){ document.getElementById("copied").textContent="Copy not available here"; }
+    });
+    box.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+
+  function actions(c, d){
+    var Y = you();
+    var now = "Now";
+    var today = todayUTC();
+    var by = function(dt, fallback){ if(!dt) return fallback; return dt < today ? "Now (target date "+fmt(dt)+" has passed)" : "By "+fmt(dt); };
+    var a = [];
+    if(c==="NON"){
+      a.push([now, "<b>Pull "+Y.your+" PBM contract and every amendment.</b> Federal rules won't do this work for a government or church plan. The contract is the only protection."]);
+      a.push([by(d.reviewBy,"Before the next renewal"), "<b>Run a Contract X-Ray&trade;.</b> Get a Negotiation Guide that compares the contract to the DOL rule and CAA 2026 standards."]);
+      a.push([by(d.autoDeadline,"Check the contract"), "<b>Calendar the auto-renewal notice deadline.</b> That date is the leverage point for new terms."]);
+      a.push(["At renewal", "<b>Contract for the same disclosures.</b> Ask for initial and semiannual compensation disclosures, in machine-readable form."]);
+      a.push(["At renewal", "<b>Contract for an annual audit right</b> with an auditor the plan chooses and claims-level data."]);
+      a.push(["At renewal", "<b>Contract for full pass-through</b> of rebates and other manufacturer payments to the plan."]);
+      return a;
+    }
+    a.push([now, "<b>Pull "+Y.your+" PBM contract and every amendment.</b> Include any contract held by a TPA or carrier on the plan's behalf."]);
+    a.push([by(d.reviewBy,"Before the next renewal"), "<b>Run a Contract X-Ray&trade;.</b> Get a Negotiation Guide that scores the contract against the DOL final rule and CAA 2026."]);
+    if(c==="FULL"){
+      a.push([by(d.autoDeadline,"Check the contract"), "<b>Calendar the auto-renewal notice deadline.</b> Missing it rolls the current terms forward."]);
+      a.push([now, "<b>Request the statutory disclosures "+Y.you+" "+(Y.you==="you"?"are":"is")+" owed today.</b> The general 408(b)(2) requirement already applies. The DOL's temporary enforcement policy covers the gap until the detailed rule starts."]);
+      a.push([by(d.initialDue, d.dolFirst ? "From "+fmt(d.dolFirst) : "When the rule applies"), "<b>Review the initial disclosure and document the decision.</b> A documented review supports the rule's exemption for a fiduciary who acts in good faith on a disclosure that turns out to be wrong."]);
+      a.push([d.dolFirst ? "From "+fmt(d.dolFirst) : "When the rule applies", "<b>Choose the plan's auditor.</b> The rule gives the plan an annual audit right, with an auditor the plan selects."]);
+    } else if(c==="FI"){
+      a.push([now, "<b>Ask the insurer for the general statutory disclosures.</b> The detailed rule doesn't cover fully insured plans, but the statute still does."]);
+      a.push([by(d.caaFirst,"By August 2028"), "<b>Ask how CAA 2026 pass-through will reach the plan.</b> Get the answer in writing at renewal."]);
+      a.push([by(d.autoDeadline,"Check the contract"), "<b>Calendar the renewal notice deadline</b> and use it to price a self-funded option."]);
+    } else if(c==="SMALL"){
+      a.push([now, "<b>Request the general statutory disclosures.</b> The detailed rule starts at 100 participants, but the statute applies now."]);
+      a.push([by(d.autoDeadline,"Check the contract"), "<b>Calendar the auto-renewal notice deadline.</b> Missing it rolls the current terms forward."]);
+      a.push([by(d.caaFirst,"By August 2028"), "<b>Plan for CAA 2026 pass-through.</b> Ask the PBM how rebates will reach the plan."]);
+    }
+    if(d.unsure){
+      a.splice(1,0,[now, "<b>Confirm the plan's profile.</b> Funding, size and sponsor type decide which rules apply. Check the plan document or ask "+(S.role==="advisor" ? "the plan sponsor" : "your broker")+"."]);
+    }
+    /* order: undated "Now" first, then by date; undated items last; stable */
+    var key = function(lbl){
+      if(lbl.indexOf("Now")===0) return 0;
+      var m = lbl.match(/([A-Z][a-z]{2}) (\d+), (\d{4})/);
+      if(m) return D(Number(m[3]), SHORT.indexOf(m[1])+1, Number(m[2])).getTime();
+      return 9e15;
+    };
+    return a.map(function(x,i){return [x,i];}).sort(function(p,q){ return (key(p[0][0])-key(q[0][0])) || (p[1]-q[1]); }).map(function(p){return p[0];}).slice(0,6);
+  }
+
+  /* ---------- presets for reviewers ---------- */
+  var PRESETS = {
+    a:{role:"sponsor",type:"private",fund:"self",size:"large",pymonth:"1",rmonth:"1",ryear:"2028",notice:"90",holder:"pbm"},
+    b:{role:"sponsor",type:"private",fund:"level",size:"mid",pymonth:"7",rmonth:"7",ryear:"2027",notice:"120",holder:"tpa"},
+    c:{role:"sponsor",type:"private",fund:"fully",size:"mid",pymonth:"1",rmonth:"1",ryear:"2027",notice:"60",holder:"carrier"},
+    d:{role:"sponsor",type:"private",fund:"self",size:"small",pymonth:"1",rmonth:"1",ryear:"2027",notice:"90",holder:"tpa"},
+    e:{role:"sponsor",type:"gov",fund:"self",size:"large",pymonth:"7",rmonth:"7",ryear:"2027",notice:"180",holder:"pbm"},
+    f:{role:"advisor",type:"private",fund:"unsure",size:"mid",pymonth:"1",rmonth:"unsure",ryear:"unsure",notice:"unsure",holder:"unsure"}
+  };
+  document.getElementById("preset").addEventListener("change", function(e){
+    var p = PRESETS[e.target.value];
+    if(!p) return;
+    S = JSON.parse(JSON.stringify(p));
+    renderQuestions();
+    buildResults();
+  });
+
+  document.getElementById("go").addEventListener("click", buildResults);
+  renderQuestions();
+})();
+</script>
+</body>
+</html>
