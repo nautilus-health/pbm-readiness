@@ -16,7 +16,7 @@ LOG_QUESTIONS = "true"   # eval period only; set to "false" at launch
 [[d1_databases]]
 binding = "DB"
 database_name = "pbm-readiness"
-database_id = "REPLACE_WITH_D1_DATABASE_ID"
+database_id = "32f24b54-8038-4aca-b2c5-281a0abaf522"
 
 [observability]
 enabled = true
