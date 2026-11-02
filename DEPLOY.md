@@ -64,7 +64,7 @@ Set `var WORKER_URL = "<worker address>";` in `index.html`, commit and push. Git
 
 ## Leads (Google Sheet)
 
-Every report request becomes a row in the **PBM Readiness Check: Leads** Google Sheet: time received, email, consent, the seven intake answers in plain words, the page it came from, and the pack version. Eval runs are not recorded.
+Every report request becomes a row in the **PBM Readiness Check: Leads** Google Sheet owned by steve.ditto@nautilushealth.org (the copy made under the Nautilus account; its script sends the report email from that address): time received, email, consent, the seven intake answers in plain words, the page it came from, and the pack version. Eval runs are not recorded.
 
 Only rows with **Consent to updates = Yes** may receive the results email or Nautilus updates. Keep the Sheet shared with Nautilus staff only.
 
