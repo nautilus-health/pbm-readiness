@@ -112,7 +112,7 @@ async function lead(body, env, headers, ipHash, now, req, isEval, ctx) {
 
   // Leads live in the Google Sheet. Eval runs are not recorded.
   if (!isEval) {
-    const lead = { email, consent, profile, source, embed, pack: env.PACK_VERSION || "" };
+    const lead = { email, consent, profile, source, embed, pack: env.PACK_VERSION ? "v" + env.PACK_VERSION : "" };
     ctx.waitUntil(sendToSheet(lead, env, now));
   }
 
