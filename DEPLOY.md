@@ -14,6 +14,14 @@ The page on GitHub Pages works without the Worker: results show, and the questio
 | `apps-script/Code.gs` | The script attached to the "PBM Readiness Check: Leads" Google Sheet. It receives each sign-up from the Worker and adds a row. |
 | `eval/questions.json`, `eval/run.mjs` | 47 test questions with automatic checks, and the runner that writes a review report for counsel. |
 
+## Automatic deploys (GitHub Actions)
+
+`.github/workflows/worker.yml` deploys the Worker whenever a push to `main` changes `worker/`, `knowledge/`, `logic.js` or `report.js`. It uses one repository secret, `CLOUDFLARE_API_TOKEN` (Workers Scripts Write, D1 Write, Account Settings Read on Steve's Cloudflare account; expires November 3, 2027). The account ID is in `worker/wrangler.toml`.
+
+To check the token without deploying: Actions > Worker > Run workflow > check. To redeploy by hand: same, with deploy.
+
+To renew the token: in Cloudflare, Roll or recreate it, copy the **API Token** value (not the R2 access keys), and update the GitHub secret.
+
 ## One-time setup (Cloudflare)
 
 You need Node.js installed. From the repo folder:
