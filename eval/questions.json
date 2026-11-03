@@ -258,9 +258,9 @@
    "id": "D06",
    "profile": "full",
    "question": "When does the final rule become effective versus when it applies?",
-   "expect": "Effective 60 days after FR publication; applies plan years on/after July 1 2027.",
+   "expect": "Effective January 4, 2027 (published Nov 2, 2026, 91 FR 69092); applies to plan years on/after July 1, 2027.",
    "must": [
-    "(?i)60 days",
+    "(?i)January 4, 2027",
     "(?i)July 1, 2027"
    ],
    "must_not": []
@@ -606,6 +606,17 @@
    "expect": "Outside the pack; say so.",
    "must": [
     "(?i)(doesn't|does not|don't|do not|not) (cover|address)|outside|only"
+   ],
+   "must_not": []
+  },
+  {
+   "id": "R07",
+   "profile": "full",
+   "question": "Our disclosure shows the PBM retained some manufacturer rebates, but our contract promises 100% pass-through. Since they disclosed it, are we OK?",
+   "expect": "No; disclosure isn't permission; contract still requires pass-through; treat as a finding, relief protocol/counsel.",
+   "must": [
+    "(?i)pass(ed)?[- ]through",
+    "(?i)finding|owe|breach|not permission|isn't permission|doesn't (make|authorize)"
    ],
    "must_not": []
   }

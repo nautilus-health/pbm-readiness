@@ -1,11 +1,11 @@
-# PBM Rule Readiness Check: Knowledge Pack v1.0
-Version: 1.0 | Date: 2026-11-02 | Status: DRAFT, awaiting counsel review
+# PBM Rule Readiness Check: Knowledge Pack v1.1
+Version: 1.1 | Date: 2026-11-03 | Status: DRAFT, awaiting counsel review
 Publisher: Nautilus Health Institute
 
 This pack is the only source the Readiness Check may answer from. It has four parts:
 
 - Part A. Nautilus Fiduciary Action Checklist (the approved Nautilus positions). Cite as "Checklist: <section heading>".
-- Part B. Text of the final regulation, 29 CFR 2550.408b-22, with page numbers from the DOL's released final rule (October 29, 2026). Cite as "29 CFR 2550.408b-22(<paragraph>)" and the page, e.g. "(j)(2), final rule p. 345".
+- Part B. Text of the final regulation, 29 CFR 2550.408b-22, with page numbers from the DOL's released final rule (October 29, 2026). The rule was published in the Federal Register on November 2, 2026 (91 FR 69092) and is effective January 4, 2027; it applies to plan years beginning on or after July 1, 2027. Page numbers refer to the October 29 release, not the Federal Register pages. Cite as "29 CFR 2550.408b-22(<paragraph>)" and the page, e.g. "(j)(2), final rule p. 345".
 - Part C. Selected preamble passages from the final rule, with page numbers. Cite as "Final rule preamble, p. <n>".
 - Part D. Open items. Anything listed here must be labeled "pending counsel confirmation" when it comes up.
 
@@ -23,7 +23,7 @@ They must disclose it before you sign or renew, again every six months, and open
 The rule shifts the burden of proof. A PBM that fails to disclose is in a prohibited transaction. A fiduciary who receives the disclosures and does nothing with them has a documentation problem of its own. Every dollar retained upstream is a dollar your employees and their families pay through premiums and cost sharing.
 | Date | What happens |
 | February 3, 2026 | Consolidated Appropriations Act (CAA) of 2026 disclosure duty under ERISA 408(b)(2)(B) took effect. DOL grants good-faith enforcement relief until the rule applies |
-| 60 days after Federal Register publication | Final rule becomes effective |
+| January 4, 2027 | Final rule becomes effective |
 | 90 days before your first renewal on or after July 1, 2027 | Initial disclosures due from your PBM (October 2027 for a January 1, 2028 renewal) |
 | Plan years beginning on or after July 1, 2027 | Rule applies. For calendar-year plans: January 1, 2028 |
 | Plan years beginning on or after August 3, 2028 | CAA 2026 100% rebate pass-through and new semiannual PBM reports apply |
@@ -42,7 +42,7 @@ The answer turns on three facts: whether ERISA governs the plan, whether it's se
 Two counting rules matter. Single-employer plans count employees using the ACA employer aggregation rules. Multiemployer plans and MEWAs count participants, averaged over the prior plan year.
 Governmental and church plans still carry fiduciary duties under state law and plan documents. For them, every item below becomes a contract ask: require the PBM to make these disclosures and accept these audit terms as if ERISA applied.
 - Confirm ERISA status, funding arrangement, and headcount for the current year
-- Identify who signed the pharmacy contract. If a TPA, carrier, or level-funded arranger contracts for pharmacy services, that entity owes you the disclosures, even when another company runs the PBM
+- Identify who signed the pharmacy contract. If a TPA, carrier, or level-funded arranger contracts for pharmacy services, that entity owes you the disclosures, even when another company runs the PBM. When a TPA relies on a PBM to prepare its disclosures, require the TPA's contract with that PBM to deliver the data in time for the TPA's own deadlines
 - Ask your broker or consultant in writing whether it is affiliated with your PBM. Affiliated brokers and consultants must disclose under the rule
 
 ### Now Through Mid-2027: Know Your Contract Before Your PBM Explains It
@@ -95,8 +95,8 @@ Terms prudence calls for. The rule is silent on these. Ask anyway.
 - Every RFP response discloses the bidder's full economics in the rule's disclosure categories, so competing offers compare line by line
 
 ### When Disclosures Arrive: Read Them, Test Them, Act on Them
-Disclosure is the raw material. The fiduciary act is what you do next, and DOL expects to see it written down.
-Review each initial disclosure against the contract and your Contract X-Ray results. A contract promising 100% pass-through next to a disclosure showing retained manufacturer payments is a finding, not a footnote.
+Disclosure is the raw material. The fiduciary act is what you do next, and DOL expects to see it written down. Drug-level disclosures also make it easy for plaintiffs' lawyers to benchmark your plan, so that written record is your best defense.
+Review each initial disclosure against the contract and your Contract X-Ray results. A contract promising 100% pass-through next to a disclosure showing retained manufacturer payments is a finding, not a footnote. Disclosure isn't permission. If the contract requires an amount to be passed through, the PBM still owes it, even after the disclosure labels it retained.
 - Disclosure arrived at least 90 days before renewal, or by the date your contract sets
 - Every required element is present: services; direct compensation by service; manufacturer payments per drug, passed through and retained; spread per NDC and by channel; affiliated pharmacy steering; pharmacy clawbacks; price protection; termination compensation; other compensation and who pays it; formulary incentives and omitted lower-cost alternatives; net price per fill; fiduciary status; audit rights
 - Amounts stated in dollars, with estimates tied to a stated method
