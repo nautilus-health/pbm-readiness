@@ -1,0 +1,51 @@
+name: Worker
+
+# Check: on demand, confirms the Cloudflare token works (lists the D1 database and recent deployments).
+# Deploy: on every push to main that changes the Worker, the knowledge pack or the shared logic.
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "check = verify the token only; deploy = deploy the Worker"
+        default: check
+        type: choice
+        options: [check, deploy]
+  push:
+    branches: [main]
+    paths:
+      - "worker/**"
+      - "knowledge/**"
+      - "logic.js"
+      - "report.js"
+      - ".github/workflows/worker.yml"
+
+concurrency: worker-deploy
+
+jobs:
+  worker:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: worker
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check secrets are present
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN" || { echo "::error::CLOUDFLARE_API_TOKEN secret is missing"; exit 1; }
+          test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo "::error::CLOUDFLARE_ACCOUNT_ID secret is missing"; exit 1; }
+      - name: Check token can read D1 and the Worker
+        run: |
+          npx --yes wrangler@4 d1 list
+          npx --yes wrangler@4 deployments list --name pbm-readiness | head -20
+      - name: Deploy
+        if: github.event_name == 'push' || inputs.action == 'deploy'
+        run: npx --yes wrangler@4 deploy
+      - name: Health check
+        if: github.event_name == 'push' || inputs.action == 'deploy'
+        run: curl -fsS https://pbm-readiness.steve-340.workers.dev/health
