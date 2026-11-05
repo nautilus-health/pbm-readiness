@@ -1,5 +1,5 @@
 {
- "version": "1.0",
+ "version": "1.2",
  "profiles": {
   "full": {
    "role": "sponsor",
@@ -88,6 +88,17 @@
    "ryear": "2028",
    "notice": "90",
    "holder": "pbm"
+  },
+  "tpa": {
+   "role": "sponsor",
+   "type": "private",
+   "fund": "self",
+   "size": "large",
+   "pymonth": "1",
+   "rmonth": "1",
+   "ryear": "2028",
+   "notice": "90",
+   "holder": "tpa"
   }
  },
  "always": {
@@ -95,9 +106,9 @@
    "General information, not legal advice\\.?\\s*$"
   ],
   "must_not": [
-   "\u2122",
-   "\u2014",
-   "(?i)\\bthe pack\\b|knowledge pack|\\bPart [ABC]\\b"
+   "™",
+   "—",
+   "(?i)\\bthe pack\\b|knowledge pack|\\bPart [ABCE]\\b"
   ]
  },
  "questions": [
@@ -514,11 +525,14 @@
    "id": "C03",
    "profile": "full",
    "question": "Can our PBM charge a termination fee if we leave early?",
-   "expect": "2550.408b-2(c)(3) pending counsel; prudence terms.",
+   "expect": "Settled: may recoup only reasonable actual losses; must be able to exit without penalty on reasonably short notice (preamble p. 116, 2550.408b-2(c)(3)). Not pending.",
    "must": [
-    "pending counsel confirmation"
+    "(?i)actual loss",
+    "(?i)short notice"
    ],
-   "must_not": []
+   "must_not": [
+    "(?i)pending counsel confirmation"
+   ]
   },
   {
    "id": "G01",
@@ -617,6 +631,178 @@
    "must": [
     "(?i)pass(ed)?[- ]through",
     "(?i)finding|owe|breach|not permission|isn't permission|doesn't (make|authorize)"
+   ],
+   "must_not": []
+  },
+  {
+   "id": "K01",
+   "profile": "tpa",
+   "question": "We don't have a contract with a PBM. Our TPA handles pharmacy through a PBM it picked. Does the rule reach us?",
+   "expect": "Yes. The TPA is the covered service provider; owes full disclosures incl. PBM's compensation; must get PBM data; audit reaches PBM records. (c)(1)(i), (j)(7), pp. 67-68.",
+   "must": [
+    "(?i)\\bTPA\\b",
+    "(?i)covered service provider|owes"
+   ],
+   "must_not": [
+    "(?i)does(n't| not) (apply|reach)"
+   ]
+  },
+  {
+   "id": "K02",
+   "profile": "tpa",
+   "question": "Our PBM stopped responding to our auditor's requests. Who do we name in the notice to DOL?",
+   "expect": "The TPA, as the party that contracts with the plan; DOL declined relief for TPAs (pp. 187-188); relief protocol (n).",
+   "must": [
+    "(?i)\\bTPA\\b"
+   ],
+   "must_not": []
+  },
+  {
+   "id": "K03",
+   "profile": "full",
+   "question": "Does the rule cover drugs paid under the medical benefit, like infusions given in a doctor's office?",
+   "expect": "Yes. (d)(1) includes drugs provided through the medical benefit; payments disclosed as other compensation (pp. 76, 120).",
+   "must": [
+    "(?i)medical benefit",
+    "(?i)\\byes\\b|includ|cover"
+   ],
+   "must_not": []
+  },
+  {
+   "id": "K04",
+   "profile": "full",
+   "question": "Our medical TPA gets rebates on specialty drugs billed through medical claims. Does the TPA have to disclose them?",
+   "expect": "Yes if it performs core PBM services such as rebate negotiation or aggregation and expects $1,000+; rebates on medical-benefit drugs are 'other compensation'.",
+   "must": [
+    "(?i)disclos",
+    "(?i)rebate"
+   ],
+   "must_not": []
+  },
+  {
+   "id": "K05",
+   "profile": "full",
+   "question": "We use a separate vendor just for prior authorization on specialty drugs. Is that vendor covered?",
+   "expect": "Yes. Utilization management including instituting or processing prior authorization is a core service standing alone (p. 72); $1,000 threshold.",
+   "must": [
+    "(?i)prior authorization",
+    "(?i)\\$1,000|covered service provider"
+   ],
+   "must_not": []
+  },
+  {
+   "id": "K06",
+   "profile": "full",
+   "question": "Is an alternative funding program vendor that steers members to manufacturer assistance covered by the rule?",
+   "expect": "Likely yes if it performs core services (formulary routing to PAPs is covered, p. 74-75); its compensation is disclosed as other compensation (p. 119). Avoid overstating.",
+   "must": [
+    "(?i)disclos|covered"
+   ],
+   "must_not": []
+  },
+  {
+   "id": "K07",
+   "profile": "level",
+   "question": "We're level-funded and our carrier arranges pharmacy. Who owes us the disclosures?",
+   "expect": "The entity that contracts with the plan (the level-funded arranger) even if it doesn't perform the services (p. 68).",
+   "must": [
+    "(?i)contract"
+   ],
+   "must_not": [
+    "(?i)does(n't| not) apply to (you|your plan)"
+   ]
+  },
+  {
+   "id": "K08",
+   "profile": "multi",
+   "question": "We're a MEWA made up of separate employer plans. Who is the covered service provider?",
+   "expect": "The MEWA operator is likely the covered service provider for each employer plan; single-plan MEWA gets disclosures from the party contracting for PBM services (pp. 68-69).",
+   "must": [
+    "(?i)operator"
+   ],
+   "must_not": []
+  },
+  {
+   "id": "K09",
+   "profile": "fi",
+   "question": "Our medical is fully insured but we carved out pharmacy and self-fund it. Does the detailed rule apply?",
+   "expect": "Yes. Fully insured exclusion only if all benefits insured, (b)(1); self-funded Rx carve-out is covered (subject to size).",
+   "must": [
+    "(?i)all (of )?(its |the plan's |your )?benefits|\\(b\\)\\(1\\)"
+   ],
+   "must_not": []
+  },
+  {
+   "id": "K10",
+   "profile": "full",
+   "question": "We're a drug wholesaler. Does the detailed rule apply to our own employee health plan?",
+   "expect": "No. (b)(2) excludes plans sponsored by manufacturers, distributors, wholesalers, PBMs, rebate aggregators or affiliates; statutory disclosures still apply.",
+   "must": [
+    "(?i)\\(b\\)\\(2\\)|wholesaler"
+   ],
+   "must_not": []
+  },
+  {
+   "id": "K11",
+   "profile": "full",
+   "question": "Our PBM made an honest mistake in its disclosure. Is that automatically a violation?",
+   "expect": "No. (l): good-faith error corrected within 30 days of learning of it is not a failure.",
+   "must": [
+    "(?i)30 days"
+   ],
+   "must_not": []
+  },
+  {
+   "id": "K12",
+   "profile": "full",
+   "question": "If our PBM refuses an audit, what happens to the PBM?",
+   "expect": "Prohibited transaction; possible 502(i) civil penalty (discretionary); plan follows (n) relief protocol (p. 169).",
+   "must": [
+    "(?i)502\\(i\\)",
+    "(?i)prohibited transaction"
+   ],
+   "must_not": []
+  },
+  {
+   "id": "K13",
+   "profile": "full",
+   "question": "We're signing a brand-new PBM contract, not a renewal. Do we get the disclosures 90 days ahead?",
+   "expect": "Not required: new contracts need disclosures reasonably in advance; 90 days is deemed reasonable only for extensions and renewals (e). Can contract for a date.",
+   "must": [
+    "(?i)reasonably in advance"
+   ],
+   "must_not": []
+  },
+  {
+   "id": "K14",
+   "profile": "full",
+   "question": "Does the enforcement relief end July 1, 2027 for our calendar-year plan?",
+   "expect": "No. Relief runs to the applicability date, the first plan year beginning on/after July 1, 2027: January 1, 2028 for a calendar-year plan (p. 47).",
+   "must": [
+    "(?i)January 1, 2028"
+   ],
+   "must_not": []
+  },
+  {
+   "id": "K15",
+   "profile": "full",
+   "question": "If our PBM doesn't comply, is the contract invalidated?",
+   "expect": "No. Not voided; becomes a prohibited transaction; (n) relief protocol; terminate or continue is a documented fiduciary judgment.",
+   "must": [
+    "(?i)prohibited transaction"
+   ],
+   "must_not": [
+    "(?i)\\bis (invalidated|void)\\b"
+   ]
+  },
+  {
+   "id": "K16",
+   "profile": "full",
+   "question": "Does the rule only matter for our PBM, or do our other vendors need to disclose too?",
+   "expect": "Follows the service: any vendor contracting with the plan, $1,000+, performing core PBM services incl. medical-benefit drugs: TPA, UM, specialty programs, alternative funding.",
+   "must": [
+    "(?i)TPA|third.party administrator",
+    "(?i)medical benefit"
    ],
    "must_not": []
   }

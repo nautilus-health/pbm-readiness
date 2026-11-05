@@ -103,7 +103,7 @@ export function renderReport({ profile, transcript = [], generated = new Date(),
   // Next step
   B.push(`<div style="background:${NAVY};color:#ffffff;border-radius:8px;padding:16px 18px;margin:26px 0 8px">
     <div style="font-weight:bold;font-size:15px;margin-bottom:6px">Next step: see what ${esc(Y.your)} contract actually says</div>
-    <div style="font-size:13px;color:#D7DFEA">A Contract X-Ray analysis reviews ${esc(Y.your)} PBM contract against the DOL final rule and CAA 2026 and produces a Negotiation Guide: the terms to ask for, model language, and the fiduciary rationale.</div>
+    <div style="font-size:13px;color:#D7DFEA">A Contract X-Ray analysis reviews ${esc(Y.your)} PBM contract against the DOL final rule and CAA 2026 and produces a Negotiation Report: the terms to ask for, model language, and the fiduciary rationale.</div>
     <div style="margin-top:10px"><a href="https://www.contractxray.com/" style="color:${GOLD};font-weight:bold">contractxray.com</a> &nbsp;|&nbsp; <a href="https://www.nautilushealth.org/PBM" style="color:${GOLD};font-weight:bold">Full Fiduciary Action Checklist</a></div>
   </div>`);
 

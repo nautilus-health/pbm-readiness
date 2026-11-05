@@ -129,7 +129,7 @@ export async function buildPDF({ profile, transcript = [], generated = new Date(
 
   // Next step box
   font("normal", 9.5);
-  const ns = lines(`A Contract X-Ray analysis reviews ${r.voice.your} PBM contract against the DOL final rule and CAA 2026 and produces a Negotiation Guide: the terms to ask for, model language, and the fiduciary rationale.`, CW - 28);
+  const ns = lines(`A Contract X-Ray analysis reviews ${r.voice.your} PBM contract against the DOL final rule and CAA 2026 and produces a Negotiation Report: the terms to ask for, model language, and the fiduciary rationale.`, CW - 28);
   const nh = 34 + ns.length * 13 + 20; need(nh + 10); y += 8;
   doc.setFillColor(NAVY[0], NAVY[1], NAVY[2]); doc.roundedRect(L, y, CW, nh, 6, 6, "F");
   font("bold", 11.5); doc.setTextColor(255, 255, 255); doc.text(`Next step: see what ${r.voice.your} contract actually says`, L + 14, y + 20);

@@ -9,7 +9,7 @@ const SHORT = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov"
 export const QUESTIONS = [
   { id: "role", label: "Which best describes you?", opts: [["sponsor","Plan sponsor or fiduciary"],["advisor","Broker or consultant"],["attorney","Attorney"],["other","Other"]] },
   { id: "type", label: "What kind of employer sponsors the plan?", opts: [["private","Private employer"],["multi","Multiemployer (union) plan"],["gov","Government"],["church","Church"],["unsure","Not sure"]] },
-  { id: "fund", label: "How is the medical plan funded?", opts: [["self","Self-funded"],["level","Level-funded"],["fully","Fully insured"],["unsure","Not sure"]] },
+  { id: "fund", label: "How is the plan funded?", opts: [["self","Self-funded"],["level","Level-funded"],["fully","Fully insured"],["unsure","Not sure"]] },
   { id: "size", label: "How many employees or participants?", opts: [["small","Under 100"],["mid","100 to 499"],["large","500 or more"],["unsure","Not sure"]] },
   { id: "pymonth", label: "What month does the plan year start?", kind: "month" },
   { id: "renewal", label: "When does the PBM contract next renew?", kind: "renewal" },
@@ -134,7 +134,9 @@ export function compute(p, today = todayUTC()) {
   if (renewal && renewal > CAA_START && primary !== "NON")
     flags.push({ title: "The current contract runs past August 3, 2028.", body: "CAA 2026 pass-through requirements attach to plan years starting on or after that date. Whether an existing contract must be amended mid-term is pending counsel confirmation. See the August 2028 scenario table in the checklist." });
   if (p.holder === "tpa" || p.holder === "carrier")
-    flags.push({ title: `The contract is held through ${p.holder === "tpa" ? "the TPA" : "the carrier"}.`, body: `That entity owes ${Y.you} the disclosures, even if another company runs the PBM.` });
+    flags.push({ title: `The contract is held through ${p.holder === "tpa" ? "the TPA" : "the carrier"}.`, body: `That entity owes ${Y.you} the full disclosures, even if a PBM does the work and the plan has no contract with it. It must get the PBM's data, disclose what the PBM keeps, and open the PBM's records to ${Y.your} auditor.` });
+  if (dolApplies)
+    flags.push({ title: "Other vendors may owe disclosures too.", body: "The rule follows the service, not the label. It reaches any vendor that negotiates drug rebates, runs a formulary or pharmacy network, or manages drug use such as prior authorization, including for drugs paid under the medical benefit. That usually includes the medical TPA, utilization management, specialty and infusion programs, and alternative funding programs." });
   if (p.holder === "unsure")
     flags.push({ title: "Find out who holds the PBM contract.", body: `Whoever holds it owes ${Y.you} the disclosures.` });
 
@@ -154,7 +156,7 @@ function actions(p, c, d, today) {
   const add = (when, title, body) => a.push({ when, title, body });
   if (c === "NON") {
     add(now, `Pull ${Y.your} PBM contract and every amendment.`, "Federal rules won't do this work for a government or church plan. The contract is the only protection.");
-    add(by(d.reviewBy, "Before the next renewal"), "Run a Contract X-Ray.", "Get a Negotiation Guide that compares the contract to the DOL rule and CAA 2026 standards.");
+    add(by(d.reviewBy, "Before the next renewal"), "Run a Contract X-Ray.", "Get a Negotiation Report that compares the contract to the DOL rule and CAA 2026 standards.");
     add(by(d.autoDeadline, "Check the contract"), "Calendar the auto-renewal notice deadline.", "That date is the leverage point for new terms.");
     add("At renewal", "Contract for the same disclosures.", "Ask for initial and semiannual compensation disclosures, in machine-readable form.");
     add("At renewal", "Contract for an annual audit right", "with an auditor the plan chooses and claims-level data.");
@@ -162,7 +164,7 @@ function actions(p, c, d, today) {
     return a;
   }
   add(now, `Pull ${Y.your} PBM contract and every amendment.`, "Include any contract held by a TPA or carrier on the plan's behalf.");
-  add(by(d.reviewBy, "Before the next renewal"), "Run a Contract X-Ray.", "Get a Negotiation Guide that scores the contract against the DOL final rule and CAA 2026.");
+  add(by(d.reviewBy, "Before the next renewal"), "Run a Contract X-Ray.", "Get a Negotiation Report that scores the contract against the DOL final rule and CAA 2026.");
   if (c === "FULL") {
     add(by(d.autoDeadline, "Check the contract"), "Calendar the auto-renewal notice deadline.", "Missing it rolls the current terms forward.");
     add(now, `Request the statutory disclosures ${Y.you} ${Y.are} owed today.`, "The general 408(b)(2) requirement already applies. The DOL's temporary enforcement policy covers the gap until the detailed rule starts.");
