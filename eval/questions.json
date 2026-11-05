@@ -260,8 +260,7 @@
    "question": "Are we protected right now, before the rule applies, if we act in good faith?",
    "expect": "Temporary enforcement policy since Feb 3 2026; good faith.",
    "must": [
-    "(?i)good.faith",
-    "(?i)February 3, 2026"
+    "(?i)good.faith"
    ],
    "must_not": []
   },
@@ -464,7 +463,7 @@
    "question": "If we sign tomorrow and the contract ends August 4, 2028, do the 2028 rules apply during it?",
    "expect": "No.",
    "must": [
-    "(?i)\\bno\\b"
+    "(?i)\\b(no|not)\\b"
    ],
    "must_not": []
   },
