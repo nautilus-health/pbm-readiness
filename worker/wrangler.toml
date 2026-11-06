@@ -14,7 +14,7 @@ ALLOWED_ORIGINS = "https://nautilus-health.github.io,https://www.nautilushealth.
 FREE_QUESTIONS = "5"     # before the email
 MAX_QUESTIONS = "10"     # total, after the email
 IP_HOURLY_LIMIT = "30"
-LOG_QUESTIONS = "true"   # eval period only; set to "false" at launch
+LOG_QUESTIONS = "false"   # eval period only; set to "false" at launch
 
 [[d1_databases]]
 binding = "DB"

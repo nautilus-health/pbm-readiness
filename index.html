@@ -170,8 +170,8 @@ import { md, esc } from "./report.js";
 import { buildPDF } from "./pdf.js";
 
 /* ---------- config ---------- */
-// The Cloudflare Worker that answers questions and emails reports. Empty = questions and email switched off.
-let WORKER_URL = "";
+// The Cloudflare Worker that answers questions and emails reports. Set to "" to switch questions and email off.
+let WORKER_URL = "https://pbm-readiness.steve-340.workers.dev";
 const params = new URLSearchParams(location.search);
 const api = params.get("api");
 if (api && /^https:\/\/[\w.-]+$|^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(api)) WORKER_URL = api;
