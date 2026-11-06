@@ -95,7 +95,6 @@
   .counter{font-size:13px;color:var(--mid)}
   .sticky{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);box-shadow:0 -4px 14px rgba(0,0,0,.06);padding:10px 16px;display:flex;gap:10px;justify-content:center;z-index:5}
   .sticky .btn{font-size:15px;padding:10px 16px}
-  .testbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:14px;color:var(--mid);margin:12px 0 0;padding:8px 10px;border:1px dashed var(--line);border-radius:8px}
   select{font:inherit;font-size:14px;padding:6px 8px;border:1px solid var(--line);border-radius:6px}
   footer{background:var(--light);border-top:3px solid var(--teal);margin-top:40px;padding:24px;font-size:13px;color:var(--mid)}
   footer > *{max-width:772px;margin-left:auto;margin-right:auto}
@@ -134,18 +133,6 @@
       <div><span class="n">4</span><b>Your report</b><span>Everything in one PDF, emailed to you to share with your team</span></div>
     </div>
     <div class="row"><button class="btn" id="startBtn">Start the check</button><span class="muted">Free. No email needed to start. No contract or plan data.</span></div>
-    <div class="testbar hidden" id="testbar">
-      <span>Reviewers: jump to a test profile</span>
-      <select id="preset" aria-label="Test profile">
-        <option value="">Choose…</option>
-        <option value="a">Self-funded employer, 800 lives, calendar year</option>
-        <option value="b">Level-funded employer, 150 lives, July plan year</option>
-        <option value="c">Fully insured employer, 300 lives</option>
-        <option value="d">Self-funded employer, 60 lives</option>
-        <option value="e">School district (government plan)</option>
-        <option value="f">Broker, client unsure of funding</option>
-      </select>
-    </div>
   </section>
 
   <!-- One question per screen -->
@@ -188,8 +175,6 @@ let WORKER_URL = "";
 const params = new URLSearchParams(location.search);
 const api = params.get("api");
 if (api && /^https:\/\/[\w.-]+$|^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(api)) WORKER_URL = api;
-const REVIEW = params.has("review");
-if (REVIEW) document.getElementById("testbar").classList.remove("hidden");
 
 /* ---------- state ---------- */
 let S = {};                 // intake answers
@@ -326,7 +311,7 @@ function buildResults() {
   renderReportPanel();
   $("results").querySelectorAll("[data-go]").forEach((b) => b.addEventListener("click", () => goTo(b.dataset.go)));
   $("edit").addEventListener("click", () => { qi = 0; show("quiz"); renderQ(); });
-  $("restart").addEventListener("click", () => { S = {}; qi = 0; $("preset").value = ""; show("intro"); });
+  $("restart").addEventListener("click", () => { S = {}; qi = 0; show("intro"); });
 }
 
 function goTo(which) {
@@ -469,17 +454,6 @@ async function downloadPDF() {
   if (!window.jspdf) throw new Error("pdf library not loaded");
   await buildPDF({ profile: S, transcript: QA.transcript });
 }
-
-/* ---------- reviewer presets (?review) ---------- */
-const PRESETS = {
-  a: { role: "sponsor", type: "private", fund: "self", size: "large", pymonth: "1", rmonth: "1", ryear: "2028", notice: "90", holder: "pbm" },
-  b: { role: "sponsor", type: "private", fund: "level", size: "mid", pymonth: "7", rmonth: "7", ryear: "2027", notice: "120", holder: "tpa" },
-  c: { role: "sponsor", type: "private", fund: "fully", size: "mid", pymonth: "1", rmonth: "1", ryear: "2027", notice: "60", holder: "carrier" },
-  d: { role: "sponsor", type: "private", fund: "self", size: "small", pymonth: "1", rmonth: "1", ryear: "2027", notice: "90", holder: "tpa" },
-  e: { role: "sponsor", type: "gov", fund: "self", size: "large", pymonth: "7", rmonth: "7", ryear: "2027", notice: "180", holder: "pbm" },
-  f: { role: "advisor", type: "private", fund: "unsure", size: "mid", pymonth: "1", rmonth: "unsure", ryear: "unsure", notice: "unsure", holder: "unsure" },
-};
-$("preset").addEventListener("change", (e) => { const p = PRESETS[e.target.value]; if (p) { S = { ...p }; buildResults(); } });
 
 /* ---------- tell an embedding page how tall we are ---------- */
 if (window.parent !== window) {
