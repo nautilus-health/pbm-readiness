@@ -169,6 +169,9 @@ def build_body(doc):
             p = el["paragraph"]
             if any("inlineObjectElement" in e for e in p["elements"]):
                 continue  # relief protocol image: replaced by the drawn flow
+            if started and any("pageBreak" in e for e in p["elements"]):
+                flush()
+                out.append('<div style="break-before:page"></div>')
             txt = plain(p["elements"])
             style = p["paragraphStyle"].get("namedStyleType", "")
             if not started:
