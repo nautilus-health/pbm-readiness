@@ -63,13 +63,16 @@ ol.steps{counter-reset:s}
 ol.steps li{counter-increment:s;position:relative;padding:3pt 0 5pt 22pt;break-inside:avoid}
 ol.steps li:before{content:counter(s);position:absolute;left:0;top:3.5pt;width:14pt;height:14pt;border-radius:50%;background:#2D8B9A;color:#fff;font-weight:600;font-size:7.8pt;line-height:14pt;text-align:center}
 ul.plain li{padding:1.5pt 0;font-size:8.4pt;break-inside:avoid}
-ul.sources{columns:2;column-gap:20pt;list-style:none;padding:0;margin:4pt 0 10pt;font-size:8.2pt}
-ul.sources li{padding:1.6pt 0;break-inside:avoid}
+ul.sources{columns:2;column-gap:20pt;list-style:none;padding:0;margin:2pt 0 6pt;font-size:7.7pt;line-height:1.3}
+ul.sources li{padding:1pt 0;break-inside:avoid}
 table.data{width:100%;border-collapse:collapse;margin:4pt 0 12pt;font-size:8.5pt;line-height:1.4}
 table.data th strong,table.data th a{color:#fff;font-weight:500}
 table.data th{background:#1B365D;color:#fff;text-align:left;font-family:Mono,monospace;font-weight:500;font-size:6.6pt;letter-spacing:.16em;text-transform:uppercase;padding:6pt 7pt}
 table.data td{padding:5.5pt 7pt;border-bottom:.6pt solid #e5e7eb;vertical-align:top}
 table.data tr{break-inside:avoid;page-break-inside:avoid}
+table.data{break-before:avoid}
+table.data tbody tr:nth-child(2),table.data tbody tr:nth-child(3){break-before:avoid}
+table.data tbody tr:nth-last-child(-n+2){break-before:avoid}
 table.data tbody tr:nth-child(even) td{background:#f7f9fb}
 table.data td:first-child{font-weight:500;color:#1B365D}
 table.data thead{display:table-header-group}
@@ -80,11 +83,11 @@ table.data thead{display:table-header-group}
 .flow .st .n{font-family:Mono,monospace;font-size:6.6pt;letter-spacing:.2em;color:#2D8B9A;margin-bottom:3pt}
 .flow .ar{width:12pt;display:flex;align-items:center;justify-content:center;color:#C5A572;font-size:11pt}
 .ladder{display:flex;gap:8pt;margin:8pt 0 4pt;break-inside:avoid}
-.ladder div{flex:1;border:1pt solid #d5dde6;border-radius:2pt;padding:8pt 9pt;font-size:8.3pt;line-height:1.38}
+.ladder div{flex:1;border:1pt solid #d5dde6;border-radius:2pt;padding:6pt 8pt;font-size:8pt;line-height:1.32}
 .ladder .n{font-family:Mono,monospace;font-size:6.6pt;letter-spacing:.2em;color:#C5A572;text-transform:uppercase}
 .ladder b{display:block;font-family:Fraunces,serif;font-weight:600;font-size:10.5pt;color:#1B365D;margin:2pt 0 2pt}
 .ladder .here{background:#1B365D;color:#e5ecf3;border-color:#1B365D}.ladder .here b{color:#fff}
-.disclaimer{margin-top:14pt;border-top:.6pt solid #d1d5db;padding-top:7pt;font-size:7.8pt;color:#6b7280}
+.disclaimer{margin-top:6pt;border-top:.6pt solid #d1d5db;padding-top:5pt;font-size:7.4pt;color:#6b7280}
 .keep{break-inside:avoid}
 """
 
@@ -132,7 +135,7 @@ def cell_html(cell):
 def section_heading(text):
     m = re.match(r"^(Step \d+|Now Through Mid-2027|Before Your Next Renewal|When Disclosures Arrive|August 2028|Watch List):\s*(.+)$", text)
     if m:
-        brk = ' style="break-before:page"' if m.group(1) == "Watch List" else ""
+        brk = ""
         return f'<div class="sec-kicker"{brk}>{esc(m.group(1))}</div><h2>{esc(m.group(2))}</h2><div class="rule"></div>'
     return f'<h2>{esc(text)}</h2><div class="rule"></div>'
 
@@ -222,7 +225,57 @@ def build_body(doc):
             trs = "".join("<tr>" + "".join(f"<td>{cell_html(c)}</td>" for c in r["tableCells"]) + "</tr>" for r in rows[1:])
             out.append(f'<table class="data"><thead><tr>{hdr}</tr></thead><tbody>{trs}</tbody></table>')
     flush()
-    return "\n".join(out)
+    return "\n".join(keep_together(out))
+
+
+def keep_together(blocks):
+    """Stop orphans: headings stay with what follows, the first two checklist
+    items stay with the text before them, and short tables stay with their intro."""
+    is_head = lambda b: b.startswith('<div class="sec-kicker"') or b.startswith("<h2>") or b.startswith("<h3>")
+    out, i = [], 0
+    while i < len(blocks):
+        b = blocks[i]
+        if b.startswith('<ul class="check">'):
+            items = re.findall(r"<li>.*?</li>", b, re.S)
+            if len(items) > 2:
+                head = '<ul class="check" style="margin-bottom:0">' + "".join(items[:2]) + "</ul>"
+                rest = items[2:]
+                if len(rest) > 2:
+                    tail = ('<ul class="check" style="margin:0">' + "".join(rest[:-2]) + "</ul>"
+                            '<div class="keep"><ul class="check" style="margin-top:0">' + "".join(rest[-2:]) + "</ul></div>")
+                else:
+                    tail = '<div class="keep"><ul class="check" style="margin-top:0">' + "".join(rest) + "</ul></div>"
+            else:
+                head, tail = b, None
+            if out and (out[-1].startswith("<p") or out[-1].startswith('<div class="keep">')):
+                out[-1] = f'<div class="keep">{out[-1]}{head}</div>'
+            else:
+                out.append(f'<div class="keep">{head}</div>')
+            if tail:
+                out.append(tail)
+            i += 1
+            continue
+        if b.startswith('<table class="data">') and b.count("<tr>") <= 5 and out and (
+                out[-1].startswith("<p") or out[-1].startswith('<div class="keep">')):
+            out[-1] = f'<div class="keep">{out[-1]}{b}</div>'
+            i += 1
+            continue
+        if b.startswith('<div class="flow"') and out and out[-1].startswith("<p"):
+            out[-1] = f'<div class="keep">{out[-1]}{b}</div>'
+            i += 1
+            continue
+        if is_head(b):
+            group = [b]
+            i += 1
+            while i < len(blocks) and (is_head(blocks[i]) or blocks[i] == ""):
+                group.append(blocks[i]); i += 1
+            if i < len(blocks) and (blocks[i].startswith("<p") or blocks[i].startswith('<div class="flow"')):
+                group.append(blocks[i]); i += 1
+            out.append('<div class="keep">' + "".join(group) + "</div>")
+            continue
+        out.append(b)
+        i += 1
+    return out
 
 
 LADDER = """
