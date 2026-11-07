@@ -7,7 +7,7 @@ The page on GitHub Pages works without the Worker: results show, and the questio
 | Path | What it is |
 |---|---|
 | `index.html` | The tool. `WORKER_URL` near the Q&A section switches questions on. Testers can also add `?api=https://<worker-url>` to the page address. |
-| `knowledge/pack-v1.2.md` | The only material Claude answers from: the Nautilus checklist, the regulation text with page numbers, selected preamble passages, and the open-items list. |
+| `knowledge/pack-v1.3.md` | The only material Claude answers from: the Nautilus checklist, the regulation text with page numbers, selected preamble passages, and the open-items list. |
 | `logic.js`, `report.js`, `pdf.js` | Results logic (shared by page and Worker), the emailed HTML report, and the PDF download. |
 | `worker/` | Cloudflare Worker: `POST /start` (anonymous session), `POST /ask` (one answer; 5 free, 10 after email), `POST /report` (emails the report through the Sheet script and records the lead), `GET /health`. |
 | `worker/schema.sql` | D1 tables: `sessions`, `asks`, and `failed_leads` (only used if the Sheet can't be reached). No emails are stored in D1. |
@@ -110,6 +110,6 @@ The page reports its height, so the frame grows with the results and the convers
 
 ## Updating the knowledge pack
 
-1. Edit or replace `knowledge/pack-v1.2.md` (for a new version, add `pack-v1.3.md` and change the import in `worker/src/index.js`).
+1. Edit or replace `knowledge/pack-v1.3.md` (for a new version, add `pack-v1.3.md` and change the import in `worker/src/index.js`).
 2. Bump `PACK_VERSION`, run the eval, get counsel sign-off on changed positions.
 3. `npx wrangler deploy`.

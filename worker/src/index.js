@@ -10,7 +10,7 @@
 //           IP_HOURLY_LIMIT, LOG_QUESTIONS, ANTHROPIC_BASE_URL (tests only)
 // Bindings: DB (D1)
 
-import PACK from "../../knowledge/pack-v1.2.md";
+import PACK from "../../knowledge/pack-v1.3.md";
 import { RULES, profileText } from "./prompt.js";
 import { renderReport } from "../../report.js";
 

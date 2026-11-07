@@ -1,5 +1,5 @@
-# PBM Rule Readiness Check: Knowledge Pack v1.2
-Version: 1.2 | Date: 2026-11-05 | Status: DRAFT, awaiting counsel review
+# PBM Rule Readiness Check: Knowledge Pack v1.3
+Version: 1.3 | Date: 2026-11-06 | Status: DRAFT, awaiting counsel review
 Publisher: Nautilus Health Institute
 
 This pack is the only source the Readiness Check may answer from. It has five parts:
@@ -20,13 +20,13 @@ This is not only a PBM rule. It follows the service, not the label. Any vendor t
 ## DOL PBM Final Rule: Fiduciary Action Checklist
 What plan sponsors and their advisors should do now
 ### Disclosure shows you the money. Acting on it is the fiduciary duty.
-On October 29, 2026, the Department of Labor released its final PBM fee disclosure rule. For plan years beginning on or after July 1, 2027, PBMs serving large self-insured ERISA plans must disclose, in dollars and drug by drug, what they and their affiliates earn: rebates kept, spread on every NDC, pharmacy clawbacks, termination fees, and the net price the plan pays. 
+On October 29, 2026, the Department of Labor released its final PBM fee disclosure rule. For plan years beginning on or after July 1, 2027, PBMs serving large self-insured ERISA plans, and any other vendor that performs pharmacy benefit services for them, must disclose, in dollars and drug by drug, what they and their affiliates earn: rebates kept, spread on every NDC, pharmacy clawbacks, termination fees, and the net price the plan pays. 
 They must disclose it before you sign or renew, again every six months, and open their records to an auditor you choose.
 The rule shifts the burden of proof. A PBM that fails to disclose is in a prohibited transaction. A fiduciary who receives the disclosures and does nothing with them has a documentation problem of its own. Every dollar retained upstream is a dollar your employees and their families pay through premiums and cost sharing.
 | Date | What happens |
 | February 3, 2026 | Consolidated Appropriations Act (CAA) of 2026 disclosure duty under ERISA 408(b)(2)(B) took effect. DOL grants good-faith enforcement relief until the rule applies |
 | January 4, 2027 | Final rule becomes effective |
-| 90 days before your first renewal on or after July 1, 2027 | Initial disclosures due from your PBM (October 2027 for a January 1, 2028 renewal) |
+| 90 days before your first renewal on or after July 1, 2027 | Initial disclosures due from your PBM (October 2027 for a January 1, 2028 renewal). For a new contract the rule says only "reasonably in advance," so set a date in the contract |
 | Plan years beginning on or after July 1, 2027 | Rule applies. For calendar-year plans: January 1, 2028 |
 | Plan years beginning on or after August 3, 2028 | CAA 2026 100% rebate pass-through and new semiannual PBM reports apply |
 
@@ -36,7 +36,7 @@ The answer turns on three facts: whether ERISA governs the plan, whether it's se
 | Plan type | DOL final rule | CAA 2026 pass-through (2028) | CAA 2026 PBM reports (2028) |
 | ERISA, self-insured or level-funded, 100+ | Applies in full | Applies | Detailed semiannual report |
 | ERISA, self-insured, under 100 | General statutory disclosures only | Applies | Summary report |
-| ERISA, fully insured | Detailed rule doesn't apply. General statutory disclosures still required | Applies through the insurer | Summary report; large plans may opt in to detailed |
+| ERISA, fully insured (all benefits, including drugs) | Detailed rule doesn't apply. General statutory disclosures still required | Applies through the insurer | Summary report; large plans may opt in to detailed |
 | Non-federal governmental (county, city, school district) | Does not apply | Does not apply | Applies |
 | Church plan (non-electing) | Does not apply | Does not apply | Applies |
 
@@ -73,7 +73,7 @@ Terms to elect. The rule permits each of these; none happens unless you ask.
 | Overage explanation threshold below 5% | 5% over estimate | (g)(4) |
 | Machine-readable disclosure files within 30 days of request | "Reasonable time," undefined | (k)(3) |
 | Audit "year" defined as the plan year | Left to the parties | (j)(1) |
-| Initial disclosures more than 90 days before renewal | 90 days | (e) |
+| Initial disclosures more than 90 days before renewal, and by a fixed date before signing a new contract | 90 days | (e) |
 
 Terms to strike. For covered plans, each of these makes the arrangement unreasonable under ERISA 408(b)(2) once the rule applies. Contract X-Ray flags them in the Negotiation Report.
 | Contract term | Why it fails | Source |
@@ -107,14 +107,14 @@ Review each initial disclosure against the contract and your Contract X-Ray resu
 - "Other compensation" itemized, including revenue from copay maximizer, accumulator, and alternative funding programs, float, technology and data fees, shared savings, and rebates and fees on drugs paid under the medical benefit
 - Reasonableness determination recorded in committee minutes before signing
 Track the semiannual reports. Each is due within 30 days after the period closes. Any category running 5% or more over the estimate, or your lower threshold, requires a written explanation of the overage.
-Decide on an audit every year, and record the decision. The plan pays the auditor and the PBM pays to produce the data. DOL says an audit isn't required absent red flags, but the choice to skip one must be a prudent, documented choice. Budget for it, choose an independent auditor, and send the request in writing. The PBM must acknowledge within 10 business days and produce within 60 calendar days.
+Decide on an audit every year, and record the decision. The plan pays the auditor and the PBM pays to produce the data. DOL says an audit isn't required absent red flags, but the choice to skip one must be a prudent, documented choice. Budget for it, choose an independent auditor, and send the request in writing. The PBM must acknowledge within 10 business days and produce within 60 calendar days, absent extraordinary circumstances.
 Follow the relief protocol the moment you find a failure. A missing disclosure or a stonewalled audit is the PBM's prohibited transaction. It becomes yours too unless you act on these steps. Relief is available when you did not know of the failure and reasonably believed the disclosures were made.
 - Send the PBM a written request to correct the failure as soon as you discover it.
 - If the PBM cures within 90 calendar days, relief is preserved. Keep monitoring.
 - If it refuses or misses the 90 days, notify DOL within 30 days of the refusal or of day 90, whichever comes first.
 - Decide whether to terminate or continue the contract under your duty of prudence, and document the basis.
 The decision record should name the alternatives you weighed and how you'll prevent a repeat. DOL says it should not be a check-the-box exercise. Keep it with the plan's fiduciary records. (2550.408b-22(n))
-A PBM that corrects a good-faith disclosure error within 30 days of learning of it hasn't broken the rule (2550.408b-22(l)). The protocol protects you, not the PBM, which stays exposed to civil penalties under ERISA 502(i). And termination is a judgment call, not a requirement: document why you stayed or left.
+A PBM or other covered provider that corrects a good-faith disclosure error within 30 days of learning of it hasn't broken the rule (2550.408b-22(l)). The protocol protects you, not the PBM, which stays exposed to civil penalties under ERISA 502(i). And termination is a judgment call, not a requirement: document why you stayed or left.
 ### August 2028: Sign 2027 Contracts for the Law Arriving Next
 When the 2028 requirements reach your contract. Two things have to be true: your contract is signed, renewed, or extended, and it covers a plan year that starts on or after August 3, 2028. For a calendar-year plan, the first such plan year starts January 1, 2029. Your contract's end date doesn't matter on its own. What matters is whether the contract covers a plan year that starts on or after August 3, 2028.
 | Scenario (calendar-year plan unless noted) | Do the 2028 requirements apply during this contract? |
@@ -155,10 +155,10 @@ DOL left several questions for later. Each could change what you ask for, so rev
 | Fiduciary safe harbor for a structured PBM selection process | DOL "strongly agrees" and is considering separate rulemaking under ERISA 404(a) | Run and document a structured evaluation now. It's the process any safe harbor would reward |
 | Definition of "bona fide service fee" | DOL called it premature; future rulemaking or guidance | Contract for the strict definition in the 2028 section |
 | Standard disclosure template and machine-readable format | DOL is considering a template after publication | Elect machine-readable delivery and a 30-day deadline |
-| Detailed disclosure rules for TPAs and other providers | Separate future project. DOL expects good-faith statutory disclosure now, naming admin fees, 340B income, network and affiliate compensation, and data monetization | Request those items from your TPA today |
+| Detailed disclosure rules for TPAs' other services | Separate future project for services other than pharmacy benefit services. A TPA that provides pharmacy services is already covered (see Step 0). DOL expects good-faith statutory disclosure now, naming admin fees, 340B income, network and affiliate compensation, and data monetization | Request those items from your TPA today |
 | Whether plan claims data is a plan asset | Not answered | Secure data ownership and access by contract |
 | Claims data outside an audit | DOL declined to require it | Negotiate standing access to claims-level data |
-| Legal challenge to the rule | The PBM trade group says DOL may have exceeded its authority; a lawsuit could delay or stay the rule. No suit had been filed as of November 5, 2026 | Act anyway. The statutory disclosure duty has applied since February 3, 2026, and these contract terms protect the plan either way |
+| Legal challenge to the rule | The PBM trade group says DOL may have exceeded its authority; a lawsuit could delay or stay the rule. No suit had been filed as of November 6, 2026 | Act anyway. The statutory disclosure duty has applied since February 3, 2026, and these contract terms protect the plan either way |
 | How state PBM laws interact with the rule | DOL declined to say whether the rule preempts state law, calling it "an interpretive matter" | If your plan covers employees in several states, ask counsel how state PBM laws apply alongside the rule and your contract |
 
 Items pending counsel confirmation in this checklist:
@@ -725,7 +725,7 @@ The Department declines to expand the exemption in this way. As described in the
 - Every CAA 2026 item (Sections 6701 and 6702) that takes effect for plan years beginning on or after August 3, 2028, including: whether a multi-year contract signed before then must comply in a later plan year; whether an amendment or auto-renewal counts as a renewal; and how "bona fide service fee" will be defined.
 - Whether plan claims data is a plan asset (DOL did not answer; preamble p. 181).
 - How state PBM laws interact with the rule. DOL called preemption "an interpretive matter" and did not address it (preamble p. 181).
-- The outcome of any legal challenge to the rule. No suit had been filed as of November 5, 2026.
+- The outcome of any legal challenge to the rule. No suit had been filed as of November 6, 2026.
 
 Resolved since v1.1 (no longer pending): whether a plan must be able to exit a PBM contract on reasonably short notice without penalty. DOL says yes. No contract is reasonable without that right, and the PBM may recoup only reasonable amounts for actual losses (preamble p. 116, citing 29 CFR 2550.408b-2(c)(3)).
 
