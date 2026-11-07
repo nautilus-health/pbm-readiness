@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PBM Rule Readiness Check | Nautilus Health Institute</title>
+<title>PBM Rule Navigator | Nautilus Health Institute</title>
 <meta name="description" content="Answer 7 quick questions to see what the DOL final PBM rule and CAA 2026 mean for your plan: your deadlines, an action plan, answers to your questions, and a report to keep.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -108,12 +108,14 @@
     main{padding:8px 16px 24px}.steps{padding:0 16px}.card{padding:18px 16px}
   }
   body.has-sticky{padding-bottom:70px}
+  .ladder{margin-top:22px;padding-top:16px;border-top:1px solid #e3e8ef;font-size:15px;color:var(--ink)} .ladder a{color:var(--teal);font-weight:500}
+  body.embedded .brand .mark, body.embedded .foot-top, body.embedded footer .about{display:none}
 </style>
 </head>
 <body>
 <header><div class="wrap brand">
   <a href="https://www.nautilushealth.org/" class="mark" aria-label="Nautilus Health Institute home"><img src="assets/nautilus-wordmark-white.png" alt="Nautilus"></a>
-  <div><div class="t">PBM Rule Readiness Check</div><div class="s">What the DOL final PBM rule and CAA 2026 mean for your plan</div></div>
+  <div><div class="t">PBM Rule Navigator</div><div class="s">Your plan's deadlines, action plan, and answers sourced to the rule</div></div>
 </div></header>
 <div class="proto" id="proto">Preview for review. Logic and answers pending counsel review.</div>
 
@@ -124,15 +126,16 @@
 <main>
   <!-- Intro -->
   <section id="intro">
-    <h1>What does the DOL PBM rule mean for your plan?</h1>
-    <p class="lede">Answer 7 quick questions. In about 2 minutes you'll have your deadlines, a personal action plan, and answers to your follow-up questions, all in a report you can keep.</p>
+    <h1>Where does the new PBM rule leave your plan?</h1>
+    <p class="lede">Answer 7 quick questions. In about 2 minutes you'll have your deadlines and a personal action plan. Then ask anything about the rule. Every answer cites the regulation, by paragraph and page.</p>
     <div class="gets">
       <div><span class="n">1</span><b>Your deadlines</b><span>When the rule reaches your plan and when your PBM owes you disclosures</span></div>
       <div><span class="n">2</span><b>Your action plan</b><span>What to do now, before renewal, and when disclosures arrive</span></div>
-      <div><span class="n">3</span><b>Your questions answered</b><span>Plain answers, with sources from the rule and the Nautilus checklist</span></div>
+      <div><span class="n">3</span><b>Answers that cite the rule</b><span>AI that answers only from the final rule and the Nautilus checklist, with the source for every answer</span></div>
       <div><span class="n">4</span><b>Your report</b><span>Everything in one PDF, emailed to you to share with your team</span></div>
     </div>
-    <div class="row"><button class="btn" id="startBtn">Start the check</button><span class="muted">Free. No email needed to start. No contract or plan data.</span></div>
+    <div class="row"><button class="btn" id="startBtn">Start navigating</button><span class="muted">Free. No email needed to start. No contract or plan data.</span></div>
+    <p class="ladder">New to the rule? Read the <a href="https://www.nautilushealth.org/PBM" id="checklistLink">Fiduciary Action Checklist</a>: every deadline, contract term, and decision the new PBM rule puts on your desk.</p>
   </section>
 
   <!-- One question per screen -->
@@ -193,8 +196,16 @@ setStep(1);
 /* ---------- intake: one question per screen ---------- */
 $("startBtn").addEventListener("click", () => { qi = 0; show("quiz"); renderQ(); });
 
+const EMBEDDED = window.parent !== window;
+if (EMBEDDED) {
+  document.body.classList.add("embedded");
+  const base = document.createElement("base"); base.target = "_blank"; document.head.appendChild(base);
+}
+function toTop() { if (EMBEDDED) { try { window.parent.postMessage({ type: "pbm-readiness-top" }, "*"); } catch (e) {} } }
+
 function show(id) {
   ["intro", "quiz", "results"].forEach((x) => $(x).classList.toggle("hidden", x !== id));
+  toTop();
   $("sticky").classList.toggle("hidden", id !== "results" || window.parent !== window);
   document.body.classList.toggle("has-sticky", id === "results" && window.parent === window);
   setStep(id === "results" ? 2 : 1);
@@ -342,10 +353,10 @@ function renderAsk() {
   const Y = compute(S).voice;
   const h = [`<h2>Ask about ${Y.your} results</h2>`];
   if (!WORKER_URL) {
-    h.push(`<p class="muted">Coming soon: plain answers to your follow-up questions, with sources from the rule and the Nautilus checklist.</p>`);
+    h.push(`<p class="muted">Coming soon: answers to your follow-up questions, each citing the rule.</p>`);
     box.innerHTML = h.join(""); return;
   }
-  h.push(`<p class="muted" style="margin-top:-4px">Plain answers from the final rule and the Nautilus Fiduciary Action Checklist, with sources. No email needed. Please don't include names, member data or contract text.</p>`);
+  h.push(`<p class="muted" style="margin-top:-4px">Answers come only from the final rule and the Nautilus Fiduciary Action Checklist, and every one cites its source. No email needed. Please don't include names, member data or contract text.</p>`);
   h.push(`<div class="msgs" id="msgs">`);
   for (const t of QA.transcript) h.push(`<div class="msg user">${esc(t.q)}</div><div class="msg">${md(t.a)}</div>`);
   h.push(`</div>`);

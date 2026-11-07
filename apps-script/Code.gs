@@ -67,8 +67,8 @@ function doPost(e) {
       var opts = { htmlBody: data.report.html, name: "Nautilus Health Institute" };
       if (from) opts.replyTo = from;
       if (from && GmailApp.getAliases().indexOf(from) >= 0) opts.from = from;
-      GmailApp.sendEmail(data.email, data.report.subject || "Your PBM Rule Readiness Report",
-        "Your PBM Rule Readiness Report is in this email. If it doesn't display, run the check again at https://www.nautilushealth.org/PBM.", opts);
+      GmailApp.sendEmail(data.email, data.report.subject || "Your PBM Rule Navigator Report",
+        "Your PBM Rule Navigator Report is in this email. If it doesn't display, run the Navigator again at https://www.nautilushealth.org/PBM.", opts);
       emailed = true;
     } catch (err) {
       error = String(err);

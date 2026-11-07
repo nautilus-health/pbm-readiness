@@ -1,4 +1,4 @@
-// PBM Rule Readiness Check: results logic.
+// PBM Rule Navigator: results logic.
 // Pure functions, no DOM. Used by the page (to show results) and by the Worker
 // (to build the emailed report), so both always say the same thing.
 // Every rule here traces to the Nautilus Fiduciary Action Checklist.
@@ -156,7 +156,7 @@ function actions(p, c, d, today) {
   const add = (when, title, body) => a.push({ when, title, body });
   if (c === "NON") {
     add(now, `Pull ${Y.your} PBM contract and every amendment.`, "Federal rules won't do this work for a government or church plan. The contract is the only protection.");
-    add(by(d.reviewBy, "Before the next renewal"), "Run a Contract X-Ray.", "Get a Negotiation Report that compares the contract to the DOL rule and CAA 2026 standards.");
+    add(by(d.reviewBy, "Before the next renewal"), "Run a Contract X-Ray.", "Start with a free Quick Look, then get a Negotiation Report that compares the contract to the DOL rule and CAA 2026 standards.");
     add(by(d.autoDeadline, "Check the contract"), "Calendar the auto-renewal notice deadline.", "That date is the leverage point for new terms.");
     add("At renewal", "Contract for the same disclosures.", "Ask for initial and semiannual compensation disclosures, in machine-readable form.");
     add("At renewal", "Contract for an annual audit right", "with an auditor the plan chooses and claims-level data.");
@@ -164,7 +164,7 @@ function actions(p, c, d, today) {
     return a;
   }
   add(now, `Pull ${Y.your} PBM contract and every amendment.`, "Include any contract held by a TPA or carrier on the plan's behalf.");
-  add(by(d.reviewBy, "Before the next renewal"), "Run a Contract X-Ray.", "Get a Negotiation Report that scores the contract against the DOL final rule and CAA 2026.");
+  add(by(d.reviewBy, "Before the next renewal"), "Run a Contract X-Ray.", "Start with a free Quick Look, then get a Negotiation Report that scores the contract against the DOL final rule and CAA 2026.");
   if (c === "FULL") {
     add(by(d.autoDeadline, "Check the contract"), "Calendar the auto-renewal notice deadline.", "Missing it rolls the current terms forward.");
     add(now, `Request the statutory disclosures ${Y.you} ${Y.are} owed today.`, "The general 408(b)(2) requirement already applies. The DOL's temporary enforcement policy covers the gap until the detailed rule starts.");

@@ -1,4 +1,4 @@
-// PBM Rule Readiness Check: Cloudflare Worker
+// PBM Rule Navigator: Cloudflare Worker
 // POST /start  -> anonymous session from the intake profile (no email needed to ask questions)
 // POST /ask    -> answer one question from the knowledge pack via the Claude API
 // POST /report -> email the full report (results + every Q&A) and record the lead in the Google Sheet
@@ -131,7 +131,7 @@ async function report(body, env, headers, ipHash, now, req, isEval) {
     source: String(req.headers.get("Origin") || "").slice(0, 100),
     embed: String(body.embed || "").slice(0, 200),
     pack: env.PACK_VERSION ? "v" + env.PACK_VERSION : "",
-    report: { subject: "Your PBM Rule Readiness Report", html },
+    report: { subject: "Your PBM Rule Navigator Report", html },
     record: s.emails_sent === 0,   // add a Sheet row only on the first send
   };
 
