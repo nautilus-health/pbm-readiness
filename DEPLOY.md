@@ -110,6 +110,6 @@ The page reports its height, so the frame grows with the results and the convers
 
 ## Updating the knowledge pack
 
-1. Edit or replace `knowledge/pack-v1.3.md` (for a new version, add `pack-v1.3.md` and change the import in `worker/src/index.js`).
+1. Edit or replace `knowledge/pack-v1.3.md` (for a new version, add `pack-v1.4.md` and change the import in `worker/src/index.js`).
 2. Bump `PACK_VERSION`, run the eval, get counsel sign-off on changed positions.
 3. `npx wrangler deploy`.
