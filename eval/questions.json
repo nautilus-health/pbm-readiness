@@ -747,7 +747,7 @@
    "question": "Our PBM made an honest mistake in its disclosure. Is that automatically a violation?",
    "expect": "No. (l): good-faith error corrected within 30 days of learning of it is not a failure.",
    "must": [
-    "(?i)30 days"
+    "(?i)30 (calendar )?days"
    ],
    "must_not": []
   },
