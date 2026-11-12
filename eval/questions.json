@@ -175,12 +175,14 @@
    "id": "A06",
    "profile": "church",
    "question": "Does the 2028 rebate pass-through apply to our church plan?",
-   "expect": "No by statute; contract for it; pending counsel.",
+   "expect": "No by statute (settled; the pass-through amends ERISA only); contract for it.",
    "must": [
     "(?i)(does not|doesn't|not) (apply|reach)|not by statute",
     "(?i)contract"
    ],
-   "must_not": []
+   "must_not": [
+    "(?i)pending counsel confirmation"
+   ]
   },
   {
    "id": "A07",
@@ -495,6 +497,29 @@
    "must": [
     "10,000",
     "100,000"
+   ],
+   "must_not": []
+  },
+  {
+   "id": "S07",
+   "profile": "full",
+   "question": "Is the CAA 2026 rebate pass-through requirement still pending counsel confirmation?",
+   "expect": "No. Enacted law (ERISA 408(b)(2)(C), CAA 2026 Section 6702) for plan years beginning on or after August 3, 2028. Only specific interpretations (contract triggers, bona fide service fee) are pending.",
+   "must": [
+    "(?i)August 3, 2028",
+    "(?i)enacted|statute|law"
+   ],
+   "must_not": [
+    "(?i)all (of )?(the|those) 2028 (items|requirements) are pending"
+   ]
+  },
+  {
+   "id": "S08",
+   "profile": "full",
+   "question": "When does the CAA 2026 pass-through first apply to a calendar-year plan?",
+   "expect": "January 1, 2029 (first plan year beginning on or after August 3, 2028). Settled; not pending.",
+   "must": [
+    "(?i)January 1, 2029"
    ],
    "must_not": []
   },
