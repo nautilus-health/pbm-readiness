@@ -9,10 +9,10 @@ The page on GitHub Pages works without the Worker: results show, and the questio
 | `index.html` | The tool. `WORKER_URL` near the Q&A section switches questions on. Testers can also add `?api=https://<worker-url>` to the page address. |
 | `knowledge/pack-v1.3.md` | The only material Claude answers from: the Nautilus checklist, the regulation text with page numbers, selected preamble passages, and the open-items list. |
 | `logic.js`, `report.js`, `pdf.js` | Results logic (shared by page and Worker), the emailed HTML report, and the PDF download. |
-| `worker/` | Cloudflare Worker: `POST /start` (anonymous session), `POST /ask` (one answer; 5 free, 10 after email), `POST /report` (emails the report through the Sheet script and records the lead), `GET /health`. |
-| `worker/schema.sql` | D1 tables: `sessions`, `asks`, and `failed_leads` (only used if the Sheet can't be reached). No emails are stored in D1. |
+| `worker/` | Cloudflare Worker: `POST /start` (anonymous session), `POST /ask` (one answer; 5 free, 10 after email), `POST /report` (emails the report through the Sheet script and records the lead), `POST /profile` (updates the plan profile when someone asks first and fills in the intake later), `POST /feedback` (helpful / not helpful on an answer), `GET /health`, and `GET /admin/questions` (review feed, needs `X-Eval-Token`). |
+| `worker/schema.sql` | D1 tables: `sessions`, `asks`, `feedback` (answer ratings; the Worker also creates it on first use), and `failed_leads` (only used if the Sheet can't be reached). No emails are stored in D1. |
 | `apps-script/Code.gs` | The script attached to the "PBM Readiness Check: Leads" Google Sheet. It receives each sign-up from the Worker and adds a row. |
-| `eval/questions.json`, `eval/run.mjs` | 47 test questions with automatic checks, and the runner that writes a review report for counsel. |
+| `eval/questions.json`, `eval/run.mjs` | 64 test questions with automatic checks, and the runner that writes a review report for counsel. |
 
 ## Automatic deploys (GitHub Actions)
 
@@ -68,7 +68,7 @@ Set `var WORKER_URL = "<worker address>";` in `index.html`, commit and push. Git
 | `MAX_QUESTIONS` | `10` | Total questions per session after the email. |
 | `EFFORT` | `medium` | How much the model thinks before answering. |
 | `IP_HOURLY_LIMIT` | `30` | Questions per network per hour. |
-| `LOG_QUESTIONS` | `true` | Stores question text for the eval period. Set to `false` at launch, per the privacy section of the spec. |
+| `LOG_QUESTIONS` | `false` | Stores question text in the `asks` log. Question-and-answer transcripts are kept in `sessions` regardless (they build the report and the review feed), which the page's privacy line discloses. |
 
 ## Leads (Google Sheet)
 
@@ -113,3 +113,13 @@ The page reports its height, so the frame grows with the results and the convers
 1. Edit or replace `knowledge/pack-v1.3.md` (for a new version, add `pack-v1.4.md` and change the import in `worker/src/index.js`).
 2. Bump `PACK_VERSION`, run the eval, get counsel sign-off on changed positions.
 3. `npx wrangler deploy`.
+
+## Reviewing questions and answers
+
+Everything visitors ask, with the answer, their plan profile and any helpful / not helpful rating:
+
+```bash
+curl -s -H "X-Eval-Token: <EVAL_TOKEN>" "<worker address>/admin/questions?days=30" > review.json
+```
+
+The response lists the 25 most common questions (`top`), every answer rated not helpful (`notHelpfulItems`), and all items. No emails or IP addresses are included. Review the not-helpful answers each week and fix the knowledge pack where an answer was wrong or thin.

@@ -109,32 +109,43 @@
   }
   body.has-sticky{padding-bottom:70px}
   .ladder{margin-top:22px;padding-top:16px;border-top:1px solid #e3e8ef;font-size:15px;color:var(--ink)} .ladder a{color:var(--teal);font-weight:500}
+  .kicker{font-size:13px;color:var(--teal);font-weight:500;letter-spacing:.3px;margin:22px 0 0}
+  .askhero{border:2px solid var(--teal);border-radius:14px;padding:22px 22px 18px;margin:8px 0 22px;background:#fff;box-shadow:0 6px 22px rgba(27,54,93,.08)}
+  .askhero h2{margin:0 0 6px}
+  .context{display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:var(--light);border-radius:8px;padding:8px 12px;font-size:14px;color:var(--ink);margin:4px 0 12px}
+  .context b{color:var(--navy)}
+  .context .tag{background:#fff;border:1px solid var(--line);border-radius:14px;padding:2px 10px;font-size:13px}
+  .alt{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:0 0 18px;background:var(--light)}
+  .alt b{color:var(--navy);font-size:17px;display:block;margin-bottom:2px}
+  .alt span{color:var(--mid);font-size:14px}
+  .rate{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px;padding-top:8px;border-top:1px solid var(--line);font-size:13px;color:var(--mid)}
+  .rate button{font:inherit;font-size:13px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:3px 11px;cursor:pointer;color:var(--navy)}
+  .rate button[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:#fff}
+  .rate .sp{flex:1}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .asof{font-size:13px;color:var(--mid);margin:6px 0 0}
   body.embedded .brand .mark, body.embedded .foot-top, body.embedded footer .about{display:none}
 </style>
 </head>
 <body>
 <header><div class="wrap brand">
   <a href="https://www.nautilushealth.org/" class="mark" aria-label="Nautilus Health Institute home"><img src="assets/nautilus-wordmark-white.png" alt="Nautilus"></a>
-  <div><div class="t">PBM Rule Navigator</div><div class="s">Your plan's deadlines, action plan, and answers sourced to the rule</div></div>
+  <div><div class="t">PBM Rule Navigator</div><div class="s">Ask anything about the DOL final PBM rule. Every answer cites the rule.</div></div>
 </div></header>
 
-<div class="steps" id="steps" aria-hidden="true">
-  <div data-s="1">1. Your plan</div><div data-s="2">2. Your results</div><div data-s="3">3. Ask &amp; get your report</div>
-</div>
 
 <main>
-  <!-- Intro -->
+  <!-- Intro: ask first -->
   <section id="intro">
-    <h1>Where does the new PBM rule leave your plan?</h1>
-    <p class="lede">Answer 7 quick questions. In about 2 minutes you'll have your deadlines and a personal action plan. Then ask anything about the rule. Every answer cites the regulation, by paragraph and page.</p>
-    <div class="gets">
-      <div><span class="n">1</span><b>Your deadlines</b><span>When the rule reaches your plan and when your PBM owes you disclosures</span></div>
-      <div><span class="n">2</span><b>Your action plan</b><span>What to do now, before renewal, and when disclosures arrive</span></div>
-      <div><span class="n">3</span><b>Answers that cite the rule</b><span>AI that answers only from the final rule and the Nautilus checklist, with the source for every answer</span></div>
-      <div><span class="n">4</span><b>Your report</b><span>Everything in one PDF, emailed to you to share with your team</span></div>
+    <p class="kicker">FREE &middot; NO SIGNUP &middot; FROM NAUTILUS HEALTH INSTITUTE, A 501(c)(3)</p>
+    <h1>Ask anything about the new PBM rule.</h1>
+    <p class="lede">The DOL final rule runs 351 pages. Ask your question in plain English and get a short answer drawn only from the rule, its preamble and the Nautilus Fiduciary Action Checklist, with the source cited by paragraph and page.</p>
+    <div id="askSlotIntro"></div>
+    <div class="alt">
+      <div><b>Get your plan's deadlines and action plan</b><span>Seven quick questions, about two minutes. Your answers also tailor every answer above.</span></div>
+      <button class="btn" id="startBtn">Start: 7 questions</button>
     </div>
-    <div class="row"><button class="btn" id="startBtn">Start navigating</button><span class="muted">Free. No email needed to start. No contract or plan data.</span></div>
-    <p class="ladder">New to the rule? Read the <a href="https://www.nautilushealth.org/PBM" id="checklistLink">Fiduciary Action Checklist</a>: every deadline, contract term, and decision the new PBM rule puts on your desk.</p>
+    <p class="ladder">Prefer it on paper? Read the <a href="https://www.nautilushealth.org/PBM" id="checklistLink">Fiduciary Action Checklist</a>: every deadline, contract term, and decision the new PBM rule puts on your desk.</p>
   </section>
 
   <!-- One question per screen -->
@@ -144,6 +155,7 @@
 
   <!-- Results -->
   <section id="results" class="hidden"></section>
+  <div class="panel askhero" id="ask"></div>
 </main>
 
 <div class="sticky hidden" id="sticky">
@@ -161,13 +173,13 @@
     </div>
   </div>
   <p class="about">Nautilus Health Institute is a 501(c)(3) non-profit organization with a mission to transform health plan market norms in procurement, contracting, and data use by 2030. This tool is part of the Nautilus PBM Fiduciary Standards Initiative.</p>
-  <p class="legal">General information about the DOL final PBM rule (29 CFR 2550.408b-22) and the Consolidated Appropriations Act (CAA) of 2026. Not legal advice, and no attorney-client relationship is created. Items marked "pending counsel confirmation" are open questions. We store your answers and, if you ask for your report, your email and questions. We don't ask for names, plan numbers or contracts.</p>
+  <p class="legal">General information about the DOL final PBM rule (29 CFR 2550.408b-22) and the Consolidated Appropriations Act (CAA) of 2026. Not legal advice, and no attorney-client relationship is created. Items marked "pending counsel confirmation" are open questions. We keep your plan answers and the questions you ask, with the answers, without names, to run the tool and improve it. If you ask for your report, we also keep your email. We don't ask for names, plan numbers or contracts. Reflects the final rule published November 2, 2026 (91 FR 69092).</p>
   <p class="legal">Copyright &copy; 2026 Nautilus Health Institute</p>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
 <script type="module">
-import { QUESTIONS, MONTHS, compute, suggestions } from "./logic.js";
+import { QUESTIONS, MONTHS, compute, suggestions, STARTERS } from "./logic.js";
 import { md, esc } from "./report.js";
 import { buildPDF } from "./pdf.js";
 
@@ -181,7 +193,8 @@ if (api && /^https:\/\/[\w.-]+$|^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test
 /* ---------- state ---------- */
 let S = {};                 // intake answers
 let qi = 0;                 // current question index
-const QA = { session: null, transcript: [], remaining: null, unlocked: false, busy: false, email: "" };
+const QA = { session: null, transcript: [], remaining: null, unlocked: false, busy: false, email: "", ratings: {}, sentProfile: null };
+const hasProfile = () => QUESTIONS.every((q) => q.kind ? true : !!S[q.id]);
 const $ = (id) => document.getElementById(id);
 
 function setStep(n) {
@@ -204,6 +217,11 @@ function toTop() { if (EMBEDDED) { try { window.parent.postMessage({ type: "pbm-
 
 function show(id) {
   ["intro", "quiz", "results"].forEach((x) => $(x).classList.toggle("hidden", x !== id));
+  const ask = $("ask");
+  if (id === "intro") $("askSlotIntro").appendChild(ask);
+  else if (id === "results" && $("askSlotResults")) $("askSlotResults").appendChild(ask);
+  ask.classList.toggle("hidden", id === "quiz");
+  renderAsk();
   toTop();
   $("sticky").classList.toggle("hidden", id !== "results" || window.parent !== window);
   document.body.classList.toggle("has-sticky", id === "results" && window.parent === window);
@@ -278,15 +296,14 @@ function advance() {
 
 /* ---------- results ---------- */
 function buildResults() {
-  const key = JSON.stringify(S);
-  if (QA.key !== key) { QA.session = null; QA.transcript = []; QA.unlocked = false; QA.remaining = null; QA.key = key; }
   const r = compute(S);
   const Y = r.voice;
   const h = [];
 
   h.push(`<div class="summary"><div class="k">${Y.you === "you" ? "Your result" : "Your client's result"}</div><div class="h">${esc(r.headline)}</div>`);
   if (r.nextDeadline) h.push(`<div class="d"><b>Next:</b> ${esc(r.nextDeadline)}</div>`);
-  h.push(`<div class="row"><button class="btn teal" data-go="ask">Ask a question</button><button class="btn gold" data-go="report">Get my full report</button></div></div>`);
+  h.push(`<div class="row"><button class="btn teal" data-go="ask">Ask about ${Y.your} plan</button><button class="btn gold" data-go="report">Get my full report</button></div></div>`);
+  h.push(`<div id="askSlotResults"></div>`);
 
   if (r.unsure) h.push(`<div class="flag"><b>${esc(Y.Your)} answers fit more than one profile.</b> We show the two most likely below. Confirm the plan type, funding and size with ${S.role === "advisor" ? "the plan sponsor or counsel" : "your broker or counsel"}.</div>`);
 
@@ -310,18 +327,17 @@ function buildResults() {
   for (const a of r.actions) h.push(`<li><div class="when">${esc(a.when)}</div><b>${esc(a.title)}</b> ${esc(a.body)}</li>`);
   h.push(`</ol>`);
 
-  h.push(`<div class="panel" id="ask"></div>`);
   h.push(`<div class="panel report" id="report"></div>`);
   h.push(`<p style="margin-top:22px" class="row"><button class="ghost" id="edit">Change my answers</button><button class="ghost" id="restart">Start over</button></p>`);
 
   $("results").innerHTML = h.join("");
+  QA.primary = r.primary;
   show("results");
   QA.primary = r.primary;
-  renderAsk();
   renderReportPanel();
   $("results").querySelectorAll("[data-go]").forEach((b) => b.addEventListener("click", () => goTo(b.dataset.go)));
   $("edit").addEventListener("click", () => { qi = 0; show("quiz"); renderQ(); });
-  $("restart").addEventListener("click", () => { S = {}; qi = 0; show("intro"); });
+  $("restart").addEventListener("click", () => { S = {}; qi = 0; QA.session = null; QA.transcript = []; QA.remaining = null; QA.unlocked = false; QA.ratings = {}; QA.sent = false; show("intro"); });
 }
 
 function goTo(which) {
@@ -340,24 +356,44 @@ function apiPost(path, payload) {
     .then((r) => r.json().then((j) => ({ ...j, _status: r.status }), () => ({ _status: r.status, error: "Unexpected response." })));
 }
 async function ensureSession() {
-  if (QA.session) return true;
+  const key = JSON.stringify(S);
+  if (QA.session) {
+    if (QA.sentProfile !== key) {
+      const j = await apiPost("/profile", { session: QA.session, profile: S });
+      if (j.code === "no_session") { QA.session = null; return ensureSession(); }
+      QA.sentProfile = key;
+    }
+    return true;
+  }
   const j = await apiPost("/start", { profile: S });
   if (!j.session) throw new Error(j.error || "Couldn't start a session.");
-  QA.session = j.session; QA.remaining = j.remaining; QA.unlocked = !!j.unlocked;
+  QA.session = j.session; QA.remaining = j.remaining; QA.unlocked = !!j.unlocked; QA.sentProfile = key;
   return true;
+}
+
+/* plain-language profile line shown above the answers */
+function contextLine() {
+  const label = (id) => { const q = QUESTIONS.find((x) => x.id === id); const o = q && q.opts && q.opts.find((x) => x[0] === S[id]); return o && S[id] !== "unsure" ? o[1] : ""; };
+  const bits = [label("type"), label("fund"), label("size") && label("size") + " employees", S.holder && S.holder !== "unsure" ? "contract held by " + ({ pbm: "the plan", tpa: "a TPA", carrier: "the carrier" })[S.holder] : ""].filter(Boolean);
+  if (!bits.length) return `<div class="context"><span>Answering generally.</span><button type="button" class="link" id="addPlan">Add your plan details</button><span class="muted">for answers tailored to your plan.</span></div>`;
+  return `<div class="context"><b>Answering for:</b>${bits.map((b) => `<span class="tag">${esc(b)}</span>`).join("")}<button type="button" class="link" id="editPlan">Change</button></div>`;
 }
 
 function renderAsk() {
   const box = $("ask"); if (!box) return;
   const Y = compute(S).voice;
-  const h = [`<h2>Ask about ${Y.your} results</h2>`];
+  const onResults = !$("results").classList.contains("hidden");
+  const h = [`<h2>${onResults ? `Ask about ${Y.your} plan` : "Ask your question"}</h2>`];
   if (!WORKER_URL) {
     h.push(`<p class="muted">Coming soon: answers to your follow-up questions, each citing the rule.</p>`);
     box.innerHTML = h.join(""); return;
   }
-  h.push(`<p class="muted" style="margin-top:-4px">Answers come only from the final rule and the Nautilus Fiduciary Action Checklist, and every one cites its source. No email needed. Please don't include names, member data or contract text.</p>`);
-  h.push(`<div class="msgs" id="msgs">`);
-  for (const t of QA.transcript) h.push(`<div class="msg user">${esc(t.q)}</div><div class="msg">${md(t.a)}</div>`);
+  h.push(contextLine());
+  h.push(`<div class="msgs" id="msgs" aria-live="polite">`);
+  QA.transcript.forEach((t, i) => {
+    const r = QA.ratings[i];
+    h.push(`<div class="msg user">${esc(t.q)}</div><div class="msg">${md(t.a)}<div class="rate"><span>Was this helpful?</span><button type="button" data-rate="1" data-i="${i}" aria-pressed="${r === 1}">Yes</button><button type="button" data-rate="-1" data-i="${i}" aria-pressed="${r === -1}">No</button><span class="sp"></span><button type="button" data-copy="${i}">Copy answer</button></div></div>`);
+  });
   h.push(`</div>`);
   const left = QA.remaining == null ? null : QA.remaining;
   if (left === 0 && !QA.unlocked) {
@@ -367,17 +403,30 @@ function renderAsk() {
   } else {
     if (!QA.transcript.length) {
       h.push(`<div class="muted" style="margin-bottom:4px">Try one of these:</div><div class="chips">`);
-      for (const t of suggestions(QA.primary)) h.push(`<button type="button" data-s="${esc(t)}">${esc(t)}</button>`);
+      for (const t of (hasProfile() ? suggestions(QA.primary) : STARTERS)) h.push(`<button type="button" data-s="${esc(t)}">${esc(t)}</button>`);
       h.push(`</div>`);
     }
-    h.push(`<form id="askForm"><textarea id="q" maxlength="500" placeholder="Or type your own question about the rule, your dates or your next steps" aria-label="Your question"></textarea>
+    h.push(`<form id="askForm"><textarea id="q" maxlength="500" placeholder="Type your question about the rule, your deadlines or your contract" aria-label="Your question"></textarea>
       <div class="row" style="margin-top:8px"><button class="btn teal" type="submit" id="askBtn" style="font-size:15px;padding:10px 20px">Ask</button>
       <span class="counter" id="left">${left == null ? (QA.unlocked ? "" : "5 free questions") : `${left} question${left === 1 ? "" : "s"} left${QA.unlocked ? "" : " before email"}`}</span></div>
-      <p class="err" id="askErr" role="alert"></p></form>`);
+      <p class="err" id="askErr" role="alert"></p>
+      <p class="muted" style="margin:6px 0 0">Answers come only from the final rule, its preamble and the Nautilus checklist. Please don't include names, member data or contract text. General information, not legal advice.</p></form>`);
   }
   box.innerHTML = h.join("");
+  const ap = $("addPlan") || $("editPlan"); if (ap) ap.addEventListener("click", () => { qi = 0; show("quiz"); renderQ(); });
+  box.querySelectorAll("[data-rate]").forEach((b) => b.addEventListener("click", () => rate(+b.dataset.i, +b.dataset.rate)));
+  box.querySelectorAll("[data-copy]").forEach((b) => b.addEventListener("click", () => {
+    const t = QA.transcript[+b.dataset.copy]; if (!t) return;
+    const txt = `Q: ${t.q}\n\n${t.a}\n\nPBM Rule Navigator, Nautilus Health Institute: https://www.nautilushealth.org/PBM`;
+    (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(() => { b.textContent = "Copied"; setTimeout(() => (b.textContent = "Copy answer"), 1500); }, () => {});
+  }));
   box.querySelectorAll(".chips button").forEach((b) => b.addEventListener("click", () => { $("q").value = b.dataset.s; send(); }));
   const f = $("askForm"); if (f) f.addEventListener("submit", (e) => { e.preventDefault(); send(); });
+}
+
+function rate(i, v) {
+  QA.ratings[i] = v; renderAsk();
+  if (QA.session) apiPost("/feedback", { session: QA.session, turn: i, rating: v }).catch(() => {});
 }
 
 async function send() {
@@ -464,6 +513,8 @@ async function downloadPDF() {
   if (!window.jspdf) throw new Error("pdf library not loaded");
   await buildPDF({ profile: S, transcript: QA.transcript });
 }
+
+show("intro");
 
 /* ---------- tell an embedding page how tall we are ---------- */
 if (window.parent !== window) {
