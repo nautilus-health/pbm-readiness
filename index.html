@@ -123,6 +123,7 @@
   .rate button[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:#fff}
   .rate .sp{flex:1}
   :focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .h1b{color:var(--teal)}
   .asof{font-size:13px;color:var(--mid);margin:6px 0 0}
   body.embedded .brand .mark, body.embedded .foot-top, body.embedded footer .about{display:none}
 </style>
@@ -138,8 +139,8 @@
   <!-- Intro: ask first -->
   <section id="intro">
     <p class="kicker">FREE &middot; NO SIGNUP &middot; FROM NAUTILUS HEALTH INSTITUTE, A 501(c)(3)</p>
-    <h1>Ask anything about the new PBM rule.</h1>
-    <p class="lede">The DOL final rule runs 351 pages. Ask your question in plain English and get a short answer drawn only from the rule, its preamble and the Nautilus Fiduciary Action Checklist, with the source cited by paragraph and page.</p>
+    <h1>Ask anything about the new PBM rule.<br><span class="h1b">Get answers and an action plan.</span></h1>
+    <p class="lede">The DOL PBM rule runs 350+ pages. Enter a few details about your plan and get answers in minutes.</p>
     <div id="askSlotIntro"></div>
     <div class="alt">
       <div><b>Get your plan's deadlines and action plan</b><span>Seven quick questions, about two minutes. Your answers also tailor every answer above.</span></div>
@@ -401,16 +402,16 @@ function renderAsk() {
   } else if (left === 0) {
     h.push(`<p class="muted">You've used all your questions for this session. Your report has every answer. For more help, visit <a href="https://www.nautilushealth.org/PBM">nautilushealth.org/PBM</a>.</p>`);
   } else {
-    if (!QA.transcript.length) {
-      h.push(`<div class="muted" style="margin-bottom:4px">Try one of these:</div><div class="chips">`);
-      for (const t of (hasProfile() ? suggestions(QA.primary) : STARTERS)) h.push(`<button type="button" data-s="${esc(t)}">${esc(t)}</button>`);
-      h.push(`</div>`);
-    }
     h.push(`<form id="askForm"><textarea id="q" maxlength="500" placeholder="Type your question about the rule, your deadlines or your contract" aria-label="Your question"></textarea>
       <div class="row" style="margin-top:8px"><button class="btn teal" type="submit" id="askBtn" style="font-size:15px;padding:10px 20px">Ask</button>
       <span class="counter" id="left">${left == null ? (QA.unlocked ? "" : "5 free questions") : `${left} question${left === 1 ? "" : "s"} left${QA.unlocked ? "" : " before email"}`}</span></div>
-      <p class="err" id="askErr" role="alert"></p>
-      <p class="muted" style="margin:6px 0 0">Answers come only from the final rule, its preamble and the Nautilus checklist. Please don't include names, member data or contract text. General information, not legal advice.</p></form>`);
+      <p class="err" id="askErr" role="alert"></p></form>`);
+    if (!QA.transcript.length) {
+      h.push(`<div class="muted" style="margin:14px 0 4px">Or try one of these:</div><div class="chips">`);
+      for (const t of (hasProfile() ? suggestions(QA.primary) : STARTERS)) h.push(`<button type="button" data-s="${esc(t)}">${esc(t)}</button>`);
+      h.push(`</div>`);
+    }
+    h.push(`<p class="muted" style="margin:12px 0 0">Answers come only from the final rule, its preamble and the Nautilus checklist. Please don't include names, member data or contract text. General information, not legal advice.</p>`);
   }
   box.innerHTML = h.join("");
   const ap = $("addPlan") || $("editPlan"); if (ap) ap.addEventListener("click", () => { qi = 0; show("quiz"); renderQ(); });
