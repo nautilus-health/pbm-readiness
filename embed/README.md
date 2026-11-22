@@ -1,6 +1,6 @@
 # Embedding the PBM Rule Navigator
 
-Paste `snippet.html` into a Code (Squarespace), Custom HTML (WordPress), or Embed block on nautilushealth.org/PBM.
+Paste `snippet.html` into a Code (Squarespace), Custom HTML (WordPress), or Embed block on nautilushealth.org/pbm.
 
 What it does:
 - Loads the Navigator from GitHub Pages in an iframe.

@@ -92,7 +92,7 @@ npx wrangler d1 execute pbm-readiness --remote --command "SELECT id, lead, error
 
 Copy those rows into the Sheet, then `DELETE FROM failed_leads WHERE id IN (...)`.
 
-## Embedding on nautilushealth.org/PBM
+## Embedding on nautilushealth.org/pbm
 
 ```html
 <iframe id="pbm-readiness" src="https://nautilus-health.github.io/pbm-readiness/" title="PBM Rule Readiness Check" style="width:100%;height:1400px;border:0"></iframe>

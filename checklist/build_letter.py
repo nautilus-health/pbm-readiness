@@ -28,7 +28,7 @@ def cover():
 <tr><td class="k">Submitted by</td><td>Sean Schantzen, Executive Director, Nautilus Health Institute</td></tr>
 <tr><td class="k">Recommends</td><td>(1) A safe harbor for fiduciaries who proactively select PBMs with fiduciary-aligned contract terms; (2) coverage harmonized with CAA 2026; (3) transaction-level data in machine-readable formats; (4) no contractual limits on PBM accountability for disclosures</td></tr>
 <tr><td class="k">Status</td><td>Reproduced as filed, on the proposed rule. DOL issued the final rule on October 29, 2026 (29 CFR 2550.408b-22). For what the final rule requires, see the Fiduciary Action Checklist</td></tr>
-<tr><td class="k">Online</td><td><a href="https://www.nautilushealth.org/PBM">nautilushealth.org/PBM</a> · <a href="https://www.contractxray.com/">contractxray.com</a></td></tr>
+<tr><td class="k">Online</td><td><a href="https://www.nautilushealth.org/pbm">nautilushealth.org/pbm</a> · <a href="https://www.contractxray.com/">contractxray.com</a></td></tr>
 </table>
 """
 

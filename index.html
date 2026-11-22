@@ -146,7 +146,7 @@
       <div><b>Get your plan's deadlines and action plan</b><span>Seven quick questions, about two minutes. Your answers also tailor every answer above.</span></div>
       <button class="btn" id="startBtn">Start: 7 questions</button>
     </div>
-    <p class="ladder">Prefer it on paper? Read the <a href="https://www.nautilushealth.org/PBM" id="checklistLink">Fiduciary Action Checklist</a>: every deadline, contract term, and decision the new PBM rule puts on your desk.</p>
+    <p class="ladder">Prefer it on paper? Read the <a href="https://www.nautilushealth.org/pbm" id="checklistLink">Fiduciary Action Checklist</a>: every deadline, contract term, and decision the new PBM rule puts on your desk.</p>
   </section>
 
   <!-- One question per screen -->
@@ -168,7 +168,7 @@
   <div class="foot-top">
     <a href="https://www.nautilushealth.org/" aria-label="Nautilus Health Institute"><img src="assets/nautilus-wordmark-navy.png" alt="Nautilus Health Institute"></a>
     <div class="foot-links">
-      <a href="https://www.nautilushealth.org/PBM">PBM Resources</a>
+      <a href="https://www.nautilushealth.org/pbm">PBM Resources</a>
       <a href="https://www.contractxray.com/">Contract X-Ray</a>
       <a href="https://www.nautilushealth.org/donate">Donate</a>
     </div>
@@ -403,7 +403,7 @@ function renderAsk() {
   if (left === 0 && !QA.unlocked) {
     h.push(`<div class="flag"><b>You've used your free questions.</b> Get your report below to unlock 5 more. Your answers so far will be in it.</div>`);
   } else if (left === 0) {
-    h.push(`<p class="muted">You've used all your questions for this session. Your report has every answer. For more help, visit <a href="https://www.nautilushealth.org/PBM">nautilushealth.org/PBM</a>.</p>`);
+    h.push(`<p class="muted">You've used all your questions for this session. Your report has every answer. For more help, visit <a href="https://www.nautilushealth.org/pbm">nautilushealth.org/pbm</a>.</p>`);
   } else {
     h.push(`<form id="askForm"><textarea id="q" maxlength="500" placeholder="Type your question about the rule, your deadlines or your contract" aria-label="Your question"></textarea>
       <div class="row" style="margin-top:8px"><button class="btn teal" type="submit" id="askBtn" style="font-size:15px;padding:10px 20px">Ask</button>
@@ -422,7 +422,7 @@ function renderAsk() {
   box.querySelectorAll("[data-rate]").forEach((b) => b.addEventListener("click", () => rate(+b.dataset.i, +b.dataset.rate)));
   box.querySelectorAll("[data-copy]").forEach((b) => b.addEventListener("click", () => {
     const t = QA.transcript[+b.dataset.copy]; if (!t) return;
-    const txt = `Q: ${t.q}\n\n${t.a}\n\nPBM Rule Navigator, Nautilus Health Institute: https://www.nautilushealth.org/PBM`;
+    const txt = `Q: ${t.q}\n\n${t.a}\n\nPBM Rule Navigator, Nautilus Health Institute: https://www.nautilushealth.org/pbm`;
     (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(() => { b.textContent = "Copied"; setTimeout(() => (b.textContent = "Copy answer"), 1500); }, () => {});
   }));
   box.querySelectorAll(".chips button").forEach((b) => b.addEventListener("click", () => { $("q").value = b.dataset.s; send(); }));

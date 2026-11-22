@@ -137,7 +137,7 @@ export async function buildPDF({ profile, transcript = [], generated = new Date(
   font("bold", 9.5); color(GOLD);
   const ly = y + 36 + ns.length * 13 + 6;
   doc.textWithLink("contractxray.com", L + 14, ly, { url: "https://www.contractxray.com/" });
-  doc.textWithLink("Full Fiduciary Action Checklist: nautilushealth.org/PBM", L + 130, ly, { url: "https://www.nautilushealth.org/PBM" });
+  doc.textWithLink("Full Fiduciary Action Checklist: nautilushealth.org/pbm", L + 130, ly, { url: "https://www.nautilushealth.org/pbm" });
   y += nh + 14;
 
   para("For information and educational purposes only. Covers the DOL final PBM rule (29 CFR 2550.408b-22) and the Consolidated Appropriations Act (CAA) of 2026. Not legal advice, and no attorney-client relationship is created. Confirm plan-specific questions with ERISA counsel.", { size: 8, c: MID, gap: 6 });
