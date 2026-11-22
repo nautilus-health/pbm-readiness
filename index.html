@@ -305,7 +305,7 @@ function buildResults() {
 
   h.push(`<div class="summary"><div class="k">${Y.you === "you" ? "Your result" : "Your client's result"}</div><div class="h">${esc(r.headline)}</div>`);
   if (r.nextDeadline) h.push(`<div class="d"><b>Next:</b> ${esc(r.nextDeadline)}</div>`);
-  h.push(`<div class="row"><button class="btn teal" data-go="ask">Ask about ${Y.your} plan</button><button class="btn gold" data-go="report">Get my full report</button></div></div>`);
+  h.push(`<div class="row"><button class="btn gold" data-go="report">Get my full report</button></div></div>`);
   h.push(`<div id="askSlotResults"></div>`);
 
   if (r.unsure) h.push(`<div class="flag"><b>${esc(Y.Your)} answers fit more than one profile.</b> We show the two most likely below. Confirm the plan type, funding and size with ${S.role === "advisor" ? "the plan sponsor or counsel" : "your broker or counsel"}.</div>`);
