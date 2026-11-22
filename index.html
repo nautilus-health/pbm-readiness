@@ -174,7 +174,7 @@
     </div>
   </div>
   <p class="about">Nautilus Health Institute is a 501(c)(3) non-profit organization with a mission to transform health plan market norms in procurement, contracting, and data use by 2030. This tool is part of the Nautilus PBM Fiduciary Standards Initiative.</p>
-  <p class="legal">General information about the DOL final PBM rule (29 CFR 2550.408b-22) and the Consolidated Appropriations Act (CAA) of 2026. Not legal advice, and no attorney-client relationship is created. Items marked "pending counsel confirmation" are open questions. We keep your plan answers and the questions you ask, with the answers, without names, to run the tool and improve it. If you ask for your report, we also keep your email. We don't ask for names, plan numbers or contracts. Reflects the final rule published November 2, 2026 (91 FR 69092).</p>
+  <p class="legal">For information and educational purposes only. Covers the DOL final PBM rule (29 CFR 2550.408b-22) and the Consolidated Appropriations Act (CAA) of 2026. Not legal advice, and no attorney-client relationship is created. Items marked "pending counsel confirmation" are open questions. We keep your plan answers and the questions you ask, with the answers, without names, to run the tool and improve it. If you ask for your report, we also keep your email. We don't ask for names, plan numbers or contracts. Reflects the final rule published November 2, 2026 (91 FR 69092).</p>
   <p class="legal">Copyright &copy; 2026 Nautilus Health Institute</p>
 </footer>
 
@@ -404,14 +404,14 @@ function renderAsk() {
   } else {
     h.push(`<form id="askForm"><textarea id="q" maxlength="500" placeholder="Type your question about the rule, your deadlines or your contract" aria-label="Your question"></textarea>
       <div class="row" style="margin-top:8px"><button class="btn teal" type="submit" id="askBtn" style="font-size:15px;padding:10px 20px">Ask</button>
-      <span class="counter" id="left">${left == null ? (QA.unlocked ? "" : "5 free questions") : `${left} question${left === 1 ? "" : "s"} left${QA.unlocked ? "" : " before email"}`}</span></div>
+      <span class="counter" id="left">${left != null && left <= 1 ? `${left} question left${QA.unlocked ? "" : " before email"}` : ""}</span></div>
       <p class="err" id="askErr" role="alert"></p></form>`);
     if (!QA.transcript.length) {
       h.push(`<div class="muted" style="margin:14px 0 4px">Sample questions</div><div class="chips">`);
       for (const t of (hasProfile() ? suggestions(QA.primary) : STARTERS)) h.push(`<button type="button" data-s="${esc(t)}">${esc(t)}</button>`);
       h.push(`</div>`);
     }
-    h.push(`<p class="muted" style="margin:12px 0 0">Answers come only from the final rule, its preamble and the Nautilus checklist. Please don't include names, member data or contract text. General information, not legal advice.</p>`);
+    h.push(`<p class="muted" style="margin:12px 0 0">Answers come only from the final rule, its preamble and the Nautilus checklist. Please don't include names, member data or contract text. For information and educational purposes only. Not legal advice.</p>`);
   }
   box.innerHTML = h.join("");
   const ap = $("addPlan") || $("editPlan"); if (ap) ap.addEventListener("click", () => { qi = 0; show("quiz"); renderQ(); });

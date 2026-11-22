@@ -6,4 +6,4 @@ A free tool from Nautilus Health Institute. Plan sponsors and advisors answer se
 
 Live: https://nautilus-health.github.io/pbm-readiness/
 
-General information, not legal advice.
+For information and educational purposes only. Not legal advice.

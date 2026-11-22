@@ -103,7 +103,7 @@
  },
  "always": {
   "must": [
-   "General information, not legal advice\\.?\\s*$"
+   "(General information, not legal advice|For information and educational purposes only\\. Not legal advice)\\.?\\s*$"
   ],
   "must_not": [
    "™",
