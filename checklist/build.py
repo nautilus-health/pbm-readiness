@@ -282,7 +282,7 @@ LADDER = """
 <div class="keep"><h2>Put the Checklist to Work</h2><div class="rule"></div>
 <div class="ladder">
   <div class="here"><div class="n">Step 1 · You are here</div><b>Fiduciary Action Checklist</b>Every deadline, contract term, and decision the rule puts on your desk.</div>
-  <div><div class="n">Step 2 · Free</div><b>PBM Rule Navigator</b>Your plan's deadlines and action plan in two minutes. Ask anything; every answer cites the rule. <a href="https://www.nautilushealth.org/PBM">nautilushealth.org/PBM</a></div>
+  <div><div class="n">Step 2 · Free</div><b>PBM Rule Navigator</b>Your plan's deadlines and action plan in two minutes. Ask anything; every answer cites the rule. <a href="https://www.nautilushealth.org/pbm">nautilushealth.org/pbm</a></div>
   <div><div class="n">Step 3 · Free</div><b>Contract X-Ray Quick Look</b>Test your actual PBM contract against fiduciary-aligned standards. <a href="https://www.contractxray.com/">contractxray.com</a></div>
   <div><div class="n">Step 4</div><b>Full Assessment</b>A Negotiation Report with the terms to request and the model language to propose.</div>
 </div></div>
@@ -298,8 +298,8 @@ def cover(edition, month):
 <table class="meta">
 <tr><td class="k">Audience</td><td>Plan sponsors, plan fiduciaries, and the brokers, consultants, and attorneys who advise them</td></tr>
 <tr><td class="k">Purpose</td><td>What to do, by when, under the DOL final PBM rule and CAA 2026: who owes you disclosures, which contract terms to elect and strike, and how to act when disclosures arrive</td></tr>
-<tr><td class="k">Companion</td><td>The free PBM Rule Navigator applies this checklist to your plan in two minutes. Contract X-Ray tests your actual contract</td></tr>
-<tr><td class="k">Online</td><td><a href="https://www.nautilushealth.org/PBM">nautilushealth.org/PBM</a> · <a href="https://www.contractxray.com/">contractxray.com</a></td></tr>
+<tr><td class="k">Companion</td><td>The free PBM Rule Navigator applies this checklist to your plan in two minutes and answers your questions, citing the rule. Contract X-Ray tests your actual contract</td></tr>
+<tr><td class="k">Online</td><td><a href="https://www.nautilushealth.org/pbm">nautilushealth.org/pbm</a> · <a href="https://www.contractxray.com/">contractxray.com</a></td></tr>
 </table>
 """
 
