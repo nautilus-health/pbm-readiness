@@ -379,8 +379,8 @@ function contextLine() {
   const label = (id) => { const q = QUESTIONS.find((x) => x.id === id); const o = q && q.opts && q.opts.find((x) => x[0] === S[id]); return o && S[id] !== "unsure" ? o[1] : ""; };
   const bits = [label("type"), label("fund"), label("size") && label("size") + " employees", S.holder && S.holder !== "unsure" ? "contract held by " + ({ pbm: "the plan", tpa: "a TPA", carrier: "the carrier" })[S.holder] : ""].filter(Boolean);
   if (!bits.length) return `<div class="context"><span><button type="button" class="link" id="addPlan">Add your plan details</button> for answers tailored to your specific situation.</span></div>`;
-  if (!hasProfile()) return `<div class="context"><b>Answering for:</b>${bits.map((b) => `<span class="tag">${esc(b)}</span>`).join("")}<button type="button" class="link" id="finishPlan">Finish your plan details</button><span class="muted">for deadlines, an action plan and fully tailored answers.</span></div>`;
-  return `<div class="context"><b>Answering for:</b>${bits.map((b) => `<span class="tag">${esc(b)}</span>`).join("")}<button type="button" class="link" id="editPlan">Change</button></div>`;
+  if (!hasProfile()) return `<div class="context"><b>Your profile:</b>${bits.map((b) => `<span class="tag">${esc(b)}</span>`).join("")}<button type="button" class="link" id="finishPlan">Finish your plan details</button><span class="muted">for deadlines, an action plan and fully tailored answers.</span></div>`;
+  return `<div class="context"><b>Your profile:</b>${bits.map((b) => `<span class="tag">${esc(b)}</span>`).join("")}<button type="button" class="link" id="editPlan">Change</button></div>`;
 }
 
 function renderAsk() {
