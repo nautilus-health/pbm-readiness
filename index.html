@@ -196,6 +196,8 @@ let S = {};                 // intake answers
 let qi = 0;                 // current question index
 const QA = { session: null, transcript: [], remaining: null, unlocked: false, busy: false, email: "", ratings: {}, sentProfile: null };
 const hasProfile = () => QUESTIONS.every((q) => q.kind ? true : !!S[q.id]);
+// first intake question still unanswered (or 0 when nothing is missing)
+const firstMissing = () => { const i = QUESTIONS.findIndex((q) => q.opts ? !S[q.id] : q.kind === "month" ? !S.pymonth : !renewalDone()); return i < 0 ? 0 : i; };
 const $ = (id) => document.getElementById(id);
 
 function setStep(n) {
@@ -377,6 +379,7 @@ function contextLine() {
   const label = (id) => { const q = QUESTIONS.find((x) => x.id === id); const o = q && q.opts && q.opts.find((x) => x[0] === S[id]); return o && S[id] !== "unsure" ? o[1] : ""; };
   const bits = [label("type"), label("fund"), label("size") && label("size") + " employees", S.holder && S.holder !== "unsure" ? "contract held by " + ({ pbm: "the plan", tpa: "a TPA", carrier: "the carrier" })[S.holder] : ""].filter(Boolean);
   if (!bits.length) return `<div class="context"><span><button type="button" class="link" id="addPlan">Add your plan details</button> for answers tailored to your specific situation.</span></div>`;
+  if (!hasProfile()) return `<div class="context"><b>Answering for:</b>${bits.map((b) => `<span class="tag">${esc(b)}</span>`).join("")}<button type="button" class="link" id="finishPlan">Finish your plan details</button><span class="muted">for deadlines, an action plan and fully tailored answers.</span></div>`;
   return `<div class="context"><b>Answering for:</b>${bits.map((b) => `<span class="tag">${esc(b)}</span>`).join("")}<button type="button" class="link" id="editPlan">Change</button></div>`;
 }
 
@@ -414,7 +417,8 @@ function renderAsk() {
     h.push(`<p class="muted" style="margin:12px 0 0">Answers come only from the final rule, its preamble and the Nautilus checklist. Please don't include names, member data or contract text. For information and educational purposes only. Not legal advice.</p>`);
   }
   box.innerHTML = h.join("");
-  const ap = $("addPlan") || $("editPlan"); if (ap) ap.addEventListener("click", () => { qi = 0; show("quiz"); renderQ(); });
+  const ap = $("editPlan"); if (ap) ap.addEventListener("click", () => { qi = 0; show("quiz"); renderQ(); });
+  const fp = $("addPlan") || $("finishPlan"); if (fp) fp.addEventListener("click", () => { qi = firstMissing(); show("quiz"); renderQ(); });
   box.querySelectorAll("[data-rate]").forEach((b) => b.addEventListener("click", () => rate(+b.dataset.i, +b.dataset.rate)));
   box.querySelectorAll("[data-copy]").forEach((b) => b.addEventListener("click", () => {
     const t = QA.transcript[+b.dataset.copy]; if (!t) return;
