@@ -2,7 +2,10 @@
 // POST /start  -> anonymous session from the intake profile (no email needed to ask questions)
 // POST /ask    -> answer one question from the knowledge pack via the Claude API
 // POST /report -> email the full report (results + every Q&A) and record the lead in the Google Sheet
+// POST /profile -> update the session's plan profile (asked first, intake later)
+// POST /feedback -> record a helpful / not helpful rating on one answer
 // GET  /health -> pack version and model, for monitoring
+// GET  /admin/questions -> recent questions, answers and ratings (X-Eval-Token required)
 //
 // Secrets:  ANTHROPIC_API_KEY, IP_SALT, SHEET_WEBHOOK_URL, SHEET_SECRET,
 //           EVAL_TOKEN (optional; lets the eval runner skip rate limits)
@@ -68,6 +71,11 @@ export default {
     if (req.method === "GET" && url.pathname === "/health") {
       return json({ ok: true, pack: env.PACK_VERSION, model: env.MODEL }, 200, c.headers);
     }
+    if (req.method === "GET" && url.pathname === "/admin/questions") {
+      if (!env.EVAL_TOKEN || req.headers.get("X-Eval-Token") !== env.EVAL_TOKEN) return json({ error: "Not found" }, 404, c.headers);
+      try { return await adminQuestions(url, env, c.headers); }
+      catch (e) { console.error("admin_error", String(e)); return json({ error: "Something went wrong." }, 500, c.headers); }
+    }
     if (req.method !== "POST") return json({ error: "Not found" }, 404, c.headers);
     if (!c.ok) return json({ error: "Origin not allowed" }, 403, c.headers);
 
@@ -88,6 +96,8 @@ export default {
       if (url.pathname === "/start") return await start(body, env, c.headers, ipHash, now, isEval);
       if (url.pathname === "/report") return await report(body, env, c.headers, ipHash, now, req, isEval);
       if (url.pathname === "/ask") return await ask(body, env, c.headers, ipHash, now, isEval);
+      if (url.pathname === "/profile") return await updateProfile(body, env, c.headers);
+      if (url.pathname === "/feedback") return await feedback(body, env, c.headers, now);
     } catch (e) {
       console.error("handler_error", url.pathname, e && e.stack ? e.stack : String(e));
       return json({ error: "Something went wrong. Please try again." }, 500, c.headers);
@@ -256,4 +266,57 @@ async function ask(body, env, headers, ipHash, now, isEval) {
   if (isEval) out.debug = { stop: data.stop_reason, blocks: (data.content || []).map((b) => b.type), usage: u };
   if (data.stop_reason && data.stop_reason !== "end_turn") console.warn("stop_reason", data.stop_reason, JSON.stringify(u));
   return json(out, 200, headers);
+}
+
+// The visitor can ask first and fill in the intake later, so the session's profile can be updated.
+// The profile only steers answers for this visitor's own session.
+async function updateProfile(body, env, headers) {
+  const s = await env.DB.prepare("SELECT id FROM sessions WHERE id = ?").bind(String(body.session || "")).first();
+  if (!s) return json({ error: "Your session has expired. Please start again.", code: "no_session" }, 401, headers);
+  await env.DB.prepare("UPDATE sessions SET profile = ? WHERE id = ?").bind(JSON.stringify(cleanProfile(body.profile)), s.id).run();
+  return json({ ok: true }, 200, headers);
+}
+
+const FEEDBACK_TABLE = `CREATE TABLE IF NOT EXISTS feedback (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  session_id TEXT NOT NULL,
+  turn INTEGER NOT NULL,
+  rating INTEGER NOT NULL,
+  created_at INTEGER NOT NULL,
+  UNIQUE(session_id, turn)
+)`;
+
+async function feedback(body, env, headers, now) {
+  const turn = Number(body.turn), rating = Number(body.rating);
+  if (!Number.isInteger(turn) || turn < 0 || turn > 50 || (rating !== 1 && rating !== -1)) return json({ error: "Invalid request" }, 400, headers);
+  const s = await env.DB.prepare("SELECT id FROM sessions WHERE id = ?").bind(String(body.session || "")).first();
+  if (!s) return json({ error: "Your session has expired.", code: "no_session" }, 401, headers);
+  await env.DB.prepare(FEEDBACK_TABLE).run();
+  await env.DB.prepare("INSERT INTO feedback (session_id, turn, rating, created_at) VALUES (?, ?, ?, ?) ON CONFLICT(session_id, turn) DO UPDATE SET rating = excluded.rating, created_at = excluded.created_at")
+    .bind(s.id, turn, rating, now).run();
+  return json({ ok: true }, 200, headers);
+}
+
+// Review feed for the Nautilus team: every question asked in the last N days, its answer,
+// the plan profile and any rating, plus the most common questions. No emails or IPs.
+async function adminQuestions(url, env, headers) {
+  const days = Math.min(Math.max(parseInt(url.searchParams.get("days") || "30", 10) || 30, 1), 365);
+  const since = Date.now() - days * 864e5;
+  await env.DB.prepare(FEEDBACK_TABLE).run();
+  const rows = (await env.DB.prepare("SELECT id, profile, transcript, created_at FROM sessions WHERE created_at > ? AND questions > 0 ORDER BY created_at DESC LIMIT 2000").bind(since).all()).results || [];
+  const fb = (await env.DB.prepare("SELECT session_id, turn, rating FROM feedback WHERE created_at > ?").bind(since).all()).results || [];
+  const rating = new Map(fb.map((f) => [f.session_id + ":" + f.turn, f.rating]));
+  const items = [], counts = new Map();
+  for (const r of rows) {
+    const t = JSON.parse(r.transcript || "[]");
+    t.forEach((x, i) => {
+      const rt = rating.get(r.id + ":" + i) ?? null;
+      items.push({ at: new Date(r.created_at).toISOString(), profile: JSON.parse(r.profile || "{}"), q: x.q, a: x.a, rating: rt });
+      const k = String(x.q || "").toLowerCase().replace(/[^a-z0-9 ]/g, "").replace(/\s+/g, " ").trim();
+      counts.set(k, (counts.get(k) || 0) + 1);
+    });
+  }
+  const top = [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 25).map(([q, n]) => ({ q, n }));
+  const notHelpful = items.filter((x) => x.rating === -1);
+  return json({ days, sessions: rows.length, questions: items.length, notHelpful: notHelpful.length, top, notHelpfulItems: notHelpful, items }, 200, headers);
 }

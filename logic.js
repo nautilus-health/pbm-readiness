@@ -188,6 +188,15 @@ function actions(p, c, d, today) {
   return a.map((x, i) => [x, i]).sort((x, y) => key(x[0].when) - key(y[0].when) || x[1] - y[1]).map((x) => x[0]).slice(0, 6);
 }
 
+// Starter questions shown before a visitor has entered plan details. Each is a hard,
+// common situation with a settled answer in the checklist or the rule.
+export const STARTERS = [
+  "We're level-funded through our carrier and never signed with the PBM. Does the rule apply, and who owes us the disclosures?",
+  "We self-fund pharmacy but our medical plan is fully insured. Are we covered?",
+  "Can our PBM require us to use an auditor it approves?",
+  "What should we do if our PBM misses a disclosure deadline?",
+];
+
 export function suggestions(primary) {
   if (primary === "NON") return ["Which disclosure and audit terms should we put in our PBM contract?", "Do the CAA 2026 PBM reports apply to our plan?", "How do we handle a PBM that refuses these terms?"];
   if (primary === "FI") return ["What disclosures is our insurer required to give us now?", "How will the 2028 rebate pass-through reach a fully insured plan?", "Should we consider moving to self-funding?"];
