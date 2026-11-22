@@ -376,7 +376,7 @@ async function ensureSession() {
 function contextLine() {
   const label = (id) => { const q = QUESTIONS.find((x) => x.id === id); const o = q && q.opts && q.opts.find((x) => x[0] === S[id]); return o && S[id] !== "unsure" ? o[1] : ""; };
   const bits = [label("type"), label("fund"), label("size") && label("size") + " employees", S.holder && S.holder !== "unsure" ? "contract held by " + ({ pbm: "the plan", tpa: "a TPA", carrier: "the carrier" })[S.holder] : ""].filter(Boolean);
-  if (!bits.length) return `<div class="context"><span>Answering generally.</span><button type="button" class="link" id="addPlan">Add your plan details</button><span class="muted">for answers tailored to your plan.</span></div>`;
+  if (!bits.length) return `<div class="context"><span><button type="button" class="link" id="addPlan">Add your plan details</button> for answers tailored to your specific situation.</span></div>`;
   return `<div class="context"><b>Answering for:</b>${bits.map((b) => `<span class="tag">${esc(b)}</span>`).join("")}<button type="button" class="link" id="editPlan">Change</button></div>`;
 }
 
@@ -407,7 +407,7 @@ function renderAsk() {
       <span class="counter" id="left">${left == null ? (QA.unlocked ? "" : "5 free questions") : `${left} question${left === 1 ? "" : "s"} left${QA.unlocked ? "" : " before email"}`}</span></div>
       <p class="err" id="askErr" role="alert"></p></form>`);
     if (!QA.transcript.length) {
-      h.push(`<div class="muted" style="margin:14px 0 4px">Or try one of these:</div><div class="chips">`);
+      h.push(`<div class="muted" style="margin:14px 0 4px">Sample questions</div><div class="chips">`);
       for (const t of (hasProfile() ? suggestions(QA.primary) : STARTERS)) h.push(`<button type="button" data-s="${esc(t)}">${esc(t)}</button>`);
       h.push(`</div>`);
     }
