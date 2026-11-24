@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2027 Expert Review</title>
+<meta name="description" content="Join the expert panel reviewing the 2027 editions of the Nautilus Fiduciary Toolkit, PBM Procurement Toolkit, and Benefit Advisor Toolkit. Comments due December 19, 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#12355B; --teal:#2A7F86; --red:#B81C1C;
+    --ink:#222; --muted:#5a6470; --line:#d5dbe2; --soft:#eef3f6; --bg:#fff; --card:#fff;
+    --font:"EB Garamond", Garamond, Georgia, serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --navy:#9cc3ea; --teal:#6cc3ca; --red:#ff8a8a;
+      --ink:#e8ecf0; --muted:#a9b3bd; --line:#334150; --soft:#1b2733; --bg:#111a22; --card:#16212b;
+    }
+  }
+  :root[data-theme="dark"]{
+    --navy:#9cc3ea; --teal:#6cc3ca; --red:#ff8a8a;
+    --ink:#e8ecf0; --muted:#a9b3bd; --line:#334150; --soft:#1b2733; --bg:#111a22; --card:#16212b;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:18px;line-height:1.5}
+  a{color:var(--teal)}
+  .wrap{max-width:980px;margin:0 auto;padding:0 16px}
+  header{border-bottom:3px solid var(--navy);padding:28px 0 22px}
+  .kicker{color:var(--teal);letter-spacing:.12em;text-transform:uppercase;font-size:14px;font-weight:600}
+  h1{color:var(--navy);font-size:clamp(30px,5vw,42px);line-height:1.15;margin:6px 0 10px}
+  .lede{font-size:20px;max-width:760px;margin:0}
+  .due{display:inline-block;margin-top:14px;color:var(--red);font-weight:700;font-size:18px}
+  .jump{margin-left:14px;font-size:17px;white-space:nowrap}
+  h2{color:var(--navy);font-size:26px;margin:36px 0 6px}
+  .sub{color:var(--muted);margin:0 0 14px}
+
+  .letter{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:22px 26px;margin:28px 0 6px;max-width:820px}
+  .letter h2{margin:0 0 12px}
+  .letter p{margin:0 0 12px}
+  .letter ul{margin:0 0 12px;padding-left:22px}
+  .letter li{margin:3px 0}
+  .sig{margin-top:18px}
+  .sig b{color:var(--navy);font-size:19px}
+  .sig span{display:block;color:var(--muted);font-size:16px;line-height:1.35}
+
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:18px 0 6px;padding:0;list-style:none;counter-reset:s}
+  .steps li{background:var(--soft);border-radius:8px;padding:14px 16px;counter-increment:s}
+  .steps li::before{content:counter(s);display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--navy);color:var(--bg);font-weight:700;margin-right:8px}
+  .steps b{color:var(--navy)}
+  .group{margin-top:10px}
+  .doc{display:flex;gap:16px;align-items:flex-start;justify-content:space-between;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:14px 16px;margin:10px 0}
+  .doc h3{margin:0;font-size:20px;color:var(--navy)}
+  .doc p{margin:4px 0 0;color:var(--muted);font-size:17px}
+  .actions{display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
+  .btn{font-family:var(--font);font-size:16px;font-weight:600;border-radius:6px;padding:8px 14px;cursor:pointer;text-decoration:none;display:inline-block;border:1.5px solid var(--navy);white-space:nowrap}
+  .btn.primary{background:var(--navy);color:var(--bg)}
+  .btn.ghost{background:transparent;color:var(--navy)}
+  .btn.big{font-size:19px;padding:12px 22px}
+  .btn:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+  .cta{background:var(--soft);border-left:5px solid var(--teal);border-radius:8px;padding:16px 20px;margin:18px 0 6px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .cta p{margin:0;max-width:600px}
+  .cta .actions{justify-content:flex-start;flex-shrink:1;min-width:0}
+  footer{border-top:1px solid var(--line);margin-top:40px;padding:18px 0 40px;color:var(--muted);font-size:15px}
+  @media (max-width:640px){.doc{flex-direction:column}.actions{justify-content:flex-start}.letter{padding:18px 16px}.jump{display:block;margin:6px 0 0}}
+
+  dialog{border:none;border-radius:10px;padding:0;width:min(620px,calc(100vw - 32px));max-height:calc(100vh - 32px);background:var(--card);color:var(--ink)}
+  dialog::backdrop{background:rgba(10,20,30,.55)}
+  .dlg-head{background:var(--navy);color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+  .dlg-head h2{color:#fff;margin:0;font-size:22px}
+  .x{background:none;border:none;color:#fff;font-size:28px;line-height:1;cursor:pointer}
+  form{padding:16px 20px 20px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media (max-width:560px){.row{grid-template-columns:1fr}}
+  label{display:block;font-weight:600;font-size:16px;margin:10px 0 4px;color:var(--navy)}
+  label .opt{font-weight:400;color:var(--muted)}
+  input[type=text],input[type=email],select,textarea{width:100%;font-family:var(--font);font-size:17px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+  input[type=file]{font-family:var(--font);font-size:16px;width:100%}
+  textarea{min-height:90px;resize:vertical}
+  fieldset{border:1px solid var(--line);border-radius:6px;margin:12px 0 0;padding:8px 12px}
+  legend{font-weight:600;color:var(--navy);font-size:16px;padding:0 4px}
+  .choice{display:flex;gap:8px;align-items:flex-start;font-weight:400;color:var(--ink);margin:6px 0}
+  .choice input{margin-top:5px}
+  .hint{font-size:14px;color:var(--muted);margin:3px 0 0}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .status{margin-top:12px;font-size:16px}
+  .status.err{color:var(--red)}
+  .status.ok{color:var(--teal)}
+  .form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="kicker">Nautilus Health Institute · 2027 Expert Review</div>
+    <h1>Help us get the 2027 editions right</h1>
+    <p class="lede">Nautilus is convening a panel of experts to review the 2027 editions of its fiduciary guides. These drafts put CAA 2026 and the Department of Labor's PBM Fee Disclosure Rule into plain steps for plan fiduciaries and the advisors who serve them. Pick the documents in your field and tell us what to change.</p>
+    <div class="due">Comments due December 19, 2026</div><a class="jump" href="#documents">Go to the documents</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="letter" aria-labelledby="inv-title">
+    <h2 id="inv-title">An invitation to the 2027 Expert Review Panel</h2>
+    <p>Dear colleague,</p>
+    <p>You're here because you know something we need. You may have negotiated a PBM contract line by line, defended a committee's decision under ERISA, priced a specialty drug pipeline, or sat across from a broker and asked how they get paid. Experience like yours is what turns a guide from correct into useful.</p>
+    <p>CAA 2026 and the DOL's PBM Fee Disclosure Rule change what plan sponsors must ask for, review, and act on. These fifteen documents turn those rules into plain steps for the people who carry the duty: fiduciary committees, HR and finance leaders, and the advisors who serve them. Nautilus publishes them free. What this panel tells us will shape how plan sponsors and advisors are taught to protect the employees and families who depend on their health plans.</p>
+    <p>Contribute in whatever way suits you:</p>
+    <ul>
+      <li>Mark up a full document with tracked changes.</li>
+      <li>Comment on the one section you know best.</li>
+      <li>Suggest language we should adopt, word for word.</li>
+      <li>Point us to a case, regulation, or source we should cite.</li>
+      <li>Tell us what's missing, wrong, or unclear.</li>
+      <li>Put the PBM Rule Navigator to the test with the hardest question you hear from clients.</li>
+    </ul>
+    <p>One sharp comment is as welcome as a full markup. Every submission is read.</p>
+    <p>With your permission, we'll list you by name as a member of the 2027 Expert Review Panel in the published editions. You choose how you're credited when you send your review.</p>
+    <p>Comments are due December 19, 2026. The final editions publish in January 2027. Thank you for lending your judgment to this work.</p>
+    <div class="sig">
+      <b>Steve Ditto</b>
+      <span>Program Director, PBM Fiduciary Standards Initiative</span>
+      <span>Nautilus Health Institute</span>
+    </div>
+  </section>
+
+  <h2>How it works</h2>
+  <ol class="steps">
+    <li><b>Download</b> any document below. Each one arrives as an editable Word file, always the latest draft. For the PBM Rule Navigator, choose <b>Launch</b> and try it.</li>
+    <li><b>Mark it up</b> with tracked changes and comments, or jot your thoughts down as you read. Review one document or all fifteen.</li>
+    <li><b>Come back here</b> and choose <b>Return review</b>. Upload your file or type your comments, and tell us who you are.</li>
+  </ol>
+  <p class="sub">You'll get an email confirming we received it. Questions, or rather talk it through? Write to <a href="mailto:steve.ditto@nautilushealth.org">steve.ditto@nautilushealth.org</a>.</p>
+  <div class="cta">
+    <p><b>Reviewing more than one?</b> Open the shared Drive folder and choose Download to get all fifteen in a single zip file. Comments that cover several documents, or none in particular, are welcome too.</p>
+    <div class="actions">
+      <a class="btn primary big" id="all" href="#" target="_blank" rel="noopener">Open the Drive folder</a>
+      <button class="btn ghost big" type="button" data-upload="GEN">Send general comments</button>
+    </div>
+  </div>
+
+  <div id="documents"></div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    Nautilus Health Institute is a 501(c)(3) nonprofit. These are review drafts, not legal advice. Final editions publish in January 2027 at <a href="https://nautilushealth.org/pbm">nautilushealth.org/pbm</a>.
+  </div>
+</footer>
+
+<dialog id="dlg" aria-labelledby="dlg-title">
+  <div class="dlg-head">
+    <h2 id="dlg-title">Send your review</h2>
+    <button class="x" type="button" aria-label="Close" data-close>&times;</button>
+  </div>
+  <form id="f" novalidate>
+    <label for="document">Document you reviewed</label>
+    <select id="document" name="document" required></select>
+
+    <label for="file" id="file-label">Your marked-up file <span class="opt">(or type your comments below)</span></label>
+    <input id="file" name="file" type="file" accept=".docx,.doc,.pdf">
+    <p class="hint" id="file-hint">Word (.docx or .doc) or PDF, up to 20 MB.</p>
+
+    <div class="row">
+      <div><label for="first">First name</label><input id="first" name="first_name" type="text" autocomplete="given-name" required></div>
+      <div><label for="last">Last name</label><input id="last" name="last_name" type="text" autocomplete="family-name" required></div>
+    </div>
+    <div class="row">
+      <div><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+      <div><label for="org">Organization <span class="opt">(optional)</span></label><input id="org" name="organization" type="text" autocomplete="organization"></div>
+    </div>
+    <label for="role">Your perspective <span class="opt">(optional)</span></label>
+    <select id="role" name="role">
+      <option value="">Choose one</option>
+      <option>ERISA or benefits attorney</option>
+      <option>Benefits advisor or consultant</option>
+      <option>Plan sponsor, HR, or finance leader</option>
+      <option>Fiduciary committee member</option>
+      <option>Pharmacy or PBM pricing expert</option>
+      <option>Actuary or underwriter</option>
+      <option>Coalition or policy professional</option>
+      <option>Other</option>
+    </select>
+
+    <label for="note" id="note-label">Comments <span class="opt">(optional if you attach a file)</span></label>
+    <textarea id="note" name="note"></textarea>
+
+    <fieldset>
+      <legend>Credit in the published editions</legend>
+      <label class="choice"><input type="radio" name="credit" value="Name and organization" checked> List my name and organization as a member of the 2027 Expert Review Panel</label>
+      <label class="choice"><input type="radio" name="credit" value="Name only"> List my name only</label>
+      <label class="choice"><input type="radio" name="credit" value="No credit"> Don't list me</label>
+    </fieldset>
+
+    <label class="choice" style="margin-top:12px"><input type="checkbox" name="consent" value="yes" required> Nautilus may use my comments and suggested language in the final editions, without payment.</label>
+    <label class="choice"><input type="checkbox" name="future" value="yes"> Invite me to review future Nautilus editions.</label>
+
+    <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+
+    <div class="status" id="status" role="status" aria-live="polite"></div>
+    <div class="form-actions">
+      <button class="btn ghost" type="button" data-close>Cancel</button>
+      <button class="btn primary" type="submit" id="send">Send review</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+/* ---- Settings: replace before publishing ---- */
+const MAKE_WEBHOOK_URL = "https://hook.us1.make.com/REPLACE_WITH_YOUR_WEBHOOK_ID";
+const MAX_MB = 20;
+const NAVIGATOR_URL = "https://nautilus-health.github.io/pbm-readiness/";
+const DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/1MTxNUFKGynPSBb0mSVSEdo2JzxZlH6IA";
+/* Downloads come straight from the live Google Docs as Word files. The Drive folder must be shared: anyone with the link, Viewer. */
+const wordUrl = id => `https://docs.google.com/document/d/${id}/export?format=docx`;
+
+/* Each document: code (used in file names), title, description, and the Google Doc ID it downloads from. */
+const GROUPS = [
+  { name: "Fiduciary Toolkit", note: "For plan sponsors and fiduciary committees. Start here if you review one thing.", docs: [
+    { code: "HB",  title: "Health Plan Fiduciary Handbook, 2027 Edition", desc: "The fiduciary primer and committee playbook: ERISA, CAA 2021 and 2026, the DOL rule, litigation, and governance.", doc: "1sHqFB6wX-wkI6jao46fGI6K55gMxtWy-O-jKH9xf-MU" },
+    { code: "KIT", title: "Fiduciary Fast Start Kit, 2027 Edition", desc: "Ready-to-use templates: committee charter, disclosure request letters, disclosure log, DOL notices, and annual checklists.", doc: "1xbN99sjpaggEmJqZ3_ysTHyDZQFNKot3INrnA6oOw-c" },
+    { code: "CHK", title: "Fiduciary Action Checklist: DOL PBM Fee Disclosure Rule, 2027 Edition", desc: "Every deadline, contract term, and decision the DOL rule puts on your desk, organized by the moment you act.", doc: "1EdugrPESJtu4-zjzLrheMj5RqtJChvs-O_lMsiPragg" },
+    { code: "NAV", title: "PBM Rule Navigator", desc: "Answer a few questions about your plan and get a personal action plan: whether the DOL rule reaches you, when disclosures are due, who owes them, and what to do next. Then ask it anything about the DOL rule or CAA 2026, in plain English, and get an answer built from the regulation text. Try something hard, like “Does the new rule require my PBM to declare it’s a fiduciary?” Test both: run your own plan or a sample one, and ask the toughest question you hear from clients.", launch: NAVIGATOR_URL }
+  ]},
+  { name: "PBM Procurement Toolkit", note: "For advisors, procurement leads, and pricing experts.", docs: [
+    { code: "FG",   title: "Nautilus PBM Field Guide, 2027 Edition", desc: "The step-by-step path for evaluating, negotiating, and selecting a PBM under CAA 2026 and the DOL rule.", doc: "1k7NYHrKIrJEQAI2Rj_JL2mFcW5E2W6a50BlxEy1Z520" },
+    { code: "CRFI", title: "PBM Contract Compliance RFI, 2027 Edition", desc: "Asks the current PBM to adopt, propose alternate language for, or decline model terms on ten contract provisions.", doc: "1NjkSuQDnT60lJqhnEAhWyr7M7-mUph4qYX6N6WTcInc" },
+    { code: "MRFI", title: "PBM Market Test RFI, 2027 Edition", desc: "A short market check: about 40 questions across eleven topics, plus the contract questionnaire.", doc: "1fcsI_yJxBqvzs7tiawvZybTVkloxtlh7e51_xIhDI2Q" },
+    { code: "RFP",  title: "PBM Request for Proposals, 2027 Edition", desc: "The full RFP: contract questionnaire, disclosures in the DOL rule's format, and scoring that awards only a Gold contract.", doc: "1HxrGeuBM-f97jGJg7K2ZnXaLcupmS1vWRdltdu-4A9s" }
+  ]},
+  { name: "Benefit Advisor Toolkit", note: "For plan sponsors choosing an advisor, and advisors who want to be chosen. Listed in the order a sponsor uses them.", docs: [
+    { code: "AG",   title: "Benefit Advisor Selection and Partnership Guide, 2027 Edition", desc: "How to choose, pay, and manage a benefit advisor, and what a fiduciary-aligned advisor looks like.", doc: "1W6Mpwl5OOQbuhbDKdT327lvtYigFWrgoEAv4f73AnQY" },
+    { code: "FM",   title: "Benefit Advisor First Meeting, 2027 Edition", desc: "Two short lists to take into the room: the questions that show whether an advisor can help, and the questions that show whose side they're on.", doc: "1D2XztRGHdK4xVB0LSXMlgRI83cl_1s3fsr42o9bi-lM" },
+    { code: "BRFP", title: "Benefit Advisor Request for Proposal, 2027 Edition", desc: "A fiduciary-first RFP for selecting benefit advisor services, with compensation disclosure built in as Exhibit B.", doc: "1WXOOUtX4fhXbNM_U8f99rTScYzJW55qf9LTaAi-JfFU" },
+    { code: "FI",   title: "Benefit Advisor Finalist Interview and Reference Check, 2027 Edition", desc: "The tools for the finalist stage: a structured interview with scoring, and the questions to ask references.", doc: "11gVejIO1qltE6EGzJhNs_0oeGunQcYtZMOiTDLWLnkU" },
+    { code: "CD",   title: "Benefit Advisor Compensation Disclosure and Attestation, 2027 Edition", desc: "The signable form for every dollar an advisor receives, from every source.", doc: "1BUpk-cns9voQYvbqlB8SSLij2NO9B73FsgzY6RLHrYI" },
+    { code: "MA",   title: "Benefit Advisor Model Agreement, 2027 Edition", desc: "A starting-point engagement agreement that writes transparency, independence, and accountability into the terms.", doc: "13tidwo89t6vhquYF3NPnohIuudsxs-N9CnYIXQyp0Ys" },
+    { code: "SC",   title: "Benefit Advisor Annual Performance Scorecard, 2027 Edition", desc: "A weighted yearly review across financial, service, and strategic performance, ending in a renewal recommendation.", doc: "1VqyS3-FNSiYuh8PXLxCc0z2jVv3xhc2p8qxR3oiiulM" },
+    { code: "AP",   title: "Benefit Advisor Action Plan, 2027 Edition", desc: "A twelve-week plan, plus the questions to ask your advisor, PBM, TPA, stop-loss carrier, and board.", doc: "1J5ZJKKx8Xkw-aHMA_G8-6vP5fSK_jGTY4lLC6-hb5GI" }
+  ]}
+];
+const GENERAL = { code: "GEN", title: "General comments or several documents" };
+
+/* ---- Page ---- */
+document.getElementById("all").href = DRIVE_FOLDER_URL;
+const docsEl = document.getElementById("documents");
+const sel = document.getElementById("document");
+sel.innerHTML = '<option value="">Choose a document</option>';
+GROUPS.forEach(g => {
+  const sec = document.createElement("section");
+  sec.className = "group";
+  sec.innerHTML = `<h2>${g.name}</h2><p class="sub">${g.note}</p>`;
+  const og = document.createElement("optgroup");
+  og.label = g.name;
+  g.docs.forEach(d => {
+    const el = document.createElement("div");
+    el.className = "doc";
+    el.innerHTML = `<div><h3>${d.title}</h3><p>${d.desc}</p></div>
+      <div class="actions">
+        ${d.launch
+          ? `<a class="btn primary" href="${d.launch}" target="_blank" rel="noopener">Launch</a>`
+          : `<a class="btn primary" href="${wordUrl(d.doc)}">Download</a>`}
+        <button class="btn ghost" type="button" data-upload="${d.code}">${d.launch ? "Send feedback" : "Return review"}</button>
+      </div>`;
+    sec.appendChild(el);
+    const o = document.createElement("option");
+    o.value = d.code; o.textContent = d.title;
+    og.appendChild(o);
+  });
+  sel.appendChild(og);
+  docsEl.appendChild(sec);
+});
+{ const o = document.createElement("option"); o.value = GENERAL.code; o.textContent = GENERAL.title; sel.appendChild(o); }
+const ALL = GROUPS.flatMap(g => g.docs).concat([GENERAL]);
+
+/* ---- Dialog ---- */
+const dlg = document.getElementById("dlg");
+const form = document.getElementById("f");
+const statusEl = document.getElementById("status");
+const sendBtn = document.getElementById("send");
+const note = document.getElementById("note");
+
+function setMode(){
+  const code = sel.value;
+  note.placeholder = code === "NAV"
+    ? "What was unclear? Which answer looked wrong for your plan? What's missing?"
+    : code === "GEN"
+    ? "Name the documents or topics your comments cover, or tell us what the set is missing."
+    : "Your top concern, a section to look at first, suggested language, or a source we should cite.";
+}
+sel.addEventListener("change", setMode);
+function openDlg(code){
+  form.reset(); statusEl.textContent = ""; statusEl.className = "status";
+  sendBtn.disabled = false; sendBtn.textContent = "Send review";
+  if (code) sel.value = code;
+  setMode();
+  try { const saved = JSON.parse(localStorage.getItem("nautilus-reviewer") || "{}");
+        for (const k of ["first_name","last_name","email","organization","role"]) if (saved[k]) form.elements[k].value = saved[k];
+  } catch(e) {}
+  dlg.showModal();
+  (code ? form.elements.file : sel).focus();
+}
+document.addEventListener("click", e => {
+  const up = e.target.closest("[data-upload]");
+  if (up) openDlg(up.dataset.upload);
+  if (e.target.closest("[data-close]")) dlg.close();
+});
+
+function fail(msg){ statusEl.textContent = msg; statusEl.className = "status err"; }
+
+form.addEventListener("submit", async e => {
+  e.preventDefault();
+  if (form.elements.website.value) return; // spam trap
+  const f = form.elements.file.files[0];
+  if (!sel.value) return fail("Choose the document you reviewed.");
+  if (!f && !note.value.trim()) return fail("Attach your file or type your comments in the Comments box.");
+  if (f && !/\.(docx|doc|pdf)$/i.test(f.name)) return fail("Please upload a Word file (.docx or .doc) or a PDF.");
+  if (f && f.size > MAX_MB * 1024 * 1024) return fail(`That file is over ${MAX_MB} MB. Email it to steve.ditto@nautilushealth.org instead.`);
+  if (!form.checkValidity()) return fail("Please fill in your name and email, and check the permission box.");
+
+  const doc = ALL.find(d => d.code === sel.value);
+  const isNav = doc.code === "NAV";
+  const fd = new FormData(form);
+  fd.delete("website");
+  if (!f) fd.delete("file");
+  fd.set("has_file", f ? "yes" : "no");
+  fd.set("document_title", doc.title);
+  fd.set("submitted_at", new Date().toISOString());
+  fd.set("consent", form.elements.consent.checked ? "yes" : "no");
+  fd.set("future", form.elements.future.checked ? "yes" : "no");
+
+  try { localStorage.setItem("nautilus-reviewer", JSON.stringify({
+    first_name: fd.get("first_name"), last_name: fd.get("last_name"), email: fd.get("email"),
+    organization: fd.get("organization"), role: fd.get("role") })); } catch(e) {}
+
+  sendBtn.disabled = true; sendBtn.textContent = "Sending...";
+  statusEl.textContent = ""; statusEl.className = "status";
+  try {
+    const r = await fetch(MAKE_WEBHOOK_URL, { method: "POST", body: fd });
+    if (!r.ok) throw new Error(r.status);
+    const what = doc.code === "GEN" ? "your comments" : `your ${isNav ? "feedback on" : "review of"} ${doc.title}`;
+    statusEl.textContent = `Thank you. We received ${what}. A confirmation is on its way to ${fd.get("email")}.`;
+    statusEl.className = "status ok";
+    sendBtn.textContent = "Sent";
+    form.elements.file.value = "";
+  } catch(err) {
+    sendBtn.disabled = false; sendBtn.textContent = "Send review";
+    fail("Your review didn't go through. Please try again, or email it to steve.ditto@nautilushealth.org.");
+  }
+});
+</script>
+</body>
+</html>
