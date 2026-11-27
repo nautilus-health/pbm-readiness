@@ -1,5 +1,5 @@
 # PBM Rule Readiness Check: Knowledge Pack v1.3
-Version: 1.3 | Date: 2026-11-06 | Status: DRAFT, awaiting counsel review
+Version: 1.3 | Date: 2026-11-27 (Part A refreshed from the 2027 Checklist review draft) | Status: DRAFT, awaiting counsel review
 Publisher: Nautilus Health Institute
 
 This pack is the only source the Readiness Check may answer from. It has five parts:
@@ -17,47 +17,46 @@ This is not only a PBM rule. It follows the service, not the label. Any vendor t
 =====================================================================
 ## PART A. NAUTILUS FIDUCIARY ACTION CHECKLIST
 =====================================================================
-## DOL PBM Final Rule: Fiduciary Action Checklist
-What plan sponsors and their advisors should do now
+## DOL PBM Fee Disclosure Rule: Fiduciary Action Checklist
+Every deadline, contract term, and decision the DOL's PBM Fee Disclosure Rule puts on your desk
 ### Disclosure shows you the money. Acting on it is the fiduciary duty.
-On October 29, 2026, the Department of Labor released its final PBM fee disclosure rule. For plan years beginning on or after July 1, 2027, PBMs serving large self-insured ERISA plans, and any other vendor that performs pharmacy benefit services for them, must disclose, in dollars and drug by drug, what they and their affiliates earn: rebates kept, spread on every NDC, pharmacy clawbacks, termination fees, and the net price the plan pays. 
+On October 29, 2026, the Department of Labor issued its PBM Fee Disclosure Rule (the DOL rule). For plan years beginning on or after July 1, 2027, PBMs serving large self-insured ERISA plans, and any other vendor that performs pharmacy benefit services for them, must disclose, in dollars and drug by drug, what they and their affiliates earn: rebates kept, spread on every NDC, pharmacy clawbacks, termination fees, and the net price the plan pays.
 They must disclose it before you sign or renew, again every six months, and open their records to an auditor you choose.
 The rule shifts the burden of proof. A PBM that fails to disclose is in a prohibited transaction. A fiduciary who receives the disclosures and does nothing with them has a documentation problem of its own. Every dollar retained upstream is a dollar your employees and their families pay through premiums and cost sharing.
 | Date | What happens |
-| February 3, 2026 | Consolidated Appropriations Act (CAA) of 2026 disclosure duty under ERISA 408(b)(2)(B) took effect. DOL grants good-faith enforcement relief until the rule applies |
-| January 4, 2027 | Final rule becomes effective |
-| 90 days before your first renewal on or after July 1, 2027 | Initial disclosures due from your PBM (October 2027 for a January 1, 2028 renewal). For a new contract the rule says only "reasonably in advance," so set a date in the contract |
+| February 3, 2026 | CAA 2026 disclosure duty under ERISA 408(b)(2)(B) took effect. DOL grants good-faith enforcement relief until the rule applies |
+| January 4, 2027 | DOL rule becomes effective |
+| 90 days before your first renewal on or after July 1, 2027 | Initial disclosures due from your PBM (October 2027 for a January 1, 2028 renewal). For a new contract the rule says only “reasonably in advance,” so set a date in the contract |
 | Plan years beginning on or after July 1, 2027 | Rule applies. For calendar-year plans: January 1, 2028 |
-| Plan years beginning on or after August 3, 2028 | CAA 2026 100% rebate pass-through and new semiannual PBM reports apply |
-
-Items marked pending counsel confirmation rest on our reading and await legal review.
-### Step 0: Know Which Rules Reach Your Plan
-The answer turns on three facts: whether ERISA governs the plan, whether it's self-insured, and whether it has 100 or more employees or participants. Level-funded plans count as self-insured. Self-insured dental and vision plans are covered plans too, so check whether any of their vendors provide pharmacy-related services. Two exclusions are narrower than they look. A plan counts as fully insured only if all of its benefits are insured, so a self-funded pharmacy carve-out next to insured medical is covered. And plans sponsored by a drug manufacturer, distributor, wholesaler, PBM, or rebate aggregator, or an affiliate, fall outside the detailed rule.
-| Plan type | DOL final rule | CAA 2026 pass-through (2028) | CAA 2026 PBM reports (2028) |
+| Plan years beginning on or after August 3, 2028 | CAA 2026 100% rebate pass-through and new semiannual PBM reports apply. For calendar-year plans: January 1, 2029 |
+Items marked pending counsel confirmation await legal review. For your plan’s deadlines and action plan, and answers to your questions that cite the rule, use the free PBM Rule Navigator at nautilushealth.org/pbm.
+### Start Here: Know Which Rules Reach Your Plan
+The answer turns on three facts: whether ERISA governs the plan, whether it’s self-insured, and whether it has 100 or more employees or participants. The PBM Rule Navigator at nautilushealth.org/pbm works out the answer for your plan in about two minutes and answers your follow-up questions, citing the rule. Level-funded plans count as self-insured. Self-insured dental and vision plans are covered plans too, so check whether any of their vendors provide pharmacy-related services. Two exclusions are narrower than they look. A plan counts as fully insured only if all of its benefits are insured, so a self-funded pharmacy carve-out next to insured medical is covered. And plans sponsored by a drug manufacturer, distributor, wholesaler, PBM, or rebate aggregator, or an affiliate, fall outside the detailed rule.
+| Plan type | DOL rule | CAA 2026 pass-through (2028) | CAA 2026 PBM reports (2028) |
 | ERISA, self-insured or level-funded, 100+ | Applies in full | Applies | Detailed semiannual report |
 | ERISA, self-insured, under 100 | General statutory disclosures only | Applies | Summary report |
-| ERISA, fully insured (all benefits, including drugs) | Detailed rule doesn't apply. General statutory disclosures still required | Applies through the insurer | Summary report; large plans may opt in to detailed |
+| ERISA, fully insured (all benefits, including drugs) | Detailed rule doesn’t apply. General statutory disclosures still required | Applies through the insurer | Summary report; large plans may opt in to detailed |
 | Non-federal governmental (county, city, school district) | Does not apply | Does not apply | Applies |
 | Church plan (non-electing) | Does not apply | Does not apply | Applies |
-
 Two counting rules matter. Single-employer plans count employees using the ACA employer aggregation rules. Multiemployer plans and MEWAs count participants, averaged over the prior plan year.
 Governmental and church plans still carry fiduciary duties under state law and plan documents. For them, every item below becomes a contract ask: require the PBM to make these disclosures and accept these audit terms as if ERISA applied.
 Who owes you disclosures. The rule follows the service, not the label. Any vendor that contracts with your plan and expects $1,000 or more is covered if it provides any of these: rebate negotiation or aggregation, a formulary, a pharmacy network (including specialty, infusion, and outpatient pharmacies), or drug utilization management such as prior authorization, step therapy, adherence programs, and generic or biosimilar substitution. Drugs paid under the medical benefit count. So most medical TPAs are in scope, along with utilization management vendors, specialty and site-of-care programs, and alternative funding programs.
-A TPA that contracts to provide pharmacy services owes you the full disclosures even when a PBM does the work and you have no contract with that PBM. The TPA must get the PBM's data, disclose what the PBM keeps, and give your auditor the PBM's records. If the PBM fails, the plan names the TPA in its notice to DOL, and DOL declined to give TPAs any relief. The same applies to level-funded arrangers and to the operator of a MEWA made up of separate employer plans.
-- Confirm ERISA status, funding arrangement, and headcount for the current year
-- Identify who signed the pharmacy contract. If a TPA, carrier, or level-funded arranger contracts for pharmacy services, that entity owes you the disclosures, even when another company runs the PBM. When a TPA relies on a PBM to prepare its disclosures, require the TPA's contract with that PBM to deliver the data in time for the TPA's own deadlines
-- Ask your broker or consultant in writing whether it is affiliated with your PBM. Affiliated brokers and consultants must disclose under the rule
+A TPA that contracts to provide pharmacy services owes you the full disclosures even when a PBM does the work and you have no contract with that PBM. The TPA must get the PBM’s data, disclose what the PBM keeps, and give your auditor the PBM’s records. If the PBM fails, the plan names the TPA in its notice to DOL, and DOL declined to give TPAs any relief. The same applies to level-funded arrangers and to the operator of a MEWA made up of separate employer plans.
+- Confirm ERISA status, funding arrangement, and headcount for the current year, run the Navigator with those facts, and save the results to the fiduciary file
+- Identify who signed the pharmacy contract. If a TPA, carrier, or level-funded arranger contracts for pharmacy services, that entity owes you the disclosures, even when another company runs the PBM. When a TPA relies on a PBM to prepare its disclosures, require the TPA’s contract with that PBM to deliver the data in time for the TPA’s own deadlines
+- Ask your broker or consultant in writing whether it is affiliated with your PBM. Affiliated brokers and consultants must disclose under the rule. Also ask your PBM, TPA, and carriers in writing to disclose anything they pay your broker, consultant, or coalition, including payments for leads, meetings, finalist slots, or sharing your claims data, whether or not a sale follows
 - List every vendor that touches a drug: PBM, medical TPA, utilization management, specialty and infusion programs, alternative funding, GLP-1 or condition programs, and rebate aggregators. Note which ones contract with the plan
 - Ask your TPA in writing what rebates, administrative fees, and other payments it or its partners receive on drugs paid under the medical benefit
 ### Now Through Mid-2027: Know Your Contract Before Your PBM Explains It
 The grace period is a head start, not a pause. DOL confirmed the statutory disclosure duty has applied since February 3, 2026, and it protects fiduciaries who act in good faith until the rule applies. Good faith leaves a paper trail.
-- Pull the complete contract. The master agreement, every pricing and rebate exhibit, every amendment, performance guarantees, the business associate agreement, and the renewal, notice, and termination terms. Most sponsors have never assembled the full set in one place. If your PBM or TPA holds the only copy, request it in writing.
-- Run a Contract X-Ray analysis. It evaluates the contract against Fiduciary-Aligned PBM Contract Standards organized into 10 categories, from rebate pass-through and audit rights to data ownership and clean exit, and produces a Negotiation Report: the specific terms to request, the model language to propose, and the fiduciary rationale for each. That report becomes your renewal agenda and part of your documented process.
-- Request statutory disclosures now from your PBM, TPA, broker, and any other provider paid $1,000 or more. ERISA 408(b)(2)(B) has required them since February 3, 2026. Keep the request and the response. For your TPA, ask for the items DOL lists: administrative and per-employee-per-month fees, 340B-related income, provider and network compensation, affiliate and vertically integrated compensation, data monetization, and payment and recovery compensation.
-- Document a reasonableness review of the current arrangement, using the disclosures and the Contract X-Ray results. Minutes, not memory.
-- Build a renewal calendar. List every pharmacy-related contract, its renewal date, and its auto-renewal notice window. Work backward: the Negotiation Report should be in hand before the PBM's 90-day disclosure window opens.
-- Name the responsible plan fiduciary. The rule sends disclosures to the fiduciary with authority to sign, extend, or renew. Confirm who that is, and update the committee charter so disclosure review and audit decisions have an owner.
-- Complete contract assembled and stored with the plan's fiduciary records
+1. Pull the complete contract. The master agreement, every pricing and rebate exhibit, every amendment, performance guarantees, the business associate agreement, and the renewal, notice, and termination terms. Most sponsors have never assembled the full set in one place. If your PBM or TPA holds the only copy, request it in writing.
+2. Run a Contract X-Ray analysis. It scores the contract against ten fiduciary-aligned provisions in three domains, from rebate pass-through and audit rights to data ownership and clean exit, and rates it Gold, Silver, Bronze, or Ineligible. A PBM whose standard contract has earned Gold already meets them. The analysis produces a Negotiation Report: the specific terms to request, the model language to propose, and the fiduciary rationale for each. That report becomes your renewal agenda and part of your documented process.
+3. Request statutory disclosures now from your PBM, TPA, broker, and any other provider paid $1,000 or more. ERISA 408(b)(2)(B) has required them since February 3, 2026. Keep the request and the response. For your TPA, ask for the items DOL lists: administrative and per-employee-per-month fees, 340B-related income, provider and network compensation, affiliate and vertically integrated compensation, data monetization, and payment and recovery compensation.
+4. Document a reasonableness review of the current arrangement, using the disclosures and the Contract X-Ray results. Minutes, not memory.
+5. Build a renewal calendar. List every pharmacy-related contract, its renewal date, and its auto-renewal notice window. The Navigator gives you each deadline from your plan year and renewal date. Work backward: the Negotiation Report should be in hand before the PBM’s 90-day disclosure window opens.
+6. Name the responsible plan fiduciary. The rule sends disclosures to the fiduciary with authority to sign, extend, or renew. Confirm who that is, and update the committee charter so disclosure review and audit decisions have an owner.
+
+- Complete contract assembled and stored with the plan’s fiduciary records
 - Contract X-Ray analysis and Negotiation Report received
 - Written disclosure requests sent to PBM, TPA, and broker
 - Reasonableness review documented in committee minutes
@@ -65,17 +64,17 @@ The grace period is a head start, not a pause. DOL confirmed the statutory discl
 - Responsible plan fiduciary named; committee charter updated
 - Multi-year contract running past July 1, 2027 without a renewal: ask counsel how the rule applies (pending counsel confirmation)
 ### Before Your Next Renewal: Negotiate the Terms the Rule Leaves Open
-The rule sets a floor and leaves several dials to you. Set them in the contract, because whatever you don't elect defaults to the PBM's preference.
+The rule sets a floor and leaves several dials to you. Set them in the contract, because whatever you don’t elect defaults to the PBM’s preference. If your current contract runs past the date the rule applies, don’t wait for renewal. The Nautilus PBM Contract Compliance RFI asks your current PBM to adopt these terms in writing, effective no later than the first plan year the rule applies to.
 Terms to elect. The rule permits each of these; none happens unless you ask.
 | Ask | Default if you say nothing | Source |
 | Quarterly disclosure reports | Semiannual | 2550.408b-22(e)(2), (g) |
+| Report periods aligned to the plan year (or calendar halves or quarters) | Periods measured from the contract date | 2550.408b-22(g) |
 | Materiality threshold below 5% for formulary-change notices | 5% of manufacturer payments | (e)(6)(iii) |
 | Overage explanation threshold below 5% | 5% over estimate | (g)(4) |
-| Machine-readable disclosure files within 30 days of request | "Reasonable time," undefined | (k)(3) |
-| Audit "year" defined as the plan year | Left to the parties | (j)(1) |
+| Machine-readable disclosure files within 30 days of request | “Reasonable time,” undefined | (k)(3) |
+| Audit “year” defined as the plan year | Left to the parties | (j)(1) |
 | Initial disclosures more than 90 days before renewal, and by a fixed date before signing a new contract | 90 days | (e) |
-
-Terms to strike. For covered plans, each of these makes the arrangement unreasonable under ERISA 408(b)(2) once the rule applies. Contract X-Ray flags them in the Negotiation Report.
+Terms to strike. For covered plans, each of these makes the arrangement unreasonable under ERISA 408(b)(2) once the rule applies. Contract X-Ray flags them in the Negotiation Report. If you’re unsure whether a term in your own contract survives the rule, ask the Navigator.
 | Contract term | Why it fails | Source |
 | PBM approval of, or limits on, your choice of auditor | Plan selects the auditor | (j)(2) |
 | Audits less than once a year | At least annual, at plan request | (j)(1) |
@@ -83,64 +82,70 @@ Terms to strike. For covered plans, each of these makes the arrangement unreason
 | Upstream rebate and aggregator contracts walled off from audit | PBM must produce them, plus affiliate and subcontractor records, under reasonable confidentiality | (j)(3), (j)(7) |
 | Fees charged to the plan for producing audit data | PBM bears the cost of providing information | (j)(4) |
 | Audit data due later than 60 days after request | 60-day outer limit | (j)(5) |
-| Confidentiality clauses barring you from sharing the contract or disclosures with consultants, auditors, or competing bidders | PBM may only require reasonable confidentiality on redisclosure; regulators and counsel always allowed | (k)(4) |
-| Early-termination fees beyond the PBM's actual losses, or no exit on reasonably short notice | DOL: no arrangement is reasonable unless the plan can exit without penalty on reasonably short notice. The PBM may recoup only reasonable amounts for actual losses | Preamble p. 116; 29 CFR 2550.408b-2(c)(3); (e)(6)(iii) |
+| Confidentiality clauses barring you from sharing the contract or disclosures with consultants, auditors, or competing bidders | PBM may require only reasonable confidentiality on redisclosure; regulators and counsel always allowed | (k)(4) |
+| Early-termination fees beyond the PBM’s actual losses, or no exit on reasonably short notice | DOL: no arrangement is reasonable unless the plan can exit without penalty on reasonably short notice. The PBM may recoup only reasonable amounts for actual losses | Preamble p. 116; 29 CFR 2550.408b-2(c)(3); (e)(6)(iii) |
 | Mandatory statistical sampling in audits | DOL declined to permit sampling expressly (pending counsel confirmation) | (j)(6) |
-
 Terms prudence calls for. The rule is silent on these. Ask anyway.
 - No-fee termination right if the PBM fails to cure a disclosure or audit failure within 90 days
 - All rebates earned through the termination date paid in full
 - Plan data returned in usable form within 30 days of termination, at no charge
 - PBM indemnifies the plan for losses caused by inaccurate disclosures
 - PBM represents in the contract that every required disclosure is complete and accurate
+- Three disclosures beyond the rule’s minimum: every entity that touches the plan’s claims, rebates, or data, with any ownership interest the PBM, its affiliates, or its principals hold in it; every conflict of interest that could affect the plan’s costs, formulary, or network; and every payment to the plan’s broker, consultant, advisor, or coalition
+- An officer of the PBM certifies that the disclosures are complete, and the certification is attached to the contract as an exhibit
 - Audit rights cover contract compliance and permit extrapolation, beyond verifying the disclosures
-- A "higher of" clause: a broader regulatory definition of remuneration or audit scope applies automatically; a narrower one leaves the contract intact
-- Every RFP response discloses the bidder's full economics in the rule's disclosure categories, so competing offers compare line by line
+- A “higher of” clause: a broader regulatory definition of remuneration or audit scope applies automatically; a narrower one leaves the contract intact
+- Every RFP response discloses the bidder’s full economics in the rule’s disclosure categories, so competing offers compare line by line. The Nautilus PBM Market Test RFI and Request for Proposals include the disclosure table and certification
+- A contract definition of 340B claims, quarterly reporting of the 340B claims excluded from rebates, and a 12-month limit on reversing rebates already paid
+- The PBM exchanges the data the plan’s other vendors need (eligibility, accumulators, and claims), in both directions, on time, and at no charge
+- Objective definitions of generic, brand, and specialty drugs, fixed in the contract, that the PBM can’t change during the term
 ### When Disclosures Arrive: Read Them, Test Them, Act on Them
-Disclosure is the raw material. The fiduciary act is what you do next, and DOL expects to see it written down. Drug-level disclosures also make it easy for plaintiffs' lawyers to benchmark your plan, so that written record is your best defense.
-Review each initial disclosure against the contract and your Contract X-Ray results. A contract promising 100% pass-through next to a disclosure showing retained manufacturer payments is a finding, not a footnote. Disclosure isn't permission. If the contract requires an amount to be passed through, the PBM still owes it, even after the disclosure labels it retained.
+Disclosure is the raw material. The fiduciary act is what you do next, and DOL expects to see it written down. Drug-level disclosures also make it easy for plaintiffs’ lawyers to benchmark your plan, so that written record is your best defense.
+Review each initial disclosure against the contract and your Contract X-Ray results. A contract promising 100% pass-through next to a disclosure showing retained manufacturer payments is a finding, not a footnote. Disclosure isn’t permission. If the contract requires an amount to be passed through, the PBM still owes it, even after the disclosure labels it retained. When a disclosure uses a term you don’t recognize, or you can’t tell whether an item meets the rule, ask the Navigator.
 - Disclosure arrived at least 90 days before renewal, or by the date your contract sets
-- Every required element is present: services; direct compensation by service; manufacturer payments per drug, passed through and retained; spread per NDC and by channel; affiliated pharmacy steering; pharmacy clawbacks; price protection; termination compensation; other compensation and who pays it; formulary incentives and omitted lower-cost alternatives; net price per fill; fiduciary status; audit rights
-- Amounts stated in dollars. Estimates appear only where an amount isn't reasonably ascertainable, and each rests on the contract's terms or historical experience
-- Retained amounts reconciled against the contract's pass-through and fee terms
+- Every required element is present: services; direct compensation by service, with a good-faith allocation for bundled services; manufacturer payments per drug, passed through and retained; spread per NDC and by channel; affiliated pharmacy steering; pharmacy clawbacks; price protection; termination compensation; other compensation and who pays it; formulary incentives and omitted lower-cost alternatives; net price per fill; fiduciary status; audit rights
+- The three disclosures you asked for beyond the rule arrived with the officer’s certification, or the PBM refused in writing and gave its reason
+- Amounts stated in dollars for each six-month period, or each quarter if you elected quarterly reports, with drug-level items in files that identify each drug by name and NDC. Estimates appear only where an amount isn’t reasonably ascertainable, and each rests on the contract’s terms or historical experience
+- Retained amounts reconciled against the contract’s pass-through and fee terms
 - Drugs with retained manufacturer payments checked against the therapeutically equivalent alternatives the PBM left off the formulary
-- "Other compensation" itemized, including revenue from copay maximizer, accumulator, and alternative funding programs, float, technology and data fees, shared savings, and rebates and fees on drugs paid under the medical benefit
+- “Other compensation” itemized, including revenue from copay maximizer, accumulator, and alternative funding programs, 340B-related income, float, technology and data fees, shared savings, and rebates and fees on drugs paid under the medical benefit
 - Reasonableness determination recorded in committee minutes before signing
-Track the semiannual reports. Each is due within 30 days after the period closes. Any category running 5% or more over the estimate, or your lower threshold, requires a written explanation of the overage.
-Decide on an audit every year, and record the decision. The plan pays the auditor and the PBM pays to produce the data. DOL says an audit isn't required absent red flags, but the choice to skip one must be a prudent, documented choice. Budget for it, choose an independent auditor, and send the request in writing. The PBM must acknowledge within 10 business days and produce within 60 calendar days, absent extraordinary circumstances.
-Follow the relief protocol the moment you find a failure. A missing disclosure or a stonewalled audit is the PBM's prohibited transaction. It becomes yours too unless you act on these steps. Relief is available when you did not know of the failure and reasonably believed the disclosures were made.
-- Send the PBM a written request to correct the failure as soon as you discover it.
-- If the PBM cures within 90 calendar days, relief is preserved. Keep monitoring.
-- If it refuses or misses the 90 days, notify DOL within 30 days of the refusal or of day 90, whichever comes first.
-- Decide whether to terminate or continue the contract under your duty of prudence, and document the basis.
-The decision record should name the alternatives you weighed and how you'll prevent a repeat. DOL says it should not be a check-the-box exercise. Keep it with the plan's fiduciary records. (2550.408b-22(n))
-A PBM or other covered provider that corrects a good-faith disclosure error within 30 days of learning of it hasn't broken the rule (2550.408b-22(l)). The protocol protects you, not the PBM, which stays exposed to civil penalties under ERISA 502(i). And termination is a judgment call, not a requirement: document why you stayed or left.
+Track the semiannual reports. Each is due within 30 days after the period closes. Any category running 5% or more over the estimate, or your lower threshold, requires a written explanation of the overage. Periods run from the contract date unless the contract aligns them to the plan year. Each report must include amounts the PBM reasonably expects to receive, not only cash already received. Confirm that rebates earned but not yet paid appear, and that the next report reconciles them.
+Decide on an audit every year, and record the decision. The plan pays the auditor and the PBM pays to produce the data. DOL says an audit isn’t required absent red flags, but the choice to skip one must be a prudent, documented choice. Budget for it, choose an independent auditor, and send the request in writing. The PBM must acknowledge within 10 business days and produce within 60 calendar days, absent extraordinary circumstances.
+Request what you need for federal reporting. On written request, the PBM must furnish any other information about the contract that the plan needs to meet ERISA’s reporting and disclosure duties, including Form 5500 forms and schedules (2550.408b-22(i)). Ask in writing and keep the response.
+Follow the relief protocol the moment you find a failure. A missing disclosure or a stonewalled audit is the PBM’s prohibited transaction. It becomes yours too unless you act on these steps. Relief is available when you did not know of the failure and reasonably believed the disclosures were made.
+![][image1]
+1. Send the PBM a written request to correct the failure as soon as you discover it.
+2. If the PBM cures within 90 calendar days, relief is preserved. Keep monitoring.
+3. If it refuses or misses the 90 days, notify DOL within 30 days of the refusal or of day 90, whichever comes first.
+4. Decide whether to terminate or continue the contract under your duty of prudence, and document the basis.
+The decision record should name the alternatives you weighed and how you’ll prevent a repeat. DOL says it should not be a check-the-box exercise. Keep it with the plan’s fiduciary records. (2550.408b-22(n))
+A PBM or other covered provider that corrects a good-faith disclosure error within 30 days of learning of it hasn’t broken the rule (2550.408b-22(l)). The protocol protects you, not the PBM, which stays exposed to civil penalties under ERISA 502(i). And termination is a judgment call, not a requirement: document why you stayed or left.
 ### August 2028: Sign 2027 Contracts for the Law Arriving Next
-When the 2028 requirements reach your contract. Two things have to be true: your contract is signed, renewed, or extended, and it covers a plan year that starts on or after August 3, 2028. For a calendar-year plan, the first such plan year starts January 1, 2029. Your contract's end date doesn't matter on its own. What matters is whether the contract covers a plan year that starts on or after August 3, 2028.
+When the 2028 requirements reach your contract. Two things have to be true: your contract is signed, renewed, or extended, and it covers a plan year that starts on or after August 3, 2028. For a calendar-year plan, the first such plan year starts January 1, 2029. Your contract’s end date doesn’t matter on its own. What matters is whether the contract covers a plan year that starts on or after August 3, 2028.
 | Scenario (calendar-year plan unless noted) | Do the 2028 requirements apply during this contract? |
 | You sign tomorrow. The contract ends August 4, 2028. | No. Your 2028 plan year started January 1, 2028, before the cutoff. The requirements arrive with your next contract or renewal. |
 | You sign tomorrow. The contract runs through December 31, 2028. | No. Same reason: it never covers a plan year starting after August 3, 2028. |
 | You sign in 2027 for three years, through December 31, 2029. | Unsettled. The contract covers the 2029 plan year, which starts after the cutoff. One reading says the requirements apply for 2029; another says they wait for your next renewal. Pending counsel confirmation. Write them into the contract for 2029 now. |
 | The contract auto-renews on January 1, 2029. | Yes, under the better reading. An automatic renewal for the 2029 plan year is a renewal. Some practitioners treat evergreen terms differently, so put the answer in writing. |
-| You amend pricing mid-term in 2029. | Unsettled. The statute doesn't say whether an amendment counts as an extension. Treat any amendment as a renewal in the contract language. |
+| You amend pricing mid-term in 2029. | Unsettled. The statute doesn’t say whether an amendment counts as an extension. Treat any amendment as a renewal in the contract language. |
 | Your plan year starts July 1. | First covered plan year: July 1, 2029. July 1, 2028 is before the cutoff. |
 | Your plan year starts September 1. | First covered plan year: September 1, 2028. |
-| You're a county, city, school district, or church plan. | The pass-through does not apply by statute; it amends ERISA only. The reporting requirements do apply. Contract for the pass-through anyway. |
-
-The practical answer: any contract you sign from now on that runs past mid-2028 should require the PBM to comply with the CAA 2026 PBM requirements starting with your first plan year that begins on or after August 3, 2028, regardless of contract cycle. It should also treat any renewal, extension, auto-renewal, or amendment as a renewal. Then the open questions don't matter, because the contract has already answered them.
-The DOL disclosure rule runs on its own clock: plan years beginning on or after July 1, 2027, or January 1, 2028 for calendar-year plans.
+| You’re a county, city, school district, or church plan. | The pass-through does not apply by statute; it amends ERISA only. The reporting requirements do apply. Contract for the pass-through anyway. |
+The practical answer: any contract you sign from now on that runs past mid-2028 should require the PBM to comply with the CAA 2026 PBM requirements starting with your first plan year that begins on or after August 3, 2028, regardless of contract cycle. It should also treat any renewal, extension, auto-renewal, or amendment as a renewal. Then the open questions don’t matter, because the contract has already answered them.
+The DOL rule runs on its own clock: plan years beginning on or after July 1, 2027, or January 1, 2028 for calendar-year plans.
 What the statute requires of PBMs serving ERISA plans:
 - Remit 100% of rebates, fees, alternative discounts, and other remuneration from manufacturers, rebate aggregators, and affiliated GPOs, quarterly, within 90 days of quarter end (ERISA 408(b)(2)(C))
 - Rebate aggregators and PBM-affiliated GPOs must remit to the PBM within 45 days of quarter end
 - Return underpayments within 90 days of notice
 - Open remittance records and rebate contracts to audit at least once per plan year, by an auditor the plan selects and the PBM does not pay
-- Keep "bona fide service fees" only if they are transparent and quantifiable. DOL has not yet defined the term
+- Keep “bona fide service fees” only if they are transparent and quantifiable. DOL has not yet defined the term
 - These duties fall on whoever provides pharmacy benefit services, including carriers, TPAs, and rebate aggregators, whatever they call themselves
 What the statute requires for all group health plans, governmental and church plans included (ERISA 726, PHSA 2799A-11, IRC 9826):
-- Semiannual PBM reports, quarterly on request, in plain language and machine-readable format. Plans with 100 or more get drug-level and therapeutic-class detail, including spread on every claim
-- Disclosure of what the PBM pays brokers and consultants to win or keep your business, with the recipient named
+- Semiannual PBM reports, quarterly on request, in plain language and machine-readable format. Self-funded plans with 100 or more employees or participants get drug-level and therapeutic-class detail, including spread on every claim; insured plans that size can elect it
+- Disclosure of what the PBM pays brokers, consultants, and advisors when the plan is referred to it, considers it, or keeps it, naming who received referral payments
 - An annual notice from the plan to participants about the PBM reporting requirement
-- Civil penalties for PBMs and others that fail to report: up to $10,000 a day, and up to $100,000 for each item of knowingly false information
+- Civil penalties: $10,000 a day for failing to report, which can reach plans and insurers as well as PBMs, and up to $100,000 for each item of false information a PBM, insurer, or TPA knowingly provides
 Spread pricing is reported under the statute, not banned. If you want it gone, the contract has to say so.
 - Require compliance with the 2028 provisions by a fixed date, the first plan year beginning on or after August 3, 2028, regardless of contract cycle
 - Define any amendment, extension, or auto-renewal as a renewal for CAA 2026 purposes
@@ -148,23 +153,22 @@ Spread pricing is reported under the statute, not banned. If you want it gone, t
 - Require pass-through pricing so no spread exists
 - Define a manufacturer fee as bona fide only if it is flat, fair market value, for an identified service, unrelated to price or volume, and itemized by payer
 - Governmental and church plans: require the PBM to meet the 408(b)(2)(C) pass-through terms as if ERISA applied
-The 2028 items rest on the enacted text of CAA 2026 Sections 6701 and 6702 and await counsel confirmation.
+The 2028 requirements are enacted law under CAA 2026 Sections 6701 and 6702. Only the interpretive questions listed at the end of this checklist await counsel confirmation.
 ### Watch List: Questions Still Open
 DOL left several questions for later. Each could change what you ask for, so revisit this list at every renewal.
 | Open question | Where it stands | What to do now |
-| Fiduciary safe harbor for a structured PBM selection process | DOL "strongly agrees" and is considering separate rulemaking under ERISA 404(a) | Run and document a structured evaluation now. It's the process any safe harbor would reward |
-| Definition of "bona fide service fee" | DOL called it premature; future rulemaking or guidance | Contract for the strict definition in the 2028 section |
+| Fiduciary safe harbor for a structured PBM selection process | DOL “strongly agrees” and is considering separate rulemaking under ERISA 404(a) | Run and document a structured evaluation now. It’s the process any safe harbor would reward |
+| Definition of “bona fide service fee” | DOL called it premature; future rulemaking or guidance; CMS’s October 2026 Part D proposal offers the first federal draft definition, and it matches the strict one [VERIFY] | Contract for the strict definition in the 2028 section |
 | Standard disclosure template and machine-readable format | DOL is considering a template after publication | Elect machine-readable delivery and a 30-day deadline |
-| Detailed disclosure rules for TPAs' other services | Separate future project for services other than pharmacy benefit services. A TPA that provides pharmacy services is already covered (see Step 0). DOL expects good-faith statutory disclosure now, naming admin fees, 340B income, network and affiliate compensation, and data monetization | Request those items from your TPA today |
+| Detailed disclosure rules for TPAs’ other services | Separate future project for services other than pharmacy benefit services. A TPA that provides pharmacy services is already covered (see Start Here). DOL expects good-faith statutory disclosure now, naming admin fees, 340B income, network and affiliate compensation, and data monetization | Request those items from your TPA today |
 | Whether plan claims data is a plan asset | Not answered | Secure data ownership and access by contract |
-| Claims data outside an audit | DOL declined to require it | Negotiate standing access to claims-level data |
-| Legal challenge to the rule | The PBM trade group says DOL may have exceeded its authority; a lawsuit could delay or stay the rule. No suit had been filed as of November 6, 2026 | Act anyway. The statutory disclosure duty has applied since February 3, 2026, and these contract terms protect the plan either way |
-| How state PBM laws interact with the rule | DOL declined to say whether the rule preempts state law, calling it "an interpretive matter" | If your plan covers employees in several states, ask counsel how state PBM laws apply alongside the rule and your contract |
-
-Items pending counsel confirmation in this checklist:
-- Treatment of multi-year contracts that don't renew before July 1, 2027
+| Claims data outside an audit | DOL declined to require it | Negotiate standing access to claim-level data |
+| Legal challenge to the rule | The PBM trade group says DOL may have exceeded its authority; a lawsuit could delay or stay the rule. No suit had been filed as of November 20, 2026 | Act anyway. The statutory disclosure duty has applied since February 3, 2026, and these contract terms protect the plan either way |
+| How state PBM laws interact with the rule | DOL declined to say whether the rule preempts state law, calling it “an interpretive matter” | If your plan covers employees in several states, ask counsel how state PBM laws apply alongside the rule and your contract |
+Items pending counsel confirmation (the CAA 2026 requirements and dates themselves are enacted law):
+- Treatment of multi-year contracts that don’t renew before July 1, 2027
 - Whether a contract requiring statistical sampling in audits conflicts with the rule
-- All 2028 statutory items
+- Which contract events trigger CAA 2026, and what “bona fide service fee” means
 #
 
 =====================================================================

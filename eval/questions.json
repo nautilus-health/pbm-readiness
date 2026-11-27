@@ -116,7 +116,7 @@
    "id": "A01",
    "profile": "full",
    "question": "Does the DOL final rule apply to our plan?",
-   "expect": "Yes, applies in full; cites Step 0 or (b).",
+   "expect": "Yes, applies in full; cites Start Here or (b).",
    "must": [
     "(?i)applies"
    ],
